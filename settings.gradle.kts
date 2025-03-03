@@ -23,13 +23,26 @@ dependencyResolutionManagement {
         maven {
             url = uri("https://jitpack.io")
         }
+        /** nexus **/
+//        maven {
+//            isAllowInsecureProtocol = true
+//            credentials {
+//                username = "read_henry001"
+//                password = "read_henry001"
+//            }
+//            url = uri("http://www.zhouhengli.online:9001/repository/maven-releases/")
+//        }
+
+        /** aliyun **/
         maven {
-            isAllowInsecureProtocol = true
+            url = uri("https://maven.aliyun.com/repository/public")
+        }
+        maven {
             credentials {
-                username = "read_henry001"
-                password = "read_henry001"
+                username = "read_henry_001"
+                password = "RnVrdxoghjKo"
             }
-            url = uri("http://47.122.117.117:9001/repository/maven-releases/")
+            url = uri("https://packages.aliyun.com/6732fc8f356ccaf8531a1487/maven/skymvvm")
         }
         maven("${rootDir}/build/repo")
     }
