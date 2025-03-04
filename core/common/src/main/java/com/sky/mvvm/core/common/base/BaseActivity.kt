@@ -1,4 +1,4 @@
-package com.sky.mvvm.sample.base
+package com.sky.mvvm.core.common.base
 
 import android.os.Bundle
 import android.os.PersistableBundle
@@ -6,6 +6,8 @@ import androidx.databinding.ViewDataBinding
 import com.gyf.immersionbar.ktx.immersionBar
 import com.sky.mvvm.base.activity.BaseVmDbActivity
 import com.sky.mvvm.base.viewmodel.BaseViewModel
+import com.sky.mvvm.core.common.ext.dismissLoadingExt
+import com.sky.mvvm.core.common.ext.showLoadingExt
 
 /**
  * <p>{@code className: }</p>
@@ -28,8 +30,10 @@ abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding> : BaseVmDb
     }
 
     override fun showLoading(message: String) {
+        showLoadingExt(message)
     }
 
     override fun dismissLoading() {
+        dismissLoadingExt()
     }
 }

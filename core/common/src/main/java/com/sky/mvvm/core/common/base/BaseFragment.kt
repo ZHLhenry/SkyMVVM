@@ -1,4 +1,4 @@
-package com.sky.mvvm.sample.base
+package com.sky.mvvm.core.common.base
 
 import android.app.Activity
 import android.os.Bundle
@@ -8,6 +8,8 @@ import androidx.databinding.ViewDataBinding
 import com.gyf.immersionbar.ktx.immersionBar
 import com.sky.mvvm.base.fragment.BaseVmDbFragment
 import com.sky.mvvm.base.viewmodel.BaseViewModel
+import com.sky.mvvm.core.common.ext.dismissLoadingExt
+import com.sky.mvvm.core.common.ext.showLoadingExt
 
 /**
  * <p>{@code className: }</p>
@@ -41,12 +43,14 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding> : BaseVmDb
      * 打开等待框
      */
     override fun showLoading(message: String) {
+        showLoadingExt(message)
     }
 
     /**
      * 关闭等待框
      */
     override fun dismissLoading() {
+        dismissLoadingExt()
     }
 
     override fun onPause() {

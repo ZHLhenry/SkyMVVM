@@ -80,7 +80,8 @@ internal fun Project.configureKotlinAndroid(
                     "META-INF/{AL2.0,LGPL2.1}",
                     "META-INF/CHANGES",
                     "DebugProbesKt.bin",
-                    "kotlin-tooling-metadata.json"
+                    "kotlin-tooling-metadata.json",
+                    "META-INF/gradle/incremental.annotation.processors"
                 )
             }
         }

@@ -25,9 +25,12 @@ dependencies {
 
     //retrofit
     api(libs.retrofit2.retrofit)
-    api(libs.converter.gson)
     api(libs.persistentcookiejar)
     api(libs.androidx.databinding.runtime)
+
+    //gson
+    api(libs.gsonfactory)
+    api(libs.gson)
 
     //hilt
     api(libs.hilt.android)

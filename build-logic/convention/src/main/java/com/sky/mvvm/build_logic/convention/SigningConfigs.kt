@@ -36,7 +36,7 @@ internal fun Project.applySigningConfigs(
                     "proguard-rules.pro"
                 )
                 ndk {
-                    abiFilters.addAll(arrayOf("arm64-v8a", "x86"))
+                    abiFilters.addAll(arrayOf("arm64-v8a", "armeabi-v7a", "x86", "x86_64"))
                 }
             }
             getByName("release") {
@@ -48,7 +48,7 @@ internal fun Project.applySigningConfigs(
                     "proguard-rules.pro"
                 )
                 ndk {
-                    abiFilters.addAll(arrayOf("arm64-v8a", "armeabi-v7a"))
+                    abiFilters.addAll(arrayOf("arm64-v8a", "armeabi-v7a", "x86", "x86_64"))
                 }
             }
         }

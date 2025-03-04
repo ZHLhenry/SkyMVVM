@@ -20,12 +20,15 @@ lifecycleRuntimeKtx = "2.8.7"
 persistentcookiejar = "v1.0.1"
 retrofitVersion = "2.11.0"
 databindingRuntime = "8.8.1"
-skymvvm = "1.0.0"
+skymvvm = "1.0.1"
+skymultistatelayout = "1.0.0"
+chucker = "4.1.0"
+moshi = "1.15.1"
+gsonfactory = "9.6"
+gson = "2.11.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
-
-converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofitVersion" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -50,7 +53,18 @@ androidx-lifecycle-runtime-ktx = { module = "androidx.lifecycle:lifecycle-runtim
 persistentcookiejar = { module = "com.github.franmontiel:PersistentCookieJar", version.ref = "persistentcookiejar" }
 retrofit2-retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofitVersion" }
 androidx-databinding-runtime = { group = "androidx.databinding", name = "databinding-runtime", version.ref = "databindingRuntime" }
+
+okhttp-chucker = { group = "com.github.chuckerteam.chucker", name = "library", version.ref = "chucker" }
+okhttp-chucker-release = { group = "com.github.chuckerteam.chucker", name = "library-no-op", version.ref = "chucker" }
+
+moshi = { group = "com.squareup.moshi", name = "moshi-kotlin", version.ref = "moshi" }
+moshi-codegen = { group = "com.squareup.moshi", name = "moshi-kotlin-codegen", version.ref = "moshi" }
+moshi-converter = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "retrofitVersion" }
+gsonfactory = { module = "com.github.getActivity:GsonFactory", version.ref = "gsonfactory" }
+gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
+
 skymvvm = { module = "com.sky.lib:SkyMVVM", version.ref = "skymvvm" }
+skymultistatelayout = { module = "com.sky.lib:SkyMultiStateLayout", version.ref = "skymultistatelayout" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

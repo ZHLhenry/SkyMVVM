@@ -1,0 +1,59 @@
+import com.sky.mvvm.build_logic.convention.AppConfig
+
+plugins {
+    alias(libs.plugins.sky.android.library.common)
+    alias(libs.plugins.sky.android.hilt)
+    alias(libs.plugins.ksp)
+}
+
+android {
+    namespace = "com.sky.mvvm.core.common"
+    buildFeatures {
+        dataBinding = AppConfig.enableDataBinding
+        viewBinding = AppConfig.enableViewBinding
+        buildConfig = AppConfig.enableBuildConfig
+    }
+}
+
+
+dependencies {
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.material)
+    implementation(libs.androidx.activity)
+    implementation(libs.androidx.constraintlayout)
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
+
+    api("com.afollestad.material-dialogs:lifecycle:3.3.0")
+    // 沉浸式
+    api("com.geyifeng.immersionbar:immersionbar:3.2.2")
+    api("com.geyifeng.immersionbar:immersionbar-ktx:3.2.2")
+    //数据存储
+    api("com.tencent:mmkv:2.1.0")
+    //Permissions
+    api("com.github.getActivity:XXPermissions:20.0")
+    //refresh
+    api("io.github.scwang90:refresh-layout-kernel:3.0.0-alpha")      //核心必须依赖
+    api("io.github.scwang90:refresh-header-classics:3.0.0-alpha")    //经典刷新头
+    api("io.github.scwang90:refresh-footer-classics:3.0.0-alpha")    //经典加载
+    //Toaster
+    api("com.github.getActivity:Toaster:12.8")
+    //Log
+    api("com.elvishew:xlog:1.11.1")
+    //Chucker
+    devApi(libs.okhttp.chucker)
+    uatApi(libs.okhttp.chucker.release)
+    prodApi(libs.okhttp.chucker.release)
+    //Moshi
+    api(libs.moshi)
+    ksp(libs.moshi.codegen)
+    api(libs.moshi.converter)
+
+//    api(project(":SkyMVVMLib"))
+    api(libs.skymvvm)
+    api(libs.skymultistatelayout)
+
+    implementation(projects.core.model)
+}

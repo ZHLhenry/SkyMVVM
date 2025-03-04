@@ -12,7 +12,6 @@ import com.sky.mvvm.network.manager.NetworkStateReceive
  * <p>{@code date: 2025/2/22 22:00}</p>
  * <p>{@code description: 文件描述}</p>
  */
-@Suppress("DEPRECATION")
 open class BaseApplication : Application() {
 
     override fun onCreate() {

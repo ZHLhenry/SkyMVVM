@@ -15,7 +15,6 @@ import com.sky.mvvm.network.manager.NetState
 import com.sky.mvvm.network.manager.NetworkStateManager
 import java.lang.reflect.ParameterizedType
 
-@Suppress("DEPRECATION")
 abstract class BaseVmFragment<VM : BaseViewModel> : Fragment() {
 
     private val handler = Handler()
