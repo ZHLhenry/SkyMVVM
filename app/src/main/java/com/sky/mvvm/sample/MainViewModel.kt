@@ -1,4 +1,4 @@
-package com.sky.mvvm.sample.viewmodel
+package com.sky.mvvm.sample
 
 import com.sky.mvvm.base.viewmodel.BaseViewModel
 

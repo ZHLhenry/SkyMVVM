@@ -10,8 +10,8 @@
     <application
         android:name="com.sky.mvvm.sample.base.SkyMvvmApplication"
         android:allowBackup="true"
-        android:enableOnBackInvokedCallback="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
+        android:enableOnBackInvokedCallback="true"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -19,6 +19,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SkyMVVM"
         tools:targetApi="tiramisu">
+
+        <!-- Android 10 分区存储特性 -->
+        <meta-data
+            android:name="ScopedStorage"
+            android:value="true" />
+
         <activity
             android:name="com.sky.mvvm.sample.MainActivity"
             android:exported="true">
@@ -28,6 +34,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".feature.other.ui.LoginActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="DiscouragedApi,LockedOrientationActivity" />
     </application>
 
 </manifest>

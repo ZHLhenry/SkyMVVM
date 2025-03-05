@@ -1,10 +1,12 @@
-package com.sky.mvvm.feature.home.ui
+package com.sky.mvvm.sample.feature.home.ui
 
 import android.os.Bundle
+import com.hjq.toast.Toaster
 import com.sky.mvvm.core.common.base.BaseFragment
 import com.sky.mvvm.ext.parseState
-import com.sky.mvvm.feature.home.databinding.FragmentHomeBinding
-import com.sky.mvvm.feature.home.viewModel.HomeViewModel
+import com.sky.mvvm.network.manager.NetState
+import com.sky.mvvm.sample.databinding.FragmentHomeBinding
+import com.sky.mvvm.sample.feature.home.vm.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -17,11 +19,17 @@ import dagger.hilt.android.AndroidEntryPoint
 class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
     override fun initView(savedInstanceState: Bundle?) {
         addLoadingObserve(mViewModel)
+        mDatabind.statelayout.showLoading()
+        mViewModel.apiArticleListData(1)
+    }
+
+    override fun onNetworkStateChanged(netState: NetState) {
+        super.onNetworkStateChanged(netState)
+        mDatabind.tvHomeNetwork.text = "当前网络连接状态:${netState.isSuccess}"
     }
 
     override fun createObserver() {
         super.createObserver()
-        mViewModel.apiArticleListData(1)
         mViewModel.articleListResult.observe(
             viewLifecycleOwner
         ) { resultState ->

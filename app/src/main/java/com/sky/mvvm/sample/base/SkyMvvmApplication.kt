@@ -1,6 +1,7 @@
 package com.sky.mvvm.sample.base
 
 import android.app.Application
+import android.content.Intent
 import com.elvishew.xlog.LogConfiguration
 import com.elvishew.xlog.LogLevel
 import com.elvishew.xlog.XLog
@@ -14,8 +15,16 @@ import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.sky.multistatelayout.SkyMultiStateLayout
 import com.sky.mvvm.base.BaseApplication
 import com.sky.mvvm.core.common.BuildConfig
+import com.sky.mvvm.core.common.ErrorCode.ERROR_200
 import com.sky.mvvm.core.common.R
+import com.sky.mvvm.flow.SkyFlow
+import com.sky.mvvm.flow.SkyFlowEvent
+import com.sky.mvvm.sample.feature.other.ui.LoginActivity
 import dagger.hilt.android.HiltAndroidApp
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.cancel
 
 /**
  * <p>{@code className: }</p>
@@ -25,6 +34,8 @@ import dagger.hilt.android.HiltAndroidApp
  */
 @HiltAndroidApp
 class SkyMvvmApplication : BaseApplication() {
+    private val applicationScope = CoroutineScope(Dispatchers.Main + SupervisorJob())
+
     companion object {
         lateinit var mApplication: Application
     }
@@ -74,5 +85,21 @@ class SkyMvvmApplication : BaseApplication() {
             config,
             androidPrinter
         )
+
+        /**
+         * 模拟flow接受事件消息(登录过期拦截并跳转登录页面)
+         */
+        SkyFlow.with<SkyFlowEvent>(ERROR_200.toString())
+            .register(scope = applicationScope, action = {
+                val intent = Intent(this, LoginActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
+            })
+    }
+
+    override fun onTerminate() {
+        super.onTerminate()
+        SkyFlow.clearUnusedFlow()
+        applicationScope.cancel()
     }
 }

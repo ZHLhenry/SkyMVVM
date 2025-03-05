@@ -32,14 +32,16 @@ dependencies {
     api("com.geyifeng.immersionbar:immersionbar-ktx:3.2.2")
     //数据存储
     api("com.tencent:mmkv:2.1.0")
-    //Permissions
-    api("com.github.getActivity:XXPermissions:20.0")
     //refresh
     api("io.github.scwang90:refresh-layout-kernel:3.0.0-alpha")      //核心必须依赖
     api("io.github.scwang90:refresh-header-classics:3.0.0-alpha")    //经典刷新头
     api("io.github.scwang90:refresh-footer-classics:3.0.0-alpha")    //经典加载
     //Toaster
     api("com.github.getActivity:Toaster:12.8")
+    //TitleBar
+    api("com.github.getActivity:TitleBar:10.6")
+    //Permissions
+    api("com.github.getActivity:XXPermissions:20.0")
     //Log
     api("com.elvishew:xlog:1.11.1")
     //Chucker

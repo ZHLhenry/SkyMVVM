@@ -11,5 +11,3 @@
   public static * inflate(android.view.LayoutInflater, android.view.ViewGroup, boolean);
   public static * bind(android.view.View);
 }
-################ Toast ###############
--keep class com.hjq.toast.** {*;}

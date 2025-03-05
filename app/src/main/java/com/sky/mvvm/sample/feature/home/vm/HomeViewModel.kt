@@ -1,4 +1,4 @@
-package com.sky.mvvm.feature.home.viewModel
+package com.sky.mvvm.sample.feature.home.vm
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
