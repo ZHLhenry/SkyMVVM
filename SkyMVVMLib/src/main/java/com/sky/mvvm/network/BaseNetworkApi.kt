@@ -37,7 +37,6 @@ abstract class BaseNetworkApi {
     private val okHttpClient: OkHttpClient
         get() {
             var builder = OkHttpClient.Builder()
-//            var builder = RetrofitUrlManager.getInstance().with(OkHttpClient.Builder())
             builder = setHttpClientBuilder(builder)
             return builder.build()
         }

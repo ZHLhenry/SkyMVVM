@@ -11,27 +11,27 @@ import java.net.SocketException
 import java.net.URL
 
 object NetworkUtil {
-    var url = "http://www.baidu.com"
+    private var url = "http://www.baidu.com"
 
     /**
      * NetworkAvailable
      */
-    var NET_CNNT_BAIDU_OK = 1
+    private var NET_CNNT_BAIDU_OK = 1
 
     /**
      * no NetworkAvailable
      */
-    var NET_CNNT_BAIDU_TIMEOUT = 2
+    private var NET_CNNT_BAIDU_TIMEOUT = 2
 
     /**
      * Net no ready
      */
-    var NET_NOT_PREPARE = 3
+    private var NET_NOT_PREPARE = 3
 
     /**
      * net error
      */
-    var NET_ERROR = 4
+    private var NET_ERROR = 4
 
     /**
      * TIMEOUT

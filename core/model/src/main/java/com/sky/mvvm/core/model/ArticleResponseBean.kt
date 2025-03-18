@@ -1,5 +1,6 @@
 package com.sky.mvvm.core.model
 
+import com.sky.mvvm.core.model.base.BasePage
 import com.squareup.moshi.JsonClass
 
 /**
@@ -11,7 +12,7 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class ArticleResponseBean(
     val datas: MutableList<ArticleBean>,
-)
+): BasePage()
 @JsonClass(generateAdapter = true)
 data class ArticleBean(
     val adminAdd: Boolean,

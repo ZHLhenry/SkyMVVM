@@ -26,7 +26,10 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
+    //dialog
     api("com.afollestad.material-dialogs:lifecycle:3.3.0")
+    //BaseAdapter
+    api("io.github.cymchad:BaseRecyclerViewAdapterHelper4:4.1.6")
     // 沉浸式
     api("com.geyifeng.immersionbar:immersionbar:3.2.2")
     api("com.geyifeng.immersionbar:immersionbar-ktx:3.2.2")

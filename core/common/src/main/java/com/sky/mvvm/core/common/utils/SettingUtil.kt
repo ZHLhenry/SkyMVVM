@@ -12,6 +12,7 @@ import androidx.core.content.ContextCompat
 import com.sky.mvvm.core.common.R
 import java.lang.reflect.InvocationTargetException
 import kotlin.math.roundToInt
+import androidx.core.content.edit
 
 /**
  * <p>{@code className: SettingUtil}</p>
@@ -42,7 +43,7 @@ object SettingUtil {
      */
     fun setColor(context: Context, color: Int) {
         val setting = PreferenceManager.getDefaultSharedPreferences(context)
-        setting.edit().putInt("color", color).apply()
+        setting.edit { putInt("color", color) }
     }
 
 

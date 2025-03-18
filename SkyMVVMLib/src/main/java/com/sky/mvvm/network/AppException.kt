@@ -1,5 +1,8 @@
 package com.sky.mvvm.network
 
+import android.content.Context
+import com.sky.mvvm.R
+
 /**
  * <p>{@code className: }</p>
  * <p>{@code author: Henry}</p>
@@ -13,20 +16,21 @@ class AppException : Exception {
     var throwable: Throwable? = null
 
     constructor(
+        context: Context,
         errCode: Int,
         error: String?,
         errorLog: String? = "",
         throwable: Throwable? = null
     ) : super(error) {
-        this.errorMsg = error ?: "请求失败,请稍后再试"
+        this.errorMsg = error ?: context.getString(R.string.sky_mmvmlib_exception_unknown)
         this.errCode = errCode
         this.errorLog = errorLog ?: this.errorMsg
         this.throwable = throwable
     }
 
-    constructor(error: Error, e: Throwable?) {
+    constructor(context: Context, error: Error, e: Throwable?) {
         errCode = error.getKey()
-        errorMsg = error.getValue()
+        errorMsg = error.getValue(context)
         errorLog = e?.message
         throwable = e
     }

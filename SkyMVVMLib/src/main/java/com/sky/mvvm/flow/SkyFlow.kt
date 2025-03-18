@@ -17,41 +17,66 @@ import java.util.concurrent.ConcurrentHashMap
 import kotlin.coroutines.CoroutineContext
 
 /**
- * <p>{@code className: }</p>
+ * <p>{@code className: SkyFlow}</p>
  * <p>{@code author: Henry}</p>
  * <p>{@code date: 2025/3/5 11:01}</p>
- * <p>{@code description: 文件描述}</p>
+ * <p>{@code description: 基于 SharedFlow 的事件总线实现，支持普通事件和粘性事件}</p>
  */
 object SkyFlow {
     private const val TAG = "SkyFlow"
-    private val flowMap = ConcurrentHashMap<String, SkyFlow<*>>()
-    private val flowStickMap = ConcurrentHashMap<String, SkyFlowStick<*>>()
+    private val flowMap = ConcurrentHashMap<String, SkyFlowEvent<*>>()
+    private val flowStickMap = ConcurrentHashMap<String, SkyFlowStickEvent<*>>()
 
-    fun <T> with(key: String): SkyFlow<T> {
-        return flowMap.getOrPut(key) { SkyFlow<T>(key) } as SkyFlow<T>
+    /**
+     * 获取或创建普通事件流
+     */
+    fun <T> with(key: String): SkyFlowEvent<T> {
+        return flowMap.getOrPut(key) { SkyFlowEvent<T>(key) } as SkyFlowEvent<T>
     }
 
-    fun <T> withStick(key: String): SkyFlowStick<T> {
-        return flowStickMap.getOrPut(key) { SkyFlowStick<T>(key) } as SkyFlowStick<T>
+    /**
+     * 获取或创建粘性事件流
+     */
+    fun <T> withStick(key: String): SkyFlowStickEvent<T> {
+        return flowStickMap.getOrPut(key) { SkyFlowStickEvent<T>(key) } as SkyFlowStickEvent<T>
     }
 
+    /**
+     * 清理无用的 Flow
+     */
     fun clearUnusedFlow() {
         flowMap.keys.removeAll { key ->
             val flow = flowMap[key]
-            flow?._events?.subscriptionCount?.value!! <= 0
+            flow?._events?.subscriptionCount?.value == 0
         }
         flowStickMap.keys.removeAll { key ->
             val flowStick = flowStickMap[key]
-            flowStick?._events?.subscriptionCount?.value!! <= 0
+            flowStick?._events?.subscriptionCount?.value == 0
         }
     }
 
-    open class SkyFlow<T>(private val key: String) : DefaultLifecycleObserver {
+    /**
+     * 普通事件流
+     */
+    open class SkyFlowEvent<T>(private val key: String) : DefaultLifecycleObserver {
+        // 使用默认参数的 SharedFlow
         internal open val _events by lazy {
-            MutableSharedFlow<T>(0, 1, BufferOverflow.DROP_OLDEST)
+            MutableSharedFlow<T>(
+                replay = 0,
+                extraBufferCapacity = 1,
+                onBufferOverflow = BufferOverflow.DROP_OLDEST
+            )
         }
         private val events = _events.asSharedFlow()
 
+        /**
+         * 注册事件监听
+         * @param lifecycleOwner 生命周期所有者，用于自动取消订阅
+         * @param scope 协程作用域
+         * @param context 协程上下文
+         * @param filter 事件过滤条件
+         * @param action 事件处理逻辑
+         */
         fun register(
             lifecycleOwner: LifecycleOwner? = null,
             scope: CoroutineScope? = null,
@@ -63,46 +88,78 @@ object SkyFlow {
             requireNotNull(targetScope) { "Either lifecycleOwner or scope must be provided" }
 
             targetScope.launch(context) {
-                events.filter(filter).collect {
+                events.filter(filter).collect { event ->
                     try {
-                        action(it)
+                        action(event)
                     } catch (e: Exception) {
                         e.printStackTrace()
-                        "FlowBus - Error:$e".logd(tag = TAG)
+                        "SkyFlowEvent - Error: $e".logd(tag = TAG)
                     }
+                }
+            }
+
+            // 绑定生命周期
+            lifecycleOwner?.lifecycle?.addObserver(this)
+        }
+
+        /**
+         * 发送事件（挂起函数）
+         */
+        suspend fun post(event: T) {
+            try {
+                _events.emit(event)
+            } catch (e: Exception) {
+                e.printStackTrace()
+                "SkyFlowEvent - Post Error: $e".logd(tag = TAG)
+            }
+        }
+
+        /**
+         * 发送事件（非挂起函数）
+         */
+        fun post(scope: CoroutineScope, event: T) {
+            scope.launch {
+                try {
+                    _events.emit(event)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                    "SkyFlowEvent - Post Error: $e".logd(tag = TAG)
                 }
             }
         }
 
-        suspend fun post(event: T) {
-            _events.emit(event)
-        }
-
-        fun post(scope: CoroutineScope, event: T) {
-            scope.launch {
-                _events.emit(event)
-            }
-        }
-
+        /**
+         * 生命周期结束时自动清理
+         */
         override fun onDestroy(owner: LifecycleOwner) {
             super.onDestroy(owner)
-            "Auto Destroy".logd(tag = TAG)
-            if (_events.subscriptionCount.value <= 0) {
+            "SkyFlowEvent - Auto Destroy: $key".logd(tag = TAG)
+            if (_events.subscriptionCount.value == 0) {
                 flowMap.remove(key)
             }
         }
 
+        /**
+         * 手动销毁
+         */
         fun destroy() {
-            "Not Auto Destroy".logd(tag = TAG)
-            if (_events.subscriptionCount.value <= 0) {
+            "SkyFlowEvent - Manual Destroy: $key".logd(tag = TAG)
+            if (_events.subscriptionCount.value == 0) {
                 flowMap.remove(key)
             }
         }
     }
 
-    class SkyFlowStick<T>(key: String) : SkyFlow<T>(key) {
+    /**
+     * 粘性事件流
+     */
+    class SkyFlowStickEvent<T>(key: String) : SkyFlowEvent<T>(key) {
         override val _events by lazy {
-            MutableSharedFlow<T>(1, 1, BufferOverflow.DROP_OLDEST)
+            MutableSharedFlow<T>(
+                replay = 1, // 粘性事件，保留最新一个事件
+                extraBufferCapacity = 1,
+                onBufferOverflow = BufferOverflow.DROP_OLDEST
+            )
         }
     }
 }

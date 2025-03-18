@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.os.Build
 import com.sky.mvvm.base.BaseApplication.Companion.app
+import androidx.core.content.edit
 
 /**
  * <p>{@code className: }</p>
@@ -13,7 +14,7 @@ import com.sky.mvvm.base.BaseApplication.Companion.app
  */
 object ShareDownLoadUtil {
 
-    private var path = Build.BRAND + "_" + Build.MODEL + "_" + "skyMVVM_download_sp"
+    private var path = Build.BRAND + "_" + Build.MODEL + "_" + "SkyMVVM_Download_SP"
     private val sp: SharedPreferences = app.getSharedPreferences(path, Context.MODE_PRIVATE)
 
 
@@ -22,7 +23,7 @@ object ShareDownLoadUtil {
     }
 
     fun putBoolean(key: String, value: Boolean) {
-        sp.edit().putBoolean(key, value).apply()
+        sp.edit { putBoolean(key, value) }
     }
 
     fun getBoolean(key: String, defValue: Boolean): Boolean {
@@ -30,7 +31,7 @@ object ShareDownLoadUtil {
     }
 
     fun putString(key: String, value: String) {
-        sp.edit().putString(key, value).apply()
+        sp.edit { putString(key, value) }
     }
 
     fun getString(key: String, defValue: String): String? {
@@ -38,7 +39,7 @@ object ShareDownLoadUtil {
     }
 
     fun putInt(key: String, value: Int) {
-        sp.edit().putInt(key, value).apply()
+        sp.edit { putInt(key, value) }
     }
 
     fun getInt(key: String, defValue: Int): Int {
@@ -46,7 +47,7 @@ object ShareDownLoadUtil {
     }
 
     fun putLong(key: String?, value: Long) {
-        sp.edit().putLong(key, value).apply()
+        sp.edit { putLong(key, value) }
     }
 
     fun getLong(key: String, defValue: Long): Long {
@@ -54,11 +55,11 @@ object ShareDownLoadUtil {
     }
 
     fun remove(key: String) {
-        sp.edit().remove(key).apply()
+        sp.edit { remove(key) }
     }
 
     fun clear() {
-        sp.edit().clear().apply()
+        sp.edit { clear() }
     }
 
 

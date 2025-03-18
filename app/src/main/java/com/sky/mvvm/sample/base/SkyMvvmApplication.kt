@@ -18,7 +18,7 @@ import com.sky.mvvm.core.common.BuildConfig
 import com.sky.mvvm.core.common.ErrorCode.ERROR_200
 import com.sky.mvvm.core.common.R
 import com.sky.mvvm.flow.SkyFlow
-import com.sky.mvvm.flow.SkyFlowEvent
+import com.sky.mvvm.flow.SkyFlowEventData
 import com.sky.mvvm.sample.feature.other.ui.LoginActivity
 import dagger.hilt.android.HiltAndroidApp
 import kotlinx.coroutines.CoroutineScope
@@ -89,7 +89,7 @@ class SkyMvvmApplication : BaseApplication() {
         /**
          * 模拟flow接受事件消息(登录过期拦截并跳转登录页面)
          */
-        SkyFlow.with<SkyFlowEvent>(ERROR_200.toString())
+        SkyFlow.with<SkyFlowEventData>(ERROR_200.toString())
             .register(scope = applicationScope, action = {
                 val intent = Intent(this, LoginActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK

@@ -1,37 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <data/>
+    <data />
 
     <com.sky.multistatelayout.widget.LinearStateLayout
         android:id="@+id/statelayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tv_home_network"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="30sp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <!--            <com.hjq.bar.TitleBar-->
-            <!--                android:id="@+id/titlebar"-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:background="@color/a609BE5"-->
-            <!--                app:barStyle="ripple"-->
-            <!--                app:leftIcon="@null"-->
-            <!--                app:layout_constraintLeft_toRightOf="parent"-->
-            <!--                app:layout_constraintRight_toLeftOf="parent"-->
-            <!--                app:layout_constraintTop_toTopOf="parent"-->
-            <!--                app:title="首页" />-->
-
-            <com.scwang.smart.refresh.layout.SmartRefreshLayout
+            <com.sky.mvvm.core.common.widget.CustomRefreshLayout
                 android:id="@+id/refresh_home"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -41,8 +19,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
 
-            </com.scwang.smart.refresh.layout.SmartRefreshLayout>
+            </com.sky.mvvm.core.common.widget.CustomRefreshLayout>
 
-        </LinearLayout>
     </com.sky.multistatelayout.widget.LinearStateLayout>
 </layout>

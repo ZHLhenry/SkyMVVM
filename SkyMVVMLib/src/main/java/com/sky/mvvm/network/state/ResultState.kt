@@ -1,4 +1,5 @@
 package com.sky.mvvm.network.state
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import com.sky.mvvm.network.AppException
 import com.sky.mvvm.network.BaseResponse
@@ -25,14 +26,14 @@ sealed class ResultState<out T> {
  * 处理返回值
  * @param result 请求结果
  */
-fun <T> MutableLiveData<ResultState<T>>.paresResult(result: BaseResponse<T>) {
+fun <T> MutableLiveData<ResultState<T>>.paresResult(context: Context,result: BaseResponse<T>) {
     value = when {
         result.isSucces() -> {
             ResultState.onAppSuccess(result.getResponseData())
         }
 
         else -> {
-            ResultState.onAppError(AppException(result.getResponseCode(), result.getResponseMsg()))
+            ResultState.onAppError(AppException(context,result.getResponseCode(), result.getResponseMsg()))
         }
     }
 }
@@ -48,6 +49,6 @@ fun <T> MutableLiveData<ResultState<T>>.paresResult(result: T) {
 /**
  * 异常转换异常处理
  */
-fun <T> MutableLiveData<ResultState<T>>.paresException(e: Throwable) {
-    this.value = ResultState.onAppError(ExceptionHandle.handleException(e))
+fun <T> MutableLiveData<ResultState<T>>.paresException(context: Context, e: Throwable) {
+    this.value = ResultState.onAppError(ExceptionHandle.handleException(context,e))
 }

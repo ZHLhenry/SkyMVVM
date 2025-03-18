@@ -1,6 +1,9 @@
 package com.sky.mvvm.ext
+
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.sky.mvvm.R
 import com.sky.mvvm.base.activity.BaseVmActivity
 import com.sky.mvvm.base.fragment.BaseVmFragment
 import com.sky.mvvm.base.viewmodel.BaseViewModel
@@ -88,11 +91,12 @@ fun <T> BaseVmFragment<*>.parseState(
  * @param isShowDialog 是否显示加载框
  * @param loadingMessage 加载框提示内容
  */
-fun <T> BaseViewModel.request(
+fun <T> BaseViewModel.apiRequest(
+    context: Context,
     block: suspend () -> BaseResponse<T>,
     resultState: MutableLiveData<ResultState<T>>,
     isShowDialog: Boolean = false,
-    loadingMessage: String = "请求网络中..."
+    loadingMessage: String = context.getString(R.string.sky_mmvmlib_loading_message)
 ): Job {
     return viewModelScope.launch {
         runCatching {
@@ -100,12 +104,12 @@ fun <T> BaseViewModel.request(
             //请求体
             block()
         }.onSuccess {
-            resultState.paresResult(it)
+            resultState.paresResult(context,it)
         }.onFailure {
             it.message?.loge()
             //打印错误栈信息
             it.printStackTrace()
-            resultState.paresException(it)
+            resultState.paresException(context, it)
         }
     }
 }
@@ -117,11 +121,12 @@ fun <T> BaseViewModel.request(
  * @param isShowDialog 是否显示加载框
  * @param loadingMessage 加载框提示内容
  */
-fun <T> BaseViewModel.requestNoCheck(
+fun <T> BaseViewModel.apiRequestNoCheck(
+    context: Context,
     block: suspend () -> T,
     resultState: MutableLiveData<ResultState<T>>,
     isShowDialog: Boolean = false,
-    loadingMessage: String = "请求网络中..."
+    loadingMessage: String = context.getString(R.string.sky_mmvmlib_loading_message)
 ): Job {
     return viewModelScope.launch {
         runCatching {
@@ -134,7 +139,7 @@ fun <T> BaseViewModel.requestNoCheck(
             it.message?.loge()
             //打印错误栈信息
             it.printStackTrace()
-            resultState.paresException(it)
+            resultState.paresException(context, it)
         }
     }
 }
@@ -147,12 +152,13 @@ fun <T> BaseViewModel.requestNoCheck(
  * @param isShowDialog 是否显示加载框
  * @param loadingMessage 加载框提示内容
  */
-fun <T> BaseViewModel.request(
+fun <T> BaseViewModel.apiRequest(
+    context: Context,
     block: suspend () -> BaseResponse<T>,
     success: (T) -> Unit,
     error: (AppException) -> Unit = {},
     isShowDialog: Boolean = false,
-    loadingMessage: String = "请求网络中..."
+    loadingMessage: String = context.getString(R.string.sky_mmvmlib_loading_message)
 ): Job {
     //如果需要弹窗 通知Activity/fragment弹窗
     return viewModelScope.launch {
@@ -165,7 +171,7 @@ fun <T> BaseViewModel.request(
             loadingChange.dismissDialog.postValue(false)
             runCatching {
                 //校验请求结果码是否正确，不正确会抛出异常走下面的onFailure
-                executeResponse(it) { t ->
+                executeResponse(context,it) { t ->
                     success(t)
                 }
             }.onFailure { e ->
@@ -174,7 +180,7 @@ fun <T> BaseViewModel.request(
                 //打印错误栈信息
                 e.printStackTrace()
                 //失败回调
-                error(ExceptionHandle.handleException(e))
+                error(ExceptionHandle.handleException(context, e))
             }
         }.onFailure {
             //网络请求异常 关闭弹窗
@@ -184,7 +190,7 @@ fun <T> BaseViewModel.request(
             //打印错误栈信息
             it.printStackTrace()
             //失败回调
-            error(ExceptionHandle.handleException(it))
+            error(ExceptionHandle.handleException(context, it))
         }
     }
 }
@@ -197,12 +203,13 @@ fun <T> BaseViewModel.request(
  * @param isShowDialog 是否显示加载框
  * @param loadingMessage 加载框提示内容
  */
-fun <T> BaseViewModel.requestNoCheck(
+fun <T> BaseViewModel.apiRequestNoCheck(
+    context: Context,
     block: suspend () -> T,
     success: (T) -> Unit,
     error: (AppException) -> Unit = {},
     isShowDialog: Boolean = false,
-    loadingMessage: String = "请求网络中..."
+    loadingMessage: String = context.getString(R.string.sky_mmvmlib_loading_message)
 ): Job {
     //如果需要弹窗 通知Activity/fragment弹窗
     if (isShowDialog) loadingChange.showDialog.postValue(loadingMessage)
@@ -223,7 +230,7 @@ fun <T> BaseViewModel.requestNoCheck(
             //打印错误栈信息
             it.printStackTrace()
             //失败回调
-            error(ExceptionHandle.handleException(it))
+            error(ExceptionHandle.handleException(context, it))
         }
     }
 }
@@ -232,6 +239,7 @@ fun <T> BaseViewModel.requestNoCheck(
  * 请求结果过滤，判断请求服务器请求结果是否成功，不成功则会抛出异常
  */
 suspend fun <T> executeResponse(
+    context: Context,
     response: BaseResponse<T>,
     success: suspend CoroutineScope.(T) -> Unit
 ) {
@@ -243,6 +251,7 @@ suspend fun <T> executeResponse(
 
             else -> {
                 throw AppException(
+                    context,
                     response.getResponseCode(),
                     response.getResponseMsg(),
                     response.getResponseMsg()

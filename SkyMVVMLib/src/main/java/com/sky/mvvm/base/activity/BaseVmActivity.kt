@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.sky.mvvm.R
 import com.sky.mvvm.base.viewmodel.BaseViewModel
 import com.sky.mvvm.ext.util.notNull
 import com.sky.mvvm.network.manager.NetState
@@ -24,7 +25,7 @@ abstract class BaseVmActivity<VM : BaseViewModel> : AppCompatActivity() {
 
     abstract fun initView(savedInstanceState: Bundle?)
 
-    abstract fun showLoading(message: String = "请求网络中...")
+    abstract fun showLoading(message: String = application.getString(R.string.sky_mmvmlib_loading_message))
 
     abstract fun dismissLoading()
 

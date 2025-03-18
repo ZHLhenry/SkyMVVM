@@ -1,6 +1,8 @@
 package com.sky.mvvm.ext.download
 
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
+import com.sky.mvvm.R
 
 /**
  * <p>{@code className: }</p>
@@ -8,7 +10,7 @@ import androidx.lifecycle.MutableLiveData
  * <p>{@code date: 2025/2/23 10:38}</p>
  * <p>{@code description: 文件描述}</p>
  */
-fun downLoadExt(downloadResultState: MutableLiveData<DownloadResultState>): OnDownLoadListener {
+fun downLoadExt(content: Context, downloadResultState: MutableLiveData<DownloadResultState>): OnDownLoadListener {
     return object : OnDownLoadListener {
         override fun onDownLoadPrepare(key: String) {
             //开始下载
@@ -19,7 +21,7 @@ fun downLoadExt(downloadResultState: MutableLiveData<DownloadResultState>): OnDo
             //下载错误
             downloadResultState.postValue(
                 DownloadResultState.onError(
-                    throwable.message ?: "下载错误"
+                    throwable.message ?: content.getString(R.string.sky_mmvmlib_download_error)
                 )
             )
         }

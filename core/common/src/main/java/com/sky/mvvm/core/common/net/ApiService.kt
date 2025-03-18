@@ -27,6 +27,6 @@ interface ApiService {
      * 获取置顶文章集合数据
      */
     @GET("article/top/json")
-    suspend fun getTopAritrilList(): ApiResponse<ArrayList<ArticleBean>>
+    suspend fun getTopAritrilList(): ApiResponse<MutableList<ArticleBean>>
 
 }

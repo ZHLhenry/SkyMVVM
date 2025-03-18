@@ -4,7 +4,7 @@ import com.hjq.gson.factory.GsonFactory
 import com.sky.mvvm.core.common.ErrorCode.ERROR_200
 import com.sky.mvvm.core.common.net.ApiResponse
 import com.sky.mvvm.flow.SkyFlow
-import com.sky.mvvm.flow.SkyFlowEvent
+import com.sky.mvvm.flow.SkyFlowEventData
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -29,8 +29,8 @@ class TokenOutInterceptor : Interceptor {
             val apiResponse = GsonFactory.getSingletonGson().fromJson(string, ApiResponse::class.java)
             if (apiResponse.errorCode == ERROR_200) {
                 GlobalScope.launch {
-                    val skyFlowEvent = SkyFlowEvent(ERROR_200.toString(),"TokenOutInterceptor")
-                    SkyFlow.with<SkyFlowEvent>(ERROR_200.toString()).post(skyFlowEvent)
+                    val skyFlowEvent = SkyFlowEventData(ERROR_200.toString(),"TokenOutInterceptor")
+                    SkyFlow.with<SkyFlowEventData>(ERROR_200.toString()).post(skyFlowEvent)
                 }
             }
             response.newBuilder().body(responseBody).build()

@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.sky.mvvm.R
 import com.sky.mvvm.base.viewmodel.BaseViewModel
 import com.sky.mvvm.network.manager.NetState
 import com.sky.mvvm.network.manager.NetworkStateManager
@@ -172,7 +173,7 @@ abstract class BaseVmFragment<VM : BaseViewModel> : Fragment() {
      */
     open fun initData() {}
 
-    abstract fun showLoading(message: String = "请求网络中...")
+    abstract fun showLoading(message: String = mActivity.getString(R.string.sky_mmvmlib_loading_message))
 
     abstract fun dismissLoading()
 

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SkyMVVM</string>
+    <string name="sky_mmvmlib_exception_network_error">我是自定义网络连接错误</string>
 </resources>

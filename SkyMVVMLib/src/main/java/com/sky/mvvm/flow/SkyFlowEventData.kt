@@ -6,7 +6,7 @@ package com.sky.mvvm.flow
  * <p>{@code date: 2025/3/5 11:11}</p>
  * <p>{@code description: 文件描述}</p>
  */
-data class SkyFlowEvent(
+data class SkyFlowEventData(
     var eventKey: String,
     var eventValue: String
 )

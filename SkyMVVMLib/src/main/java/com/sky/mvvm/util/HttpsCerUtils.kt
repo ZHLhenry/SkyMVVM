@@ -31,7 +31,8 @@ object HttpsCerUtils {
             val mBuilder = OkHttpClient.Builder()
             try {
                 val sc = SSLContext.getInstance("TLS")
-                val trustAllManager: X509TrustManager = object : X509TrustManager {
+                val trustAllManager: X509TrustManager = @SuppressLint("CustomX509TrustManager")
+                object : X509TrustManager {
                     override fun checkClientTrusted(
                         chain: Array<X509Certificate>,
                         authType: String
