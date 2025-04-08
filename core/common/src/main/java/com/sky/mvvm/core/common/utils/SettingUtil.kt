@@ -1,6 +1,7 @@
+@file:Suppress("DEPRECATION")
+
 package com.sky.mvvm.core.common.utils
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
@@ -25,7 +26,6 @@ object SettingUtil {
     /**
      * 获取当前主题颜色
      */
-    @SuppressLint("ResourceType")
     fun getColor(context: Context): Int {
         val setting = PreferenceManager.getDefaultSharedPreferences(context)
         val defaultColor = ContextCompat.getColor(context, R.color.colorPrimary)

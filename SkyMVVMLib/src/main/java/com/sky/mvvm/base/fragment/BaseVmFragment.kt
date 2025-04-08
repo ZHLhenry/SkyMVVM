@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.sky.mvvm.base.fragment
 import android.content.Context
 import android.os.Bundle

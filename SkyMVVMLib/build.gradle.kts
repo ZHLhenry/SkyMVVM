@@ -15,9 +15,9 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     //lifecycle
+    api(libs.androidx.lifecycle.process)
     api(libs.androidx.lifecycle.runtime.ktx)
     api(libs.androidx.lifecycle.lifecycle.common.java8)
-    api(libs.androidx.lifecycle.lifecycle.extensions)
     // viewModel
     api(libs.androidx.lifecycle.lifecycle.viewmodel.ktx)
     // liveData

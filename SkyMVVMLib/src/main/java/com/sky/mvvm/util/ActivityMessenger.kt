@@ -46,12 +46,16 @@ object ActivityMessenger {
      *
      * @param TARGET 要启动的Activity
      * @param starter 发起的Activity
+     * @param flags flags
      * @param params extras键值对
      */
     inline fun <reified TARGET : Activity> startActivity(
         starter: FragmentActivity,
+        flags: Int = 0,
         vararg params: Pair<String, Any>
-    ) = starter.startActivity(Intent(starter, TARGET::class.java).putExtras(*params))
+    ) = starter.startActivity(
+        Intent(starter, TARGET::class.java).setFlags(flags).putExtras(*params)
+    )
 
     /**
      *  Fragment跳转，同[Activity.startActivity]
@@ -66,12 +70,16 @@ object ActivityMessenger {
      *
      * @param TARGET 要启动的Activity
      * @param starter 发起的Fragment
+     * @param flags flags
      * @param params extras键值对
      */
     inline fun <reified TARGET : Activity> startActivity(
         starter: Fragment,
+        flags: Int = 0,
         vararg params: Pair<String, Any>
-    ) = starter.startActivity(Intent(starter.context, TARGET::class.java).putExtras(*params))
+    ) = starter.startActivity(
+        Intent(starter.context, TARGET::class.java).setFlags(flags).putExtras(*params)
+    )
 
     /**
      * Adapter跳转，同[Context.startActivity]
@@ -86,12 +94,16 @@ object ActivityMessenger {
      *
      * @param TARGET 要启动的Context
      * @param starter 发起的Fragment
+     * @param flags flags
      * @param params extras键值对
      */
     inline fun <reified TARGET : Activity> startActivity(
         starter: Context,
+        flags: Int = 0,
         vararg params: Pair<String, Any>
-    ) = starter.startActivity(Intent(starter, TARGET::class.java).putExtras(*params))
+    ) = starter.startActivity(
+        Intent(starter, TARGET::class.java).setFlags(flags).putExtras(*params)
+    )
 
     /**
      *  作用同[Activity.startActivity]
@@ -110,13 +122,15 @@ object ActivityMessenger {
      *
      * @param starter 发起的Activity
      * @param target 要启动的Activity
+     * @param flags flags
      * @param params extras键值对
      */
     fun startActivity(
         starter: FragmentActivity,
         target: KClass<out Activity>,
+        flags: Int = 0,
         vararg params: Pair<String, Any>
-    ) = starter.startActivity(Intent(starter, target.java).putExtras(*params))
+    ) = starter.startActivity(Intent(starter, target.java).setFlags(flags).putExtras(*params))
 
     /**
      *  Fragment跳转，同[Activity.startActivity]
@@ -135,13 +149,17 @@ object ActivityMessenger {
      *
      * @param starter 发起的Fragment
      * @param target 要启动的Activity
+     * @param flags flags
      * @param params extras键值对
      */
     fun startActivity(
         starter: Fragment,
         target: KClass<out Activity>,
+        flags: Int = 0,
         vararg params: Pair<String, Any>
-    ) = starter.startActivity(Intent(starter.context, target.java).putExtras(*params))
+    ) = starter.startActivity(
+        Intent(starter.context, target.java).setFlags(flags).putExtras(*params)
+    )
 
     /**
      *  Adapter里面跳转，同[Context.startActivity]
@@ -160,13 +178,15 @@ object ActivityMessenger {
      *
      * @param starter 发起的Context
      * @param target 要启动的Activity
+     * @param flags flags
      * @param params extras键值对
      */
     fun startActivity(
         starter: Context,
         target: KClass<out Activity>,
+        flags: Int = 0,
         vararg params: Pair<String, Any>
-    ) = starter.startActivity(Intent(starter, target.java).putExtras(*params))
+    ) = starter.startActivity(Intent(starter, target.java).setFlags(flags).putExtras(*params))
 
     /**
      *  作用同[Activity.startActivityForResult]
@@ -533,23 +553,29 @@ fun <T> extraAct(extraName: String, defaultValue: T): ActivityExtras<T> =
  * 以下方法只是把ActivityMessenger里面的方法变成了扩展方法
  */
 inline fun <reified TARGET : Activity> FragmentActivity.startActivity(
+    flags: Int = 0,
     vararg params: Pair<String, Any>
-) = startActivity(Intent(this, TARGET::class.java).putExtras(*params))
+) = startActivity(Intent(this, TARGET::class.java).setFlags(flags).putExtras(*params))
 
 inline fun <reified TARGET : Activity> Fragment.startActivity(
+    flags: Int = 0,
     vararg params: Pair<String, Any>
 ) = activity?.run {
-    startActivity(Intent(this, TARGET::class.java).putExtras(*params))
+    startActivity(Intent(this, TARGET::class.java).setFlags(flags).putExtras(*params))
 }
 
 fun FragmentActivity.startActivity(
-    target: KClass<out Activity>, vararg params: Pair<String, Any>
-) = startActivity(Intent(this, target.java).putExtras(*params))
+    target: KClass<out Activity>,
+    flags: Int = 0,
+    vararg params: Pair<String, Any>
+) = startActivity(Intent(this, target.java).setFlags(flags).putExtras(*params))
 
 fun Fragment.startActivity(
-    target: KClass<out Activity>, vararg params: Pair<String, Any>
+    target: KClass<out Activity>,
+    flags: Int = 0,
+    vararg params: Pair<String, Any>
 ) = activity?.run {
-    startActivity(Intent(this, target.java).putExtras(*params))
+    startActivity(Intent(this, target.java).setFlags(flags).putExtras(*params))
 }
 
 inline fun <reified TARGET : Activity> FragmentActivity.startActivityForResult(
@@ -582,7 +608,7 @@ fun Activity.finish(intent: Intent) = run {
     finish()
 }
 
-fun String.toIntent(flags: Int = 0): Intent = Intent(this).setFlags(flags)
+//fun String.toIntent(flags: Int = 0): Intent = Intent(this).setFlags(flags)
 
 inline fun FragmentActivity?.startActivityForResult(
     intent: Intent, crossinline callback: ((result: Intent?) -> Unit)

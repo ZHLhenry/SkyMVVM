@@ -20,6 +20,7 @@ import com.sky.mvvm.core.common.R
 import com.sky.mvvm.flow.SkyFlow
 import com.sky.mvvm.flow.SkyFlowEventData
 import com.sky.mvvm.sample.feature.other.ui.LoginActivity
+import com.sky.mvvm.util.ActivityMessenger
 import dagger.hilt.android.HiltAndroidApp
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -91,9 +92,8 @@ class SkyMvvmApplication : BaseApplication() {
          */
         SkyFlow.with<SkyFlowEventData>(ERROR_200.toString())
             .register(scope = applicationScope, action = {
-                val intent = Intent(this, LoginActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                startActivity(intent)
+                val flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                ActivityMessenger.startActivity<LoginActivity>(this,flags)
             })
     }
 

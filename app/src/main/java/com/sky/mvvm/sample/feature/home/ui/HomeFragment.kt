@@ -2,7 +2,6 @@ package com.sky.mvvm.sample.feature.home.ui
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import androidx.collection.mutableIntListOf
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter4.QuickAdapterHelper
 import com.scwang.smart.refresh.layout.api.RefreshLayout
@@ -15,7 +14,6 @@ import com.sky.mvvm.core.common.utils.StringUtils
 import com.sky.mvvm.core.model.ArticleBean
 import com.sky.mvvm.ext.parseState
 import com.sky.mvvm.network.manager.NetState
-import com.sky.mvvm.network.state.paresResult
 import com.sky.mvvm.sample.databinding.FragmentHomeBinding
 import com.sky.mvvm.sample.feature.home.adapter.ArticleListAdapter
 import com.sky.mvvm.sample.feature.home.vm.HomeViewModel
@@ -46,17 +44,19 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding>() {
         helper = QuickAdapterHelper.Builder(mArticleListAdapter).build()
         mDatabind.rvArticleList.adapter = helper.adapter
 
+        pageUtils = PageUtils<MutableList<ArticleBean>>(mDatabind.refreshHome).apply {
+            setPageUtilListener(object : PageUtilListener<MutableList<ArticleBean>>{
+                override fun onPagePullDataFinish(data: MutableList<ArticleBean>?) {
+                    mArticleListAdapter.submitList(data)
+                }
 
-        pageUtils = PageUtils(mDatabind.refreshHome)
-        pageUtils.setPageUtilListener(object : PageUtilListener<MutableList<ArticleBean>> {
-            override fun onPagePullDataFinish(data: MutableList<ArticleBean>) {
-                mArticleListAdapter.submitList(data)
-            }
-
-            override fun onPageLoadMoreDataFinish(data: MutableList<ArticleBean>) {
-                mArticleListAdapter.addAll(data)
-            }
-        })
+                override fun onPageLoadMoreDataFinish(data: MutableList<ArticleBean>?) {
+                    if (data != null) {
+                        mArticleListAdapter.addAll(data)
+                    }
+                }
+            })
+        }
 
         mDatabind.refreshHome.setOnRefreshLoadMoreListener(object : OnRefreshLoadMoreListener {
             override fun onRefresh(refreshLayout: RefreshLayout) {

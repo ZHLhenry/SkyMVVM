@@ -36,9 +36,9 @@ dependencies {
     //数据存储
     api("com.tencent:mmkv:2.1.0")
     //refresh
-    api("io.github.scwang90:refresh-layout-kernel:3.0.0-alpha")      //核心必须依赖
-    api("io.github.scwang90:refresh-header-classics:3.0.0-alpha")    //经典刷新头
-    api("io.github.scwang90:refresh-footer-classics:3.0.0-alpha")    //经典加载
+    api("io.github.scwang90:refresh-layout-kernel:3.0.0-alpha")
+    api("io.github.scwang90:refresh-header-classics:3.0.0-alpha")
+    api("io.github.scwang90:refresh-footer-classics:3.0.0-alpha")
     //Toaster
     api("com.github.getActivity:Toaster:12.8")
     //TitleBar

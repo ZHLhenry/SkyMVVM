@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
 import android.view.View
 import android.widget.ImageView
+import androidx.core.graphics.createBitmap
 
 /**
  * 设置view显示
@@ -82,7 +83,7 @@ fun View.toBitmap(scale: Float = 1f, config: Bitmap.Config = Bitmap.Config.ARGB_
 
 fun createBitmapSafely(width: Int, height: Int, config: Bitmap.Config, retryCount: Int): Bitmap? {
     try {
-        return Bitmap.createBitmap(width, height, config)
+        return createBitmap(width, height, config)
     } catch (e: OutOfMemoryError) {
         e.printStackTrace()
         if (retryCount > 0) {

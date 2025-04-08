@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.sky.mvvm.base
 import android.app.Application
 import android.content.IntentFilter

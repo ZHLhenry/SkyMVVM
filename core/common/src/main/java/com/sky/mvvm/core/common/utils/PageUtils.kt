@@ -9,7 +9,7 @@ import com.sky.mvvm.core.common.widget.CustomRefreshLayout
  * <p>{@code date: 2024/6/13 16:23}</p>
  * <p>{@code description: 分页逻辑集中处理}</p>
  */
-class PageUtils<T>(
+class PageUtils<T : Any?>(
     private val smartRefreshLayout: CustomRefreshLayout,
     private var pageUtilListener: PageUtilListener<T>? = null
 ) {
@@ -46,9 +46,9 @@ class PageUtils<T>(
     fun getPageShow(): Int = pageShow
 
     /**
-     * 设置总页数和数据源
+     * 设置总页数和可选的数据
      */
-    fun setTotalPageAndData(totalPage: Int, data: T) {
+    fun setTotalPageAndData(totalPage: Int, data: T? = null) {
         this.totalPage = totalPage
         if (nowPage == defaultNowPage) {
             handleFirstPageLoad(data)
@@ -60,7 +60,7 @@ class PageUtils<T>(
     /**
      * 处理首次加载数据
      */
-    private fun handleFirstPageLoad(data: T) {
+    private fun handleFirstPageLoad(data: T? = null) {
         smartRefreshLayout.finishRefresh()
         if (smartRefreshLayout.isEnableLoadMore) {
             smartRefreshLayout.finishLoadMore(true)
@@ -82,7 +82,7 @@ class PageUtils<T>(
     /**
      * 处理后续加载数据
      */
-    private fun handleSubsequentPageLoad(data: T) {
+    private fun handleSubsequentPageLoad(data: T? = null) {
         if (totalPage <= nowPage) {
             smartRefreshLayout.setNoMoreData(true)
             smartRefreshLayout.finishLoadMore(true)
@@ -90,8 +90,6 @@ class PageUtils<T>(
             nowPage++
             smartRefreshLayout.finishLoadMore(true)
         }
-
-        // 通知监听器加载更多数据完成
         pageUtilListener?.onPageLoadMoreDataFinish(data)
     }
 
@@ -105,8 +103,8 @@ class PageUtils<T>(
     /**
      * 页面监听器接口
      */
-    interface PageUtilListener<T> {
-        fun onPagePullDataFinish(data: T)
-        fun onPageLoadMoreDataFinish(data: T)
+    interface PageUtilListener<T : Any?> {
+        fun onPagePullDataFinish(data: T? = null)
+        fun onPageLoadMoreDataFinish(data: T? = null)
     }
 }

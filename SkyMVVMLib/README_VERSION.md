@@ -22,3 +22,8 @@ v1.0.3
     <string name="sky_mmvmlib_download_error">下载错误</string>
     <string name="sky_mmvmlib_loading_message">请求网络中</string>
 </resources>
+
+v1.0.4
+1:相关版本依赖升级
+2:ActivityMessenger类方法中增加flags可选参数
+3:PageUtils类优化泛型参数T，可选

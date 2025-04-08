@@ -1,6 +1,8 @@
 package com.sky.mvvm.sample.feature.other.ui
 
 import com.sky.mvvm.core.common.base.BaseActivity
+import com.sky.mvvm.ext.util.setDebouncedClickListener
+import com.sky.mvvm.ext.view.clickNoRepeat
 import com.sky.mvvm.sample.databinding.ActivityLoginBinding
 import com.sky.mvvm.sample.feature.other.vm.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -15,5 +17,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class LoginActivity: BaseActivity<LoginViewModel,ActivityLoginBinding>() {
     override fun initView(savedInstanceState: android.os.Bundle?) {
         addLoadingObserve(mViewModel)
+        mDatabind.tvLogin.clickNoRepeat {  }
     }
 }
