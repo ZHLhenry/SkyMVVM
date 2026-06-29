@@ -25,7 +25,8 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-
+    //recyclerview
+    api("androidx.recyclerview:recyclerview:1.3.2")
     //dialog
     api("com.afollestad.material-dialogs:lifecycle:3.3.0")
     //BaseAdapter

@@ -27,3 +27,9 @@ v1.0.4
 1:相关版本依赖升级
 2:ActivityMessenger类方法中增加flags可选参数
 3:PageUtils类优化泛型参数T，可选
+
+v1.0.5
+1:agp版本升级8.9.1->9.0.0，kotlin版本升级2.1.20->2.4.0，gradle版本升级8.11.1->9.6.1，相关其他的依赖版本对应升级
+2:删除uploadArchive.gradle,增加AndroidMavenPublishConventionPlugin插件
+3:增加hilt-noop-processor模块，仅用于声明识别 Hilt 在 KSP 场景下仍注入到 javac 的内部选项，从而消除 javac 的“以下选项未被任何处理程序识别”警告。
+4:build-logic模块优化

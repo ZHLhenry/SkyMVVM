@@ -17,7 +17,7 @@ object KtxActivityManger {
     val currentActivity: Activity?
         get() =
             if (mActivityList.isEmpty()) null
-            else mActivityList.last
+            else mActivityList.last()
 
     /**
      * activity入栈
@@ -25,7 +25,7 @@ object KtxActivityManger {
      */
     fun pushActivity(activity: Activity) {
         if (mActivityList.contains(activity)) {
-            if (mActivityList.last != activity) {
+            if (mActivityList.last() != activity) {
                 mActivityList.remove(activity)
                 mActivityList.add(activity)
             }

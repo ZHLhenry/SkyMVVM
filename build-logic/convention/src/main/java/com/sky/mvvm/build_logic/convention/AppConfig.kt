@@ -4,7 +4,7 @@ object AppConfig {
     /** 项目构建版本信息 **/
     const val minSdk = 28
     const val targetSdk = 35
-    const val compileSdk = 35
+    const val compileSdk = 36
 
     /** app版本信息 **/
     const val appName = "SkyMVVM"

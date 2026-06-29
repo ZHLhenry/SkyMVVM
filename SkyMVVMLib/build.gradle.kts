@@ -1,9 +1,8 @@
-apply(from = "../uploadArchive.gradle")
 plugins {
     alias(libs.plugins.sky.android.library)
     alias(libs.plugins.sky.android.hilt)
-    id("kotlin-kapt")
-    id("maven-publish")
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.sky.android.publish)
 }
 
 android {

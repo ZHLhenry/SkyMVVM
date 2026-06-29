@@ -32,7 +32,7 @@ class LoggingInterceptor private constructor(private val builder: Builder) : Int
         if (excludeList.size > 0) {
             var flag = false
             excludeList.forEach {
-                if (request.url().encodedPath().contains(it)) {
+                if (request.url.encodedPath.contains(it)) {
                     flag = true
                     return@forEach
                 }
@@ -43,8 +43,8 @@ class LoggingInterceptor private constructor(private val builder: Builder) : Int
             }
         }
 
-        if (builder.headers.size() > 0) {
-            val headers = request.headers()
+        if (builder.headers.size > 0) {
+            val headers = request.headers
             val names = headers.names()
             val iterator = names.iterator()
             val requestBuilder = request.newBuilder()
@@ -60,7 +60,7 @@ class LoggingInterceptor private constructor(private val builder: Builder) : Int
             return chain.proceed(request)
         }
 
-        val requestBody = request.body()
+        val requestBody = request.body
 
         var rContentType: MediaType? = null
         if (requestBody != null) {
@@ -69,11 +69,11 @@ class LoggingInterceptor private constructor(private val builder: Builder) : Int
 
         var rSubtype: String? = null
         if (rContentType != null) {
-            rSubtype = rContentType.subtype()
+            rSubtype = rContentType.subtype
         }
 
         if (builder.requestFlag) {
-            if (request.method() == "GET") {
+            if (request.method == "GET") {
                 Logger.printJsonRequest(builder, request)
             } else {
                 if (subtypeIsNotFile(rSubtype)) {
@@ -88,15 +88,15 @@ class LoggingInterceptor private constructor(private val builder: Builder) : Int
         val response = chain.proceed(request)
 
         if (builder.responseFlag) {
-            val requestUrl = request.url()
+            val requestUrl = request.url
             val chainMs = TimeUnit.NANOSECONDS.toMillis(System.nanoTime() - st)
-            val header = response.headers().toString()
-            val code = response.code()
+            val header = response.headers.toString()
+            val code = response.code
             val isSuccessful = response.isSuccessful
-            val responseBody = response.body()
+            val responseBody = response.body
             val contentType = responseBody?.contentType()
 
-            var subtype = contentType?.subtype() ?: response.headers()["Content-Type"] ?: ""
+            var subtype = contentType?.subtype ?: response.headers["Content-Type"] ?: ""
 
             if (subtypeIsNotFile(subtype)) {
 

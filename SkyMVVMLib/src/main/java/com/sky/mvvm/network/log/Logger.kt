@@ -87,7 +87,7 @@ class Logger {
             val logLevel = builder.logLevel
             val urlLength = builder.urlLength
             val lineLength = builder.lineLength
-            val requestBody = request.body()
+            val requestBody = request.body
 
             val requestString = StringBuilder().apply {
 
@@ -104,7 +104,7 @@ class Logger {
                         )
                     )
 
-                val header = request.headers().toString()
+                val header = request.headers.toString()
 
                 if (!header.isLineEmpty()) {
                     if (hideVerticalLine) {
@@ -260,17 +260,17 @@ class Logger {
 
             if (hideVerticalLine) {
 
-                return if (request.url().toString().length > urlLength) {
-                    " URL: " + request.url().toString()
-                        .take(urlLength) + "$LINE_SEPARATOR " + request.url().toString()
-                        .substring(urlLength, request.url().toString().length) + getDoubleSeparator(
+                return if (request.url.toString().length > urlLength) {
+                    " URL: " + request.url.toString()
+                        .take(urlLength) + "$LINE_SEPARATOR " + request.url.toString()
+                        .substring(urlLength, request.url.toString().length) + getDoubleSeparator(
                         hideVerticalLine
-                    ) + " Method: @" + request.method() + getDoubleSeparator(hideVerticalLine) +
+                    ) + " Method: @" + request.method + getDoubleSeparator(hideVerticalLine) +
                             if (enableThreadName) " Thread: " + Thread.currentThread().name + getDoubleSeparator(
                                 hideVerticalLine
                             ) else ""
                 } else {
-                    " URL: " + request.url() + getDoubleSeparator(hideVerticalLine) + " Method: @" + request.method() + getDoubleSeparator(
+                    " URL: " + request.url + getDoubleSeparator(hideVerticalLine) + " Method: @" + request.method + getDoubleSeparator(
                         hideVerticalLine
                     ) +
                             if (enableThreadName) " Thread: " + Thread.currentThread().name + getDoubleSeparator(
@@ -279,15 +279,15 @@ class Logger {
                 }
             } else {
 
-                return if (request.url().toString().length > urlLength) {
-                    "║ URL: " + request.url().toString()
-                        .take(urlLength) + "${LINE_SEPARATOR}║ " + request.url().toString().substring(
+                return if (request.url.toString().length > urlLength) {
+                    "║ URL: " + request.url.toString()
+                        .take(urlLength) + "${LINE_SEPARATOR}║ " + request.url.toString().substring(
                         urlLength,
-                        request.url().toString().length
-                    ) + getDoubleSeparator() + "║ Method: @" + request.method() + getDoubleSeparator() +
+                        request.url.toString().length
+                    ) + getDoubleSeparator() + "║ Method: @" + request.method + getDoubleSeparator() +
                             if (enableThreadName) "║ Thread: " + Thread.currentThread().name + getDoubleSeparator() else ""
                 } else {
-                    "║ URL: " + request.url() + getDoubleSeparator() + "║ Method: @" + request.method() + getDoubleSeparator() +
+                    "║ URL: " + request.url + getDoubleSeparator() + "║ Method: @" + request.method + getDoubleSeparator() +
                             if (enableThreadName) "║ Thread: " + Thread.currentThread().name + getDoubleSeparator() else ""
                 }
             }
@@ -404,9 +404,9 @@ class Logger {
             try {
                 val copy = request.newBuilder().build()
                 val buffer = Buffer()
-                if (copy.body() == null) return ""
+                if (copy.body == null) return ""
 
-                copy.body()?.writeTo(buffer)
+                copy.body?.writeTo(buffer)
                 return getJsonString(buffer.readUtf8())
             } catch (e: IOException) {
                 return "{\"err\": \"" + e.message + "\"}"
@@ -416,7 +416,7 @@ class Logger {
         private fun binaryBodyToString(request: Request): String {
 
             val copy = request.newBuilder().build()
-            val requestBody = copy.body() ?: return ""
+            val requestBody = copy.body ?: return ""
 
             var buffer: String?
             val contentType = requestBody.contentType()
@@ -436,7 +436,7 @@ class Logger {
                 if (contentTypeString.contains("application/x-www-form-urlencoded")) {
                     buffer += LINE_SEPARATOR
                     if (requestBody is FormBody) {
-                        val size = requestBody.size()
+                        val size = requestBody.size
                         for (i in 0 until size) {
                             buffer += requestBody.name(i) + "=" + requestBody.value(i) + "&"
                         }

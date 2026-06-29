@@ -22,9 +22,9 @@ class TokenOutInterceptor : Interceptor {
     @OptIn(DelicateCoroutinesApi::class)
     override fun intercept(chain: Interceptor.Chain): Response {
         val response = chain.proceed(chain.request())
-        return if (response.body != null && response.body!!.contentType() != null) {
-            val mediaType = response.body!!.contentType()
-            val string = response.body!!.string()
+        return if (response.body.contentType() != null) {
+            val mediaType = response.body.contentType()
+            val string = response.body.string()
             val responseBody = string.toResponseBody(mediaType)
             val apiResponse = GsonFactory.getSingletonGson().fromJson(string, ApiResponse::class.java)
             if (apiResponse.errorCode == ERROR_200) {

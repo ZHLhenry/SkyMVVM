@@ -68,7 +68,7 @@ object NetworkUtil {
                     while (enumIpAddr.hasMoreElements()) {
                         val inetAddress = enumIpAddr.nextElement()
                         if (!inetAddress.isLoopbackAddress) {
-                            ret = inetAddress.hostAddress?.toString() ?: ""
+                            ret = inetAddress.hostAddress ?: ""
                         }
                     }
                 }

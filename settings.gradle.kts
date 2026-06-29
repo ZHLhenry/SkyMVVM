@@ -24,26 +24,33 @@ dependencyResolutionManagement {
             url = uri("https://jitpack.io")
         }
         /** nexus **/
-        maven {
-            isAllowInsecureProtocol = true
-            credentials {
-                username = "read_henry001"
-                password = "read_henry001"
-            }
-            url = uri("http://www.zhouhengli.online:9001/repository/maven-releases/")
-        }
+//        maven {
+//            isAllowInsecureProtocol = true
+//            credentials {
+//                username = "read_henry001"
+//                password = "read_henry001"
+//            }
+//            url = uri("http://www.zhouhengli.online:9001/repository/maven-releases/")
+//        }
 
         /** aliyun **/
+        fun aliyunMaven(repoUrl: String) {
+            maven {
+                credentials {
+                    username = "677b4e5b259532263f6b30a6"
+                    password = "RnVrdxoghjKo"
+                }
+                url = uri(repoUrl)
+                content {
+                    includeGroup("com.sky.lib")
+                }
+            }
+        }
         maven {
             url = uri("https://maven.aliyun.com/repository/public")
         }
-        maven {
-            credentials {
-                username = "677b4e5b259532263f6b30a6"
-                password = "RnVrdxoghjKo"
-            }
-            url = uri("https://packages.aliyun.com/6732fc8f356ccaf8531a1487/maven/skymvvm")
-        }
+        aliyunMaven("https://packages.aliyun.com/6732fc8f356ccaf8531a1487/maven/skymvvm")
+        aliyunMaven("https://packages.aliyun.com/6732fc8f356ccaf8531a1487/maven/skymultistatelayout")
         maven("${rootDir}/build/repo")
     }
 }
@@ -54,3 +61,4 @@ include(":app")
 include(":SkyMVVMLib")
 include(":core:common")
 include(":core:model")
+include(":hilt-noop-processor")

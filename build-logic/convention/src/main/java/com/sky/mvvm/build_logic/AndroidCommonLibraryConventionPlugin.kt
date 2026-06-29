@@ -1,4 +1,4 @@
-import com.android.build.gradle.LibraryExtension
+import com.android.build.api.dsl.LibraryExtension
 import com.sky.mvvm.build_logic.convention.AppConfig
 import com.sky.mvvm.build_logic.convention.AppFlavor
 import com.sky.mvvm.build_logic.convention.configureFlavors
@@ -14,12 +14,10 @@ class AndroidCommonLibraryConventionPlugin : Plugin<Project> {
         with(target) {
             with(pluginManager) {
                 apply("com.android.library")
-                apply("org.jetbrains.kotlin.android")
             }
 
             extensions.configure<LibraryExtension> {
                 configureKotlinAndroid(this)
-                defaultConfig.targetSdk = AppConfig.targetSdk
                 configureFlavors(this) { flavor ->
                     buildConfigField(
                         "Boolean",

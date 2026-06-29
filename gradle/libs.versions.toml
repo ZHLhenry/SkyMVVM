@@ -1,29 +1,29 @@
 [versions]
-agp = "8.9.1"
-kotlin = "2.1.20"
-coreKtx = "1.15.0"
+agp = "9.0.0"
+kotlin = "2.4.0"
+coreKtx = "1.16.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 appcompat = "1.7.0"
-material = "1.12.0"
-activity = "1.10.1"
-constraintlayout = "2.2.0"
+material = "1.13.0"
+activity = "1.12.4"
+constraintlayout = "2.2.1"
 
-ksp = "2.1.20-1.0.32"
-org-jetbrains-kotlin-jvm = "2.1.20"
-hilt = "2.56.1"
+ksp = "2.3.9"
+org-jetbrains-kotlin-jvm = "2.4.0"
+hilt = "2.60"
 
-lifecycleRuntimeKtx = "2.9.0-alpha13"
+lifecycleRuntimeKtx = "2.10.0"
 persistentcookiejar = "v1.0.1"
-retrofitVersion = "2.11.0"
-databindingRuntime = "8.9.1"
-skymvvm = "1.0.4"
+retrofitVersion = "3.0.0"
+databindingRuntime = "9.0.0"
+skymvvm = "1.0.5"
 skymultistatelayout = "1.0.0"
-chucker = "4.1.0"
+chucker = "4.3.1"
 moshi = "1.15.2"
-gsonfactory = "9.6"
-gson = "2.12.1"
+gsonfactory = "10.5"
+gson = "2.14.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -82,4 +82,5 @@ sky-android-library-common = { id = "sky.android.library.common", version = "uns
 sky-android-test = { id = "sky.android.test", version = "unspecified" }
 sky-jvm-library = { id = "sky.jvm.library", version = "unspecified" }
 sky-android-hilt = { id = "sky.android.hilt", version = "unspecified" }
+sky-android-publish = { id = "sky.android.publish", version = "unspecified" }
 

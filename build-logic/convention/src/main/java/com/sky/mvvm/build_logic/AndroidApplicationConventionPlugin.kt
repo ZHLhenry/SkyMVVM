@@ -1,6 +1,5 @@
 import com.android.build.api.dsl.ApplicationExtension
 import com.android.build.api.variant.ApplicationAndroidComponentsExtension
-import com.android.build.gradle.AppExtension
 import com.sky.mvvm.build_logic.convention.AppConfig
 import com.sky.mvvm.build_logic.convention.applySigningConfigs
 import com.sky.mvvm.build_logic.convention.configureKotlinAndroid
@@ -15,7 +14,6 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
         with(target) {
             with(pluginManager) {
                 apply("com.android.application")
-                apply("org.jetbrains.kotlin.android")
             }
 
             extensions.configure<ApplicationExtension> {
@@ -27,8 +25,6 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
             }
             extensions.configure<ApplicationAndroidComponentsExtension> {
                 configurePrintApksTask(this)
-            }
-            extensions.configure<AppExtension> {
                 configurePrintAssembleApksTask(this)
             }
         }

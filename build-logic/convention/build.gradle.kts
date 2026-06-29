@@ -21,8 +21,8 @@ kotlin {
 }
 
 tasks.withType<KotlinCompile>().configureEach {
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
+    compilerOptions {
+        jvmTarget = JvmTarget.JVM_17
     }
 }
 
@@ -49,6 +49,10 @@ gradlePlugin {
         register("androidHilt") {
             id = "sky.android.hilt"
             implementationClass = "AndroidHiltConventionPlugin"
+        }
+        register("androidPublish") {
+            id = "sky.android.publish"
+            implementationClass = "AndroidMavenPublishConventionPlugin"
         }
         register("androidFlavors") {
             id = "sky.android.application.flavors"

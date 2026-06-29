@@ -1,9 +1,9 @@
 package com.sky.mvvm.build_logic.convention
 
 import com.android.build.api.dsl.ApplicationExtension
-import com.android.build.api.dsl.ApplicationProductFlavor
-import com.android.build.api.dsl.CommonExtension
+import com.android.build.api.dsl.LibraryExtension
 import com.android.build.api.dsl.ProductFlavor
+import com.android.build.gradle.internal.dsl.InternalCommonExtension
 
 @Suppress("EnumEntryName")
 enum class FlavorDimension {
@@ -25,24 +25,44 @@ enum class AppFlavor(
 }
 
 fun configureFlavors(
-    commonExtension: CommonExtension<*, *, *, *, *, *>,
+    commonExtension: ApplicationExtension,
     flavorConfigurationBlock: ProductFlavor.(flavor: AppFlavor) -> Unit = {},
 ) {
+    (commonExtension as InternalCommonExtension).setFlavorDimensions(
+        mutableListOf(FlavorDimension.contentType.name))
     commonExtension.apply {
-        flavorDimensions += FlavorDimension.contentType.name
         productFlavors {
-            AppFlavor.values().forEach {
-                create(it.name) {
-                    it.appIcon?.let { appIcon ->
+            AppFlavor.entries.forEach { flavor ->
+                create(flavor.name) {
+                    flavor.appIcon?.let { appIcon ->
                         manifestPlaceholders["app_icon"] = appIcon
                     }
-                    dimension = it.dimension.name
-                    flavorConfigurationBlock(this, it)
-                    if (this@apply is ApplicationExtension && this is ApplicationProductFlavor) {
-                        if (it.applicationIdSuffix != null) {
-                            applicationIdSuffix = it.applicationIdSuffix
-                        }
+                    dimension = flavor.dimension.name
+                    flavorConfigurationBlock(this, flavor)
+                    if (flavor.applicationIdSuffix != null) {
+                        applicationIdSuffix = flavor.applicationIdSuffix
                     }
+                }
+            }
+        }
+    }
+}
+
+fun configureFlavors(
+    commonExtension: LibraryExtension,
+    flavorConfigurationBlock: ProductFlavor.(flavor: AppFlavor) -> Unit = {},
+) {
+    (commonExtension as InternalCommonExtension).setFlavorDimensions(
+        mutableListOf(FlavorDimension.contentType.name))
+    commonExtension.apply {
+        productFlavors {
+            AppFlavor.entries.forEach { flavor ->
+                create(flavor.name) {
+                    flavor.appIcon?.let { appIcon ->
+                        manifestPlaceholders["app_icon"] = appIcon
+                    }
+                    dimension = flavor.dimension.name
+                    flavorConfigurationBlock(this, flavor)
                 }
             }
         }
