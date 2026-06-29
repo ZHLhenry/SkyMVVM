@@ -1,3 +1,12 @@
+## [v1.0.5] - 2026-06-29
+- 升级构建工具版本：
+  - AGP: `8.9.1` → `9.0.0`
+  - Gradle: `8.11.1` → `9.6.1`
+- 升级其他依赖库版本
+- 删除`uploadArchive.gradle`,增加`AndroidMavenPublishConventionPlugin`插件
+- 增加`hilt-noop-processor`模块，仅用于声明识别 Hilt 在 KSP 场景下仍注入到 javac 的内部选项，从而消除 javac 的“以下选项未被任何处理程序识别”警告。
+- `build-logic`模块优化
+
 ## [v1.0.4] - 2026-04-08
 - 升级相关依赖版本
 - `ActivityMessenger` 类方法中增加 `flags` 可选参数
