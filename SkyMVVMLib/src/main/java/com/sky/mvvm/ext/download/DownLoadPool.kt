@@ -12,7 +12,6 @@ import java.util.concurrent.ConcurrentHashMap
  */
 object DownLoadPool {
 
-
     private val scopeMap: ConcurrentHashMap<String, CoroutineScope> = ConcurrentHashMap()
 
     //下载位置

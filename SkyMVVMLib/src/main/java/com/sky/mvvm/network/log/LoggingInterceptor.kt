@@ -12,14 +12,14 @@ import java.util.concurrent.TimeUnit
  * <p>{@code date: 2025/2/23 10:25}</p>
  * <p>{@code description: 文件描述}</p>
  */
-class LoggingInterceptor private constructor(private val builder: Builder) : Interceptor {
+internal class LoggingInterceptor private constructor(private val builder: Builder) : Interceptor {
 
-    private val isDebug: Boolean
+    private val enableLog: Boolean
     private val charset: Charset
     private val excludeList: MutableList<String>  // 排除的 path 列表
 
     init {
-        this.isDebug = builder.isDebug
+        this.enableLog = builder.enableLog
         this.charset = Charset.forName("UTF-8")
         this.excludeList = builder.excludeList
     }
@@ -56,7 +56,7 @@ class LoggingInterceptor private constructor(private val builder: Builder) : Int
             request = requestBuilder.build()
         }
 
-        if (!isDebug) {
+        if (!enableLog) {
             return chain.proceed(request)
         }
 
@@ -136,11 +136,9 @@ class LoggingInterceptor private constructor(private val builder: Builder) : Int
         DEBUG;
     }
 
-    class Builder {
-
-        var TAG = "Logging_Interceptor"
-
-        var isDebug: Boolean = false
+    internal class Builder {
+        var TAG = "SkyMVVM"
+        var enableLog: Boolean = false
         var enableThreadName: Boolean = true
         var requestFlag: Boolean = false
         var responseFlag: Boolean = false
@@ -164,9 +162,9 @@ class LoggingInterceptor private constructor(private val builder: Builder) : Int
 
         internal fun getTag(isRequest: Boolean): String {
             return if (isRequest) {
-                if (requestTag.isNullOrBlank()) TAG else requestTag!!
+                if (requestTag.isNullOrBlank()) TAG else "$TAG:$requestTag"
             } else {
-                if (responseTag.isNullOrBlank()) TAG else responseTag!!
+                if (responseTag.isNullOrBlank()) TAG else "$TAG:$responseTag"
             }
         }
 
@@ -256,12 +254,12 @@ class LoggingInterceptor private constructor(private val builder: Builder) : Int
 
         /**
          * 是否打印 request、response 的日志
-         * @param isDebug set can sending log output
+         * @param enableLog set can sending log output
          *
          * @return Builder
          */
-        fun loggable(isDebug: Boolean): Builder {
-            this.isDebug = isDebug
+        fun loggable(enableLog: Boolean): Builder {
+            this.enableLog = enableLog
             return this
         }
 

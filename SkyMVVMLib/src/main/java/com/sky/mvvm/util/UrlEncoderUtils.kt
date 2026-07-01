@@ -1,6 +1,7 @@
 package com.sky.mvvm.util
 
 class UrlEncoderUtils private constructor() {
+    private val TAG = "UrlEncoderUtils"
     companion object {
         /**
          * 判断 str 是否已经 URLEncoder.encode() 过

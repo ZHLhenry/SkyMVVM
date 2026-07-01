@@ -11,6 +11,8 @@ import com.sky.mvvm.ext.inflateBindingWithGeneric
 
 abstract class BaseVmDbFragment<VM : BaseViewModel, DB : ViewDataBinding> : BaseVmFragment<VM>() {
 
+    private val TAG = "BaseVmDbFragment"
+
     override fun layoutId() = 0
 
     //该类绑定的ViewDataBinding

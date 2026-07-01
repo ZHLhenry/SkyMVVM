@@ -1,4 +1,5 @@
 package com.sky.mvvm.network
+import com.sky.mvvm.SkyMVVMLib
 import com.sky.mvvm.util.HttpsCerUtils
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -11,6 +12,7 @@ import retrofit2.Retrofit
 abstract class BaseNetworkApi {
 
     fun <T> getApi(serviceClass: Class<T>, baseUrl: String, type: Boolean): T {
+        SkyMVVMLib.requireInit()
         //根据type判断使用哪个okHttpClient
         val okHttpClient = if (type) okHttpClientHttps else okHttpClient
         val retrofitBuilder = Retrofit.Builder()

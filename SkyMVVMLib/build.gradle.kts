@@ -34,5 +34,8 @@ dependencies {
     //hilt
     api(libs.hilt.android)
     api(libs.hilt.compiler)
+
+    //Log
+    compileOnly(libs.xlog)
 }
 

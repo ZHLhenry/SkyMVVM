@@ -10,7 +10,7 @@ import com.sky.mvvm.R
  * <p>{@code date: 2025/2/23 10:32}</p>
  * <p>{@code description: 错误枚举类}</p>
  */
-enum class Error(private val code: Int, @StringRes private val errResId: Int) {
+enum class Error(private val code: Int, @param:StringRes private val errResId: Int) {
 
     /**
      * 未知错误

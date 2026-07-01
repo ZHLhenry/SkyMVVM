@@ -9,6 +9,7 @@ import com.sky.mvvm.base.viewmodel.BaseViewModel
 import com.sky.mvvm.ext.inflateBindingWithGeneric
 
 abstract class BaseVmVbFragment<VM : BaseViewModel, VB : ViewBinding> : BaseVmFragment<VM>() {
+    private val TAG = "BaseVmVbFragment"
 
     override fun layoutId() = 0
 

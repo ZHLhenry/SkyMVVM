@@ -30,24 +30,24 @@ dependencies {
     //dialog
     api("com.afollestad.material-dialogs:lifecycle:3.3.0")
     //BaseAdapter
-    api("io.github.cymchad:BaseRecyclerViewAdapterHelper4:4.1.6")
+    api("io.github.cymchad:BaseRecyclerViewAdapterHelper4:4.4.1")
     // 沉浸式
     api("com.geyifeng.immersionbar:immersionbar:3.2.2")
     api("com.geyifeng.immersionbar:immersionbar-ktx:3.2.2")
     //数据存储
-    api("com.tencent:mmkv:2.1.0")
+    api("com.tencent:mmkv:2.4.0")
     //refresh
     api("io.github.scwang90:refresh-layout-kernel:3.0.0-alpha")
     api("io.github.scwang90:refresh-header-classics:3.0.0-alpha")
     api("io.github.scwang90:refresh-footer-classics:3.0.0-alpha")
     //Toaster
-    api("com.github.getActivity:Toaster:12.8")
+    api("com.github.getActivity:Toaster:15.0")
     //TitleBar
-    api("com.github.getActivity:TitleBar:10.6")
+    api("com.github.getActivity:TitleBar:10.8")
     //Permissions
-    api("com.github.getActivity:XXPermissions:20.0")
+    api("com.github.getActivity:XXPermissions:28.3")
     //Log
-    api("com.elvishew:xlog:1.11.1")
+    api(libs.xlog)
     //Chucker
     devApi(libs.okhttp.chucker)
     uatApi(libs.okhttp.chucker.release)
@@ -57,8 +57,8 @@ dependencies {
     ksp(libs.moshi.codegen)
     api(libs.moshi.converter)
 
-//    api(project(":SkyMVVMLib"))
-    api(libs.skymvvm)
+    api(project(":SkyMVVMLib"))
+//    api(libs.skymvvm)
     api(libs.skymultistatelayout)
 
     implementation(projects.core.model)

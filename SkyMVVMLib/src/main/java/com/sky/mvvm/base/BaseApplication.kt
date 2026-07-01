@@ -15,7 +15,7 @@ import com.sky.mvvm.network.manager.NetworkStateReceive
  * <p>{@code description: 文件描述}</p>
  */
 open class BaseApplication : Application() {
-
+    private val TAG = "BaseApplication"
     override fun onCreate() {
         super.onCreate()
         initAppConfig(this)

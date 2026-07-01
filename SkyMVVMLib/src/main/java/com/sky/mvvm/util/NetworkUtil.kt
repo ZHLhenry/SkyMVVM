@@ -11,6 +11,7 @@ import java.net.SocketException
 import java.net.URL
 
 object NetworkUtil {
+    private const val TAG = "NetworkUtil"
     private var url = "http://www.baidu.com"
 
     /**

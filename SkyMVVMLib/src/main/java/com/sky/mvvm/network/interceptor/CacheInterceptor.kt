@@ -1,4 +1,5 @@
 package com.sky.mvvm.network.interceptor
+import com.sky.mvvm.SkyMVVMLib
 import com.sky.mvvm.base.BaseApplication.Companion.app
 import com.sky.mvvm.util.NetworkUtil
 import okhttp3.CacheControl
@@ -11,6 +12,11 @@ import okhttp3.Response
  * <p>{@code description: 缓存拦截器}</p>
  */
 class CacheInterceptor(var day: Int = 7) : Interceptor {
+    private val TAG = "CacheInterceptor"
+
+    init {
+        SkyMVVMLib.requireInit()
+    }
     override fun intercept(chain: Interceptor.Chain): Response {
         var request = chain.request()
         if (!NetworkUtil.isNetworkAvailable(app)) {

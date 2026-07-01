@@ -1,9 +1,15 @@
 package com.sky.mvvm.base.viewmodel
 
 import androidx.lifecycle.ViewModel
+import com.sky.mvvm.SkyMVVMLib
 import com.sky.mvvm.callback.livedata.event.EventLiveData
 
 open class BaseViewModel : ViewModel() {
+    private val TAG = "BaseViewModel"
+    init {
+        SkyMVVMLib.requireInit()
+    }
+
     val loadingChange: UiLoadingChange by lazy { UiLoadingChange() }
 
     /**

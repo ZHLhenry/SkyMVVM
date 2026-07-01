@@ -1,2 +1,5 @@
-1:需要上传远程仓库的项目build.gradle中引用apply(from = "../uploadArchive.gradle")
-ps: jks pwd:skymvvm123456   alias:SkyMVVM
+
+
+## 项目说明文档
+
+项目说明文档请查看 [SkyMVVM](SkyMVVMLib/README.md)

@@ -13,6 +13,8 @@ import com.sky.mvvm.ext.inflateBindingWithGeneric
  */
 abstract class BaseVmDbActivity<VM : BaseViewModel, DB : ViewDataBinding> : BaseVmActivity<VM>() {
 
+    private val TAG = "BaseVmDbActivity"
+
     override fun layoutId() = 0
 
     lateinit var mDatabind: DB

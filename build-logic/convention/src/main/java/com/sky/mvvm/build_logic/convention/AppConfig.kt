@@ -11,10 +11,7 @@ object AppConfig {
     const val versionCode = 100
     const val versionName = "1.0.0"
 
-    /** jks信息 **/
-    const val storeFile = "../SkyMVVM.jks"
-    const val storePassword = "skymvvm123456"
-    const val keyAlias = "SkyMVVM"
+    /** 应用信息 **/
     const val applicationId = "com.sky.mvvm.sample"
 
     /** 其他配置 **/

@@ -2,17 +2,29 @@ package com.sky.mvvm.build_logic.convention
 
 import com.android.build.api.dsl.ApplicationExtension
 import org.gradle.api.Project
+import java.util.Properties
 
 internal fun Project.applySigningConfigs(
     applicationExtension: ApplicationExtension,
 ) {
+    val localProperties = Properties().apply {
+        val localPropertiesFile = rootProject.file("local.properties")
+        if (localPropertiesFile.exists()) {
+            load(localPropertiesFile.inputStream())
+        }
+    }
+
+    val jksStoreFile = localProperties.getProperty("app.storeFile", "../SkyMVVM.jks")
+    val jksStorePassword = localProperties.getProperty("app.storePassword", "")
+    val jksKeyAlias = localProperties.getProperty("app.keyAlias", "")
+
     applicationExtension.apply {
         signingConfigs {
             getByName("debug") {
-                storeFile = file(AppConfig.storeFile)
-                storePassword = AppConfig.storePassword
-                keyAlias = AppConfig.keyAlias
-                keyPassword = AppConfig.storePassword
+                storeFile = file(jksStoreFile)
+                storePassword = jksStorePassword
+                keyAlias = jksKeyAlias
+                keyPassword = jksStorePassword
             }
         }
 

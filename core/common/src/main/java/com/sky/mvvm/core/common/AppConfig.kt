@@ -10,7 +10,7 @@ object AppConfig {
     const val IS_PROD: Boolean = BuildConfig.FLAVOR == "prod"
 
     //http请求地址
-    const val BASE_URL = "https://www.wanandroid.com/"
+    const val BASE_URL = "https://wanandroid.com/"
     const val CACHE_ID = "SkyMVVM_Cache"
     const val DEFAULT_TIMEOUT = 20L
 }

@@ -12,6 +12,8 @@ import com.sky.mvvm.ext.inflateBindingWithGeneric
  */
 abstract class BaseVmVbActivity<VM : BaseViewModel, VB : ViewBinding> : BaseVmActivity<VM>() {
 
+    private val TAG = "BaseVmVbActivity"
+
     override fun layoutId(): Int = 0
 
     lateinit var mViewBind: VB

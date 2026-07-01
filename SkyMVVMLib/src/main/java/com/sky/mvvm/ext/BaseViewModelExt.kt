@@ -7,7 +7,7 @@ import com.sky.mvvm.R
 import com.sky.mvvm.base.activity.BaseVmActivity
 import com.sky.mvvm.base.fragment.BaseVmFragment
 import com.sky.mvvm.base.viewmodel.BaseViewModel
-import com.sky.mvvm.ext.util.loge
+import com.sky.mvvm.ext.util.logE
 import com.sky.mvvm.network.AppException
 import com.sky.mvvm.network.BaseResponse
 import com.sky.mvvm.network.ExceptionHandle
@@ -106,7 +106,7 @@ fun <T> BaseViewModel.apiRequest(
         }.onSuccess {
             resultState.paresResult(context,it)
         }.onFailure {
-            it.message?.loge()
+            it.message?.logE()
             //打印错误栈信息
             it.printStackTrace()
             resultState.paresException(context, it)
@@ -136,7 +136,7 @@ fun <T> BaseViewModel.apiRequestNoCheck(
         }.onSuccess {
             resultState.paresResult(it)
         }.onFailure {
-            it.message?.loge()
+            it.message?.logE()
             //打印错误栈信息
             it.printStackTrace()
             resultState.paresException(context, it)
@@ -176,7 +176,7 @@ fun <T> BaseViewModel.apiRequest(
                 }
             }.onFailure { e ->
                 //打印错误消息
-                e.message?.loge()
+                e.message?.logE()
                 //打印错误栈信息
                 e.printStackTrace()
                 //失败回调
@@ -186,7 +186,7 @@ fun <T> BaseViewModel.apiRequest(
             //网络请求异常 关闭弹窗
             loadingChange.dismissDialog.postValue(false)
             //打印错误消息
-            it.message?.loge()
+            it.message?.logE()
             //打印错误栈信息
             it.printStackTrace()
             //失败回调
@@ -226,7 +226,7 @@ fun <T> BaseViewModel.apiRequestNoCheck(
             //网络请求异常 关闭弹窗
             loadingChange.dismissDialog.postValue(false)
             //打印错误消息
-            it.message?.loge()
+            it.message?.logE()
             //打印错误栈信息
             it.printStackTrace()
             //失败回调

@@ -5,6 +5,7 @@ import java.util.*
 import java.util.zip.*
 
 class ZipHelper private constructor() {
+    private val TAG = "ZipHelper"
     companion object {
         @JvmStatic
         @JvmOverloads

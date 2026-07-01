@@ -13,12 +13,14 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.sky.mvvm.R
+import com.sky.mvvm.SkyMVVMLib
 import com.sky.mvvm.base.viewmodel.BaseViewModel
 import com.sky.mvvm.network.manager.NetState
 import com.sky.mvvm.network.manager.NetworkStateManager
 import java.lang.reflect.ParameterizedType
 
 abstract class BaseVmFragment<VM : BaseViewModel> : Fragment() {
+    private val TAG = "BaseVmFragment"
 
     private val handler = Handler()
 
@@ -49,6 +51,7 @@ abstract class BaseVmFragment<VM : BaseViewModel> : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        SkyMVVMLib.requireInit()
         isFirst = true
         mViewModel = obtainViewModel(getVMClass())
         initView(savedInstanceState)

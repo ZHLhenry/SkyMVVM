@@ -6,6 +6,7 @@ import com.sky.mvvm.core.common.AppConfig
 import com.sky.mvvm.core.common.net.interceptor.HeadsInterceptor
 import com.sky.mvvm.core.common.net.interceptor.TokenOutInterceptor
 import com.sky.mvvm.network.BaseNetworkApi
+import com.sky.mvvm.network.dns.SkyDnsParser
 import com.sky.mvvm.network.interceptor.CacheInterceptor
 import com.sky.mvvm.network.log.AndroidLoggingInterceptor
 import com.squareup.moshi.Moshi
@@ -32,6 +33,8 @@ import java.util.concurrent.TimeUnit
 object NetworkModule : BaseNetworkApi() {
     override fun setHttpClientBuilder(builder: OkHttpClient.Builder): OkHttpClient.Builder {
         builder.apply {
+            /** 备用 DNS 解析器：VPN 环境下系统 DNS 失败时回退到公共 DNS */
+            dns(SkyDnsParser())
             /** 超时时间 连接、读、写 */
             connectTimeout(AppConfig.DEFAULT_TIMEOUT, TimeUnit.SECONDS)
             readTimeout(AppConfig.DEFAULT_TIMEOUT, TimeUnit.SECONDS)
@@ -49,7 +52,7 @@ object NetworkModule : BaseNetworkApi() {
                 addInterceptor(ChuckerInterceptor.Builder(app).build())
             }
             /** 日志拦截器 */
-            addInterceptor(AndroidLoggingInterceptor.build(isDebug = !AppConfig.IS_PROD))
+            addInterceptor(AndroidLoggingInterceptor.build())
         }
         return builder
     }
@@ -68,7 +71,7 @@ object NetworkModule : BaseNetworkApi() {
 
     @Provides
     fun provideApiService(): ApiService {
-        return NetworkModule.getApi(ApiService::class.java, AppConfig.BASE_URL, false)
+        return getApi(ApiService::class.java, AppConfig.BASE_URL, false)
     }
 
 }

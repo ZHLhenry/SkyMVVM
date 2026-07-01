@@ -2,21 +2,19 @@ package com.sky.mvvm.sample.base
 
 import android.app.Application
 import android.content.Intent
-import com.elvishew.xlog.LogConfiguration
-import com.elvishew.xlog.LogLevel
-import com.elvishew.xlog.XLog
-import com.elvishew.xlog.interceptor.BlacklistTagsFilterInterceptor
-import com.elvishew.xlog.printer.AndroidPrinter
-import com.elvishew.xlog.printer.Printer
 import com.hjq.toast.Toaster
 import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.ClassicsHeader
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.sky.multistatelayout.SkyMultiStateLayout
+import com.sky.mvvm.SkyMVVMLib
+import com.sky.mvvm.SkyMVVMLibConfig
 import com.sky.mvvm.base.BaseApplication
-import com.sky.mvvm.core.common.BuildConfig
 import com.sky.mvvm.core.common.ErrorCode.ERROR_200
 import com.sky.mvvm.core.common.R
+import com.sky.mvvm.ext.util.logD
+import com.sky.mvvm.ext.util.logE
+import com.sky.mvvm.ext.util.logI
 import com.sky.mvvm.flow.SkyFlow
 import com.sky.mvvm.flow.SkyFlowEventData
 import com.sky.mvvm.sample.feature.other.ui.LoginActivity
@@ -67,25 +65,11 @@ class SkyMvvmApplication : BaseApplication() {
                 clickViewIds = intArrayOf(R.id.btnNoNetwork)
             )
 
-        val config = LogConfiguration.Builder()
-            .logLevel(
-                if (BuildConfig.DEBUG) LogLevel.ALL
-                else LogLevel.NONE
-            )
-            .enableThreadInfo() // 允许打印线程信息，默认禁止
-            .enableStackTrace(2) // 允许打印深度为 2 的调用栈信息，默认禁止
-            .enableBorder() // 允许打印日志边框，默认禁止
-            .addInterceptor(
-                BlacklistTagsFilterInterceptor( // 添加黑名单 TAG 过滤器
-                    "blacklist1", "blacklist2", "blacklist3"
-                )
-            )
-            .build()
-        val androidPrinter: Printer = AndroidPrinter(true)
-        XLog.init(
-            config,
-            androidPrinter
-        )
+        SkyMVVMLib.init(SkyMVVMLibConfig.Builder(mApplication)
+            .enableXLog(enableXLogLib = true)
+            .enableSkyFlow(enableSkyFlowLib = true)
+            .enableOkHttpLogLib(enableOkHttpLogLib = true)
+            .build())
 
         /**
          * 模拟flow接受事件消息(登录过期拦截并跳转登录页面)

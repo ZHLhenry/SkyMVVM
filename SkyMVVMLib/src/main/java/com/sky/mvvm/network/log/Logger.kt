@@ -80,7 +80,7 @@ class Logger {
         }
 
         @JvmStatic
-        fun printJsonRequest(builder: LoggingInterceptor.Builder, request: Request) {
+        internal fun printJsonRequest(builder: LoggingInterceptor.Builder, request: Request) {
 
             val tag = builder.getTag(true)
             val hideVerticalLine = builder.hideVerticalLineFlag
@@ -135,7 +135,7 @@ class Logger {
         }
 
         @JvmStatic
-        fun printFileRequest(builder: LoggingInterceptor.Builder, request: Request) {
+        internal fun printFileRequest(builder: LoggingInterceptor.Builder, request: Request) {
 
             val tag = builder.getTag(true)
             val hideVerticalLine = builder.hideVerticalLineFlag
@@ -176,7 +176,7 @@ class Logger {
         }
 
         @JvmStatic
-        fun printJsonResponse(
+        internal fun printJsonResponse(
             builder: LoggingInterceptor.Builder, chainMs: Long, isSuccessful: Boolean,
             code: Int, headers: String, bodyString: String, requestUrl: HttpUrl
         ) {
@@ -220,7 +220,7 @@ class Logger {
         }
 
         @JvmStatic
-        fun printFileResponse(
+        internal fun printFileResponse(
             builder: LoggingInterceptor.Builder, chainMs: Long, isSuccessful: Boolean,
             code: Int, headers: String, requestUrl: HttpUrl
         ) {

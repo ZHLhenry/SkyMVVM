@@ -1,7 +1,7 @@
 package com.sky.mvvm.ext.download
 
 import android.os.Looper
-import com.sky.mvvm.ext.util.logi
+import com.sky.mvvm.ext.util.logI
 import com.sky.mvvm.util.HttpsCerUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -22,7 +22,6 @@ import javax.inject.Singleton
  */
 @Singleton
 class DownLoadManager @Inject constructor() {
-
     /** 忽略https模式 */
     private val retrofitBuilderHttps = Retrofit.Builder()
         .baseUrl("https://www.baidu.com")
@@ -136,10 +135,10 @@ class DownLoadManager @Inject constructor() {
         //判断是否已经在队列中
         val scope = DownLoadPool.getScopeFromKey(tag)
         if (scope != null && scope.isActive) {
-            "已经在队列中".logi()
+            "已经在队列中".logI()
             return
         } else if (scope != null && !scope.isActive) {
-            "key $tag 已经在队列中 但是已经不再活跃 remove".logi()
+            "key $tag 已经在队列中 但是已经不再活跃 remove".logI()
             DownLoadPool.removeExitSp(tag)
         }
 
@@ -168,7 +167,7 @@ class DownLoadManager @Inject constructor() {
             loadListener.onDownLoadSuccess(tag, file.path, file.length())
             return
         }
-        "startDownLoad current $currentLength".logi()
+        "startDownLoad current $currentLength".logI()
 
         try {
             //添加到pool
@@ -190,7 +189,7 @@ class DownLoadManager @Inject constructor() {
 //                .downloadFile("bytes=$currentLength-", url)
             val responseBody = response.body()
             if (responseBody == null) {
-                "responseBody is null".logi()
+                "responseBody is null".logI()
                 withContext(Dispatchers.Main) {
                     loadListener.onDownLoadError(
                         key = tag,

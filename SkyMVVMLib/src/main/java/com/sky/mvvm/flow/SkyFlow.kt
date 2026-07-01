@@ -5,7 +5,10 @@ package com.sky.mvvm.flow
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
-import com.sky.mvvm.ext.util.logd
+import com.sky.mvvm.SkyMVVMLib
+import com.sky.mvvm.SkyMVVMLib.UninitializedException
+import com.sky.mvvm.ext.util.logE
+import com.sky.mvvm.ext.util.logI
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.BufferOverflow
@@ -27,10 +30,20 @@ object SkyFlow {
     private val flowMap = ConcurrentHashMap<String, SkyFlowEvent<*>>()
     private val flowStickMap = ConcurrentHashMap<String, SkyFlowStickEvent<*>>()
 
+    fun requireSkyFlowInit() {
+        if (SkyMVVMLib.getConfig()?.skyFlowLibEnabled == false) {
+            throw UninitializedException(
+                "Please add the \"enableSkyFlowLib(true)\" attribute in the SkyMVVMLibConfig configuration."
+            )
+        }
+    }
+
     /**
      * 获取或创建普通事件流
      */
     fun <T> with(key: String): SkyFlowEvent<T> {
+        SkyMVVMLib.requireInit()
+        requireSkyFlowInit()
         return flowMap.getOrPut(key) { SkyFlowEvent<T>(key) } as SkyFlowEvent<T>
     }
 
@@ -38,6 +51,8 @@ object SkyFlow {
      * 获取或创建粘性事件流
      */
     fun <T> withStick(key: String): SkyFlowStickEvent<T> {
+        SkyMVVMLib.requireInit()
+        requireSkyFlowInit()
         return flowStickMap.getOrPut(key) { SkyFlowStickEvent<T>(key) } as SkyFlowStickEvent<T>
     }
 
@@ -45,6 +60,8 @@ object SkyFlow {
      * 清理无用的 Flow
      */
     fun clearUnusedFlow() {
+        SkyMVVMLib.requireInit()
+        requireSkyFlowInit()
         flowMap.keys.removeAll { key ->
             val flow = flowMap[key]
             flow?._events?.subscriptionCount?.value == 0
@@ -93,7 +110,7 @@ object SkyFlow {
                         action(event)
                     } catch (e: Exception) {
                         e.printStackTrace()
-                        "SkyFlowEvent - Error: $e".logd(tag = TAG)
+                        "SkyFlowEvent - Error: $e".logE(tag = TAG)
                     }
                 }
             }
@@ -110,7 +127,7 @@ object SkyFlow {
                 _events.emit(event)
             } catch (e: Exception) {
                 e.printStackTrace()
-                "SkyFlowEvent - Post Error: $e".logd(tag = TAG)
+                "SkyFlowEvent - Post Error: $e".logE(tag = TAG)
             }
         }
 
@@ -123,7 +140,7 @@ object SkyFlow {
                     _events.emit(event)
                 } catch (e: Exception) {
                     e.printStackTrace()
-                    "SkyFlowEvent - Post Error: $e".logd(tag = TAG)
+                    "SkyFlowEvent - Post Error: $e".logE(tag = TAG)
                 }
             }
         }
@@ -133,7 +150,7 @@ object SkyFlow {
          */
         override fun onDestroy(owner: LifecycleOwner) {
             super.onDestroy(owner)
-            "SkyFlowEvent - Auto Destroy: $key".logd(tag = TAG)
+            "SkyFlowEvent - Auto Destroy: $key".logI(tag = TAG)
             if (_events.subscriptionCount.value == 0) {
                 flowMap.remove(key)
             }
@@ -143,7 +160,7 @@ object SkyFlow {
          * 手动销毁
          */
         fun destroy() {
-            "SkyFlowEvent - Manual Destroy: $key".logd(tag = TAG)
+            "SkyFlowEvent - Manual Destroy: $key".logI(tag = TAG)
             if (_events.subscriptionCount.value == 0) {
                 flowMap.remove(key)
             }

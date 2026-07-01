@@ -6,6 +6,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.sky.mvvm.R
+import com.sky.mvvm.SkyMVVMLib
 import com.sky.mvvm.base.viewmodel.BaseViewModel
 import com.sky.mvvm.ext.util.notNull
 import com.sky.mvvm.network.manager.NetState
@@ -18,6 +19,7 @@ import java.lang.reflect.ParameterizedType
  * <p>{@code description: 文件描述}</p>
  */
 abstract class BaseVmActivity<VM : BaseViewModel> : AppCompatActivity() {
+    private val TAG = "BaseVmActivity"
 
     lateinit var mViewModel: VM
 
@@ -31,6 +33,7 @@ abstract class BaseVmActivity<VM : BaseViewModel> : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        SkyMVVMLib.requireInit()
         initDataBind().notNull({
             setContentView(it)
         }, {

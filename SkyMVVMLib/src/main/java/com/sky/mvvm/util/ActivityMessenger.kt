@@ -1,7 +1,6 @@
 @file:Suppress(
     "UNCHECKED_CAST",
     "unused",
-    "NON_PUBLIC_CALL_FROM_PUBLIC_INLINE",
     "SpellCheckingInspection"
 )
 
@@ -28,7 +27,8 @@ import kotlin.reflect.KProperty
  * @github https://github.com/wuyr/ActivityMessenger
  */
 object ActivityMessenger {
-    private var sRequestCode = 0
+    private val TAG = "ActivityMessenger"
+    var sRequestCode = 0
         set(value) {
             field = if (value >= Integer.MAX_VALUE) 1 else value
         }

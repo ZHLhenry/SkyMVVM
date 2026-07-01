@@ -17,6 +17,7 @@ import javax.xml.transform.stream.StreamResult
 import javax.xml.transform.stream.StreamSource
 
 class CharacterHandler private constructor() {
+    private val TAG = "CharacterHandler"
     companion object {
         //emoji过滤器
         val EMOJI_FILTER: InputFilter = object : InputFilter {

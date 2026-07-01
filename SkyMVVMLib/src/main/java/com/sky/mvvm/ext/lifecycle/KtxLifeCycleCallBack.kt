@@ -2,7 +2,7 @@ package com.sky.mvvm.ext.lifecycle
 import android.app.Activity
 import android.app.Application
 import android.os.Bundle
-import com.sky.mvvm.ext.util.logd
+import com.sky.mvvm.ext.util.logI
 
 /**
  * <p>{@code className: }</p>
@@ -12,26 +12,28 @@ import com.sky.mvvm.ext.util.logd
  */
 class KtxLifeCycleCallBack : Application.ActivityLifecycleCallbacks {
 
+    private val TAG = javaClass.simpleName
+
     override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
         KtxActivityManger.pushActivity(activity)
-        "onActivityCreated : ${activity.localClassName}".logd()
+        "onActivityCreated : ${activity.localClassName}".logI(TAG)
     }
 
     override fun onActivityStarted(activity: Activity) {
-        "onActivityStarted : ${activity.localClassName}".logd()
+        "onActivityStarted : ${activity.localClassName}".logI(TAG)
     }
 
     override fun onActivityResumed(activity: Activity) {
-        "onActivityResumed : ${activity.localClassName}".logd()
+        "onActivityResumed : ${activity.localClassName}".logI(TAG)
     }
 
     override fun onActivityPaused(activity: Activity) {
-        "onActivityPaused : ${activity.localClassName}".logd()
+        "onActivityPaused : ${activity.localClassName}".logI(TAG)
     }
 
 
     override fun onActivityDestroyed(activity: Activity) {
-        "onActivityDestroyed : ${activity.localClassName}".logd()
+        "onActivityDestroyed : ${activity.localClassName}".logI(TAG)
         KtxActivityManger.popActivity(activity)
     }
 
@@ -40,7 +42,7 @@ class KtxLifeCycleCallBack : Application.ActivityLifecycleCallbacks {
     }
 
     override fun onActivityStopped(activity: Activity) {
-        "onActivityStopped : ${activity.localClassName}".logd()
+        "onActivityStopped : ${activity.localClassName}".logI(TAG)
     }
 
 

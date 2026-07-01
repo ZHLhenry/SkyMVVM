@@ -21,6 +21,7 @@ import javax.net.ssl.X509TrustManager
  */
 @SuppressLint("TrustAllX509TrustManager")
 object HttpsCerUtils {
+    private const val TAG = "HttpsCerUtils"
     private const val CERT_PSW = "M0a0x2v9i9s0on"
     //如果需要兼容安卓5.0以下，可以使用这句
     //okHttpClientBuilder.sslSocketFactory(new TLSSocketFactory(), trustAllManager);
