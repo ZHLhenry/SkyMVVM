@@ -20,6 +20,7 @@ retrofitVersion = "3.0.0"
 databindingRuntime = "9.0.0"
 skymvvm = "1.1.0"
 skymultistatelayout = "1.0.1"
+skyBuildLogic = "1.0.0"
 chucker = "4.3.1"
 moshi = "1.15.2"
 gsonfactory = "10.5"
@@ -44,6 +45,7 @@ ksp-gradlePlugin = { group = "com.google.devtools.ksp", name = "com.google.devto
 
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
+hilt-noop-processor = { group = "com.sky.buildLogic", name = "hilt-noop-processor", version.ref = "skyBuildLogic" }
 
 androidx-lifecycle-process = { module = "androidx.lifecycle:lifecycle-process", version.ref = "lifecycleRuntimeKtx" }
 androidx-lifecycle-lifecycle-common-java8 = { module = "androidx.lifecycle:lifecycle-common-java8", version.ref = "lifecycleRuntimeKtx" }
@@ -77,12 +79,10 @@ org-jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "org
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 
-sky-android-application = { id = "sky.android.application", version = "unspecified" }
-sky-android-application-flavors = { id = "sky.android.application.flavors", version = "unspecified" }
-sky-android-library = { id = "sky.android.library", version = "unspecified" }
-sky-android-library-common = { id = "sky.android.library.common", version = "unspecified" }
-sky-android-test = { id = "sky.android.test", version = "unspecified" }
-sky-jvm-library = { id = "sky.jvm.library", version = "unspecified" }
-sky-android-hilt = { id = "sky.android.hilt", version = "unspecified" }
-sky-android-publish = { id = "sky.android.publish", version = "unspecified" }
+sky-android-application = { id = "sky.android.application", version.ref = "skyBuildLogic" }
+sky-android-application-flavors = { id = "sky.android.application.flavors", version.ref = "skyBuildLogic" }
+sky-android-library = { id = "sky.android.library", version.ref = "skyBuildLogic" }
+sky-android-library-common = { id = "sky.android.library.common", version.ref = "skyBuildLogic" }
+sky-android-hilt = { id = "sky.android.hilt", version.ref = "skyBuildLogic" }
+sky-android-publish = { id = "sky.android.publish", version.ref = "skyBuildLogic" }
 

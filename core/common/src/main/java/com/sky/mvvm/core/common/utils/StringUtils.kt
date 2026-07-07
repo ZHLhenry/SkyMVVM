@@ -14,13 +14,13 @@ object StringUtils {
      */
     fun isEmpty(obj: Any?): Boolean {
         obj?.let {
-            when (it) {
-                is String -> return it.trim().isEmpty() || it.trim() == "null"
-                is Iterable<*> -> return !it.iterator().hasNext()
-                is Array<*> -> return it.size == 0
-                is Map<*, *> -> return it.isEmpty()
-                is Number, is Date -> return false
-                else -> return false
+            return when (it) {
+                is String -> it.trim().isEmpty() || it.trim() == "null"
+                is Iterable<*> -> !it.iterator().hasNext()
+                is Array<*> -> it.isEmpty()
+                is Map<*, *> -> it.isEmpty()
+                is Number, is Date -> false
+                else -> false
             }
         }
         return true

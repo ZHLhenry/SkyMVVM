@@ -1,38 +1,43 @@
 pluginManagement {
-    includeBuild("build-logic")
     repositories {
-        google {
+        maven {
+            url = uri("https://maven.aliyun.com/repository/google")
             content {
                 includeGroupByRegex("com\\.android.*")
                 includeGroupByRegex("com\\.google.*")
                 includeGroupByRegex("androidx.*")
             }
         }
-        mavenCentral()
-        gradlePluginPortal()
         maven {
-            url = uri("${rootDir}/build/repo")
+            url = uri("https://maven.aliyun.com/repository/central")
+        }
+        maven {
+            url = uri("https://maven.aliyun.com/repository/gradle-plugin")
+        }
+        maven {
+            credentials {
+                username = "677b6d7687eb3ab8bcc7ac20"
+                password = "Tqmt4VtWBTp)"
+            }
+            url = uri("https://packages.aliyun.com/6732fc8f356ccaf8531a1487/maven/skybuildlogic")
         }
     }
 }
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
-        google()
-        mavenCentral()
+        maven {
+            url = uri("https://maven.aliyun.com/repository/google")
+        }
+        maven {
+            url = uri("https://maven.aliyun.com/repository/central")
+        }
         maven {
             url = uri("https://jitpack.io")
         }
-        /** nexus **/
-//        maven {
-//            isAllowInsecureProtocol = true
-//            credentials {
-//                username = "read_henry001"
-//                password = "read_henry001"
-//            }
-//            url = uri("http://www.zhouhengli.online:9001/repository/maven-releases/")
-//        }
-
+        maven {
+            url = uri("https://maven.aliyun.com/repository/public")
+        }
         /** aliyun **/
         fun aliyunMaven(repoUrl: String) {
             maven {
@@ -41,17 +46,13 @@ dependencyResolutionManagement {
                     password = "RnVrdxoghjKo"
                 }
                 url = uri(repoUrl)
-                content {
-                    includeGroup("com.sky.lib")
-                }
             }
-        }
-        maven {
-            url = uri("https://maven.aliyun.com/repository/public")
         }
         aliyunMaven("https://packages.aliyun.com/6732fc8f356ccaf8531a1487/maven/skymvvm")
         aliyunMaven("https://packages.aliyun.com/6732fc8f356ccaf8531a1487/maven/skymultistatelayout")
+        aliyunMaven("https://packages.aliyun.com/6732fc8f356ccaf8531a1487/maven/skybuildlogic")
         maven("${rootDir}/build/repo")
+
     }
 }
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
@@ -61,4 +62,3 @@ include(":app")
 include(":SkyMVVMLib")
 include(":core:common")
 include(":core:model")
-include(":hilt-noop-processor")

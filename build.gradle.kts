@@ -13,3 +13,16 @@ buildscript {
         classpath(libs.android.gradlePlugin)
     }
 }
+
+// skyBuild 配置
+extra["skyBuild.appName"] = "SkyMVVM"
+extra["skyBuild.applicationId"] = "com.sky.mvvm.sample"
+extra["skyBuild.versionCode"] = 100
+extra["skyBuild.versionName"] = "1.0.0"
+extra["skyBuild.compileSdk"] = 36
+extra["skyBuild.minSdk"] = 28
+extra["skyBuild.targetSdk"] = 35
+extra["skyBuild.enableViewBinding"] = true
+extra["skyBuild.enableDataBinding"] = true
+extra["skyBuild.enableBuildConfig"] = true
+extra["skyBuild.enableCompose"] = false

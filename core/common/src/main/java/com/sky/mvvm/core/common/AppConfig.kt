@@ -7,7 +7,8 @@ package com.sky.mvvm.core.common
  * <p>{@code description: 文件描述}</p>
  */
 object AppConfig {
-    const val IS_PROD: Boolean = BuildConfig.FLAVOR == "prod"
+    // 是否生产环境（由 app 模块 Application 中根据 BuildConfig.FLAVOR 注入）
+    var IS_PROD: Boolean = false
 
     //http请求地址
     const val BASE_URL = "https://wanandroid.com/"

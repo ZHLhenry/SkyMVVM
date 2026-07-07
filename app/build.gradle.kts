@@ -1,5 +1,3 @@
-import com.sky.mvvm.build_logic.convention.AppConfig
-
 plugins {
     alias(libs.plugins.sky.android.application)
     alias(libs.plugins.sky.android.application.flavors)
@@ -9,10 +7,20 @@ plugins {
 
 android {
     namespace = "com.sky.mvvm.sample"
-    buildFeatures {
-        dataBinding = AppConfig.enableDataBinding
-        viewBinding = AppConfig.enableViewBinding
-        buildConfig = AppConfig.enableBuildConfig
+    flavorDimensions += "contentType"
+    productFlavors {
+        create("dev") {
+            dimension = "contentType"
+            manifestPlaceholders["app_icon"] = "@mipmap/ic_launcher"
+        }
+        create("uat") {
+            dimension = "contentType"
+            manifestPlaceholders["app_icon"] = "@mipmap/ic_launcher"
+        }
+        create("prod") {
+            dimension = "contentType"
+            manifestPlaceholders["app_icon"] = "@mipmap/ic_launcher"
+        }
     }
 }
 

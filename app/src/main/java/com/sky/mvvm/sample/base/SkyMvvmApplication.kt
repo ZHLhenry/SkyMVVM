@@ -2,6 +2,7 @@ package com.sky.mvvm.sample.base
 
 import android.app.Application
 import android.content.Intent
+import androidx.lifecycle.ProcessLifecycleOwner
 import com.hjq.toast.Toaster
 import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.ClassicsHeader
@@ -10,23 +11,22 @@ import com.sky.multistatelayout.SkyMultiStateLayout
 import com.sky.mvvm.SkyMVVMLib
 import com.sky.mvvm.SkyMVVMLibConfig
 import com.sky.mvvm.base.BaseApplication
+import com.sky.mvvm.core.common.AppConfig
 import com.sky.mvvm.core.common.ErrorCode.ERROR_200
 import com.sky.mvvm.core.common.R
-import com.sky.mvvm.ext.util.logD
-import com.sky.mvvm.ext.util.logE
-import com.sky.mvvm.ext.util.logI
+import com.sky.mvvm.ext.lifecycle.KtxAppLifeObserver
 import com.sky.mvvm.flow.SkyFlow
 import com.sky.mvvm.flow.SkyFlowEventData
+import com.sky.mvvm.sample.BuildConfig
 import com.sky.mvvm.sample.feature.other.ui.LoginActivity
 import com.sky.mvvm.util.ActivityMessenger
 import dagger.hilt.android.HiltAndroidApp
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.cancel
 
 /**
- * <p>{@code className: }</p>
+ * <p>{@code className: SkyMvvmApplication}</p>
  * <p>{@code author: Henry}</p>
  * <p>{@code date: 2025/2/21 14:20}</p>
  * <p>{@code description: 文件描述}</p>
@@ -42,6 +42,8 @@ class SkyMvvmApplication : BaseApplication() {
     override fun onCreate() {
         super.onCreate()
         mApplication = this
+        // 由 app 模块注入 flavor 信息到 common 层
+        AppConfig.IS_PROD = BuildConfig.FLAVOR == "prod"
         Toaster.init(mApplication)
         SmartRefreshLayout.setDefaultRefreshHeaderCreator { context, layout ->
             layout.setPrimaryColorsId(R.color.black, R.color.white) // 全局设置主题颜色
@@ -71,19 +73,18 @@ class SkyMvvmApplication : BaseApplication() {
             .enableOkHttpLogLib(enableOkHttpLogLib = true)
             .build())
 
-        /**
-         * 模拟flow接受事件消息(登录过期拦截并跳转登录页面)
-         */
+        // 模拟flow接受事件消息(登录过期拦截并跳转登录页面)
         SkyFlow.with<SkyFlowEventData>(ERROR_200.toString())
             .register(scope = applicationScope, action = {
                 val flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 ActivityMessenger.startActivity<LoginActivity>(this,flags)
             })
-    }
 
-    override fun onTerminate() {
-        super.onTerminate()
-        SkyFlow.clearUnusedFlow()
-        applicationScope.cancel()
+        // 监听应用生命周期，进入后台时清理资源
+        KtxAppLifeObserver.isForeground.observe(ProcessLifecycleOwner.get()) { isForeground ->
+            if (!isForeground) {
+                SkyFlow.clearUnusedFlow()
+            }
+        }
     }
 }

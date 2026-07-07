@@ -1,18 +1,12 @@
-import com.sky.mvvm.build_logic.convention.AppConfig
-
 plugins {
     alias(libs.plugins.sky.android.library.common)
     alias(libs.plugins.sky.android.hilt)
     alias(libs.plugins.ksp)
 }
 
+
 android {
     namespace = "com.sky.mvvm.core.common"
-    buildFeatures {
-        dataBinding = AppConfig.enableDataBinding
-        viewBinding = AppConfig.enableViewBinding
-        buildConfig = AppConfig.enableBuildConfig
-    }
 }
 
 
@@ -46,12 +40,13 @@ dependencies {
     api("com.github.getActivity:TitleBar:10.8")
     //Permissions
     api("com.github.getActivity:XXPermissions:28.3")
+    // hilt-noop-processor(编译消除警告)
+    annotationProcessor(libs.hilt.noop.processor)
     //Log
     api(libs.xlog)
     //Chucker
-    devApi(libs.okhttp.chucker)
-    uatApi(libs.okhttp.chucker.release)
-    prodApi(libs.okhttp.chucker.release)
+    debugApi(libs.okhttp.chucker)
+    releaseApi(libs.okhttp.chucker.release)
     //Moshi
     api(libs.moshi)
     ksp(libs.moshi.codegen)
