@@ -22,7 +22,7 @@ class AppException : Exception {
         errorLog: String? = "",
         throwable: Throwable? = null
     ) : super(error) {
-        this.errorMsg = error ?: context.getString(R.string.sky_mmvmlib_exception_unknown)
+        this.errorMsg = error ?: context.getString(R.string.sky_mvvmlib_exception_unknown)
         this.errCode = errCode
         this.errorLog = errorLog ?: this.errorMsg
         this.throwable = throwable

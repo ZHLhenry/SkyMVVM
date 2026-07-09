@@ -64,7 +64,7 @@ object SkyMVVMLib {
      * 检查库是否已初始化，未初始化则抛出异常
      * @throws UninitializedException 未初始化时抛出
      */
-    fun requireInit() {
+    internal fun requireInit() {
         if (!isInitialized) {
             throw UninitializedException(
                 "Please first call SkyMVVMLib.init() in the Application to perform the initialization."

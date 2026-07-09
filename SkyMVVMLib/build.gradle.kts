@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.sky.android.library)
     alias(libs.plugins.sky.android.hilt)
-    alias(libs.plugins.ksp)
     alias(libs.plugins.sky.android.publish)
 }
 
@@ -33,7 +32,7 @@ dependencies {
 
     //hilt
     api(libs.hilt.android)
-    api(libs.hilt.compiler)
+    ksp(libs.hilt.compiler)
 
     //Log
     compileOnly(libs.xlog)

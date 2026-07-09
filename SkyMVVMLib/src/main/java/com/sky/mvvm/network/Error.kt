@@ -15,27 +15,27 @@ enum class Error(private val code: Int, @param:StringRes private val errResId: I
     /**
      * 未知错误
      */
-    UNKNOWN(1000, R.string.sky_mmvmlib_exception_unknown),
+    UNKNOWN(1000, R.string.sky_mvvmlib_exception_unknown),
 
     /**
      * 解析错误
      */
-    PARSE_ERROR(1001, R.string.sky_mmvmlib_exception_parse_error),
+    PARSE_ERROR(1001, R.string.sky_mvvmlib_exception_parse_error),
 
     /**
      * 网络错误
      */
-    NETWORK_ERROR(1002, R.string.sky_mmvmlib_exception_network_error),
+    NETWORK_ERROR(1002, R.string.sky_mvvmlib_exception_network_error),
 
     /**
      * 证书出错
      */
-    SSL_ERROR(1004, R.string.sky_mmvmlib_exception_ssl_error),
+    SSL_ERROR(1004, R.string.sky_mvvmlib_exception_ssl_error),
 
     /**
      * 连接超时
      */
-    TIMEOUT_ERROR(1006, R.string.sky_mmvmlib_exception_timeout_error);
+    TIMEOUT_ERROR(1006, R.string.sky_mvvmlib_exception_timeout_error);
 
     fun getValue(context: Context): String {
         return context.getString(errResId)

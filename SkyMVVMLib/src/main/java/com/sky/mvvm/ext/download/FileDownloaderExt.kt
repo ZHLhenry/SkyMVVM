@@ -21,7 +21,7 @@ fun downLoadExt(content: Context, downloadResultState: MutableLiveData<DownloadR
             //下载错误
             downloadResultState.postValue(
                 DownloadResultState.onError(
-                    throwable.message ?: content.getString(R.string.sky_mmvmlib_download_error)
+                    throwable.message ?: content.getString(R.string.sky_mvvmlib_download_error)
                 )
             )
         }

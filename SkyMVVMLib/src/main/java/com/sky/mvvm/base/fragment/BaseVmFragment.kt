@@ -178,7 +178,7 @@ abstract class BaseVmFragment<VM : BaseViewModel> : Fragment() {
      */
     open fun initData() {}
 
-    abstract fun showLoading(message: String = mActivity.getString(R.string.sky_mmvmlib_loading_message))
+    abstract fun showLoading(message: String = mActivity.getString(R.string.sky_mvvmlib_loading_message))
 
     abstract fun dismissLoading()
 

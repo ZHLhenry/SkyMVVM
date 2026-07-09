@@ -96,7 +96,7 @@ fun <T> BaseViewModel.apiRequest(
     block: suspend () -> BaseResponse<T>,
     resultState: MutableLiveData<ResultState<T>>,
     isShowDialog: Boolean = false,
-    loadingMessage: String = context.getString(R.string.sky_mmvmlib_loading_message)
+    loadingMessage: String = context.getString(R.string.sky_mvvmlib_loading_message)
 ): Job {
     return viewModelScope.launch {
         runCatching {
@@ -126,7 +126,7 @@ fun <T> BaseViewModel.apiRequestNoCheck(
     block: suspend () -> T,
     resultState: MutableLiveData<ResultState<T>>,
     isShowDialog: Boolean = false,
-    loadingMessage: String = context.getString(R.string.sky_mmvmlib_loading_message)
+    loadingMessage: String = context.getString(R.string.sky_mvvmlib_loading_message)
 ): Job {
     return viewModelScope.launch {
         runCatching {
@@ -158,7 +158,7 @@ fun <T> BaseViewModel.apiRequest(
     success: (T) -> Unit,
     error: (AppException) -> Unit = {},
     isShowDialog: Boolean = false,
-    loadingMessage: String = context.getString(R.string.sky_mmvmlib_loading_message)
+    loadingMessage: String = context.getString(R.string.sky_mvvmlib_loading_message)
 ): Job {
     //如果需要弹窗 通知Activity/fragment弹窗
     return viewModelScope.launch {
@@ -209,7 +209,7 @@ fun <T> BaseViewModel.apiRequestNoCheck(
     success: (T) -> Unit,
     error: (AppException) -> Unit = {},
     isShowDialog: Boolean = false,
-    loadingMessage: String = context.getString(R.string.sky_mmvmlib_loading_message)
+    loadingMessage: String = context.getString(R.string.sky_mvvmlib_loading_message)
 ): Job {
     //如果需要弹窗 通知Activity/fragment弹窗
     if (isShowDialog) loadingChange.showDialog.postValue(loadingMessage)

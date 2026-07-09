@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.sky.android.library.common)
     alias(libs.plugins.sky.android.hilt)
-    alias(libs.plugins.ksp)
 }
 
 android {

@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.sky.android.library.common)
     alias(libs.plugins.sky.android.hilt)
-    alias(libs.plugins.ksp)
 }
 
 
@@ -52,8 +51,8 @@ dependencies {
     ksp(libs.moshi.codegen)
     api(libs.moshi.converter)
 
-    api(project(":SkyMVVMLib"))
-//    api(libs.skymvvm)
+    api(libs.skymvvm)
+//    api(project(":SkyMVVMLib"))
     api(libs.skymultistatelayout)
 
     implementation(projects.core.model)

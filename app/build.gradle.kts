@@ -2,7 +2,6 @@ plugins {
     alias(libs.plugins.sky.android.application)
     alias(libs.plugins.sky.android.application.flavors)
     alias(libs.plugins.sky.android.hilt)
-    alias(libs.plugins.ksp)
 }
 
 android {

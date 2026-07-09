@@ -27,7 +27,7 @@ abstract class BaseVmActivity<VM : BaseViewModel> : AppCompatActivity() {
 
     abstract fun initView(savedInstanceState: Bundle?)
 
-    abstract fun showLoading(message: String = application.getString(R.string.sky_mmvmlib_loading_message))
+    abstract fun showLoading(message: String = application.getString(R.string.sky_mvvmlib_loading_message))
 
     abstract fun dismissLoading()
 
