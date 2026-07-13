@@ -5,11 +5,12 @@ import androidx.annotation.StringRes
 import com.sky.mvvm.R
 
 /**
- * <p>{@code className: }</p>
- * <p>{@code author: Henry}</p>
- * <p>{@code date: 2025/2/23 10:32}</p>
- * <p>{@code description: 错误枚举类}</p>
+ * @Class: Error
+ * @Author: Henry
+ * @Date: 2025/2/23 10:32
+ * @Description: 错误码枚举，定义网络、解析、超时、SSL等错误类型
  */
+
 enum class Error(private val code: Int, @param:StringRes private val errResId: Int) {
 
     /**

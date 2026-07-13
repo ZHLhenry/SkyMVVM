@@ -1,11 +1,12 @@
 package com.sky.mvvm.network
 
 /**
- * <p>{@code className: }</p>
- * <p>{@code author: Henry}</p>
- * <p>{@code date: 2025/2/23 10:31}</p>
- * <p>{@code description: 服务器返回数据的基类,如果需要框架帮你做脱壳处理请继承它！！请注意：必须实现抽象方法，根据自己的业务判断返回请求结果是否成功}</p>
+ * @Class: BaseResponse
+ * @Author: Henry
+ * @Date: 2025/2/23 10:31
+ * @Description: 网络响应基类，定义成功判断和数据获取的抽象方法
  */
+
 abstract class BaseResponse<T> {
     //抽象方法，用户的基类继承该类时，需要重写该方法
     abstract fun isSucces(): Boolean

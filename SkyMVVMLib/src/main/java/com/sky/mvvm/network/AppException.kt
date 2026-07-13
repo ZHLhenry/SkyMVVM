@@ -4,11 +4,12 @@ import android.content.Context
 import com.sky.mvvm.R
 
 /**
- * <p>{@code className: }</p>
- * <p>{@code author: Henry}</p>
- * <p>{@code date: 2025/2/23 10:29}</p>
- * <p>{@code description: 自定义错误信息异常}</p>
+ * @Class: AppException
+ * @Author: Henry
+ * @Date: 2025/2/23 10:29
+ * @Description: 应用异常类，封装错误码、错误消息和错误日志
  */
+
 class AppException : Exception {
     var errorMsg: String //错误消息
     var errCode: Int = 0 //错误码

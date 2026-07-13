@@ -1,11 +1,12 @@
 package com.sky.mvvm.network.log
 
 /**
- * <p>{@code className: }</p>
- * <p>{@code author: Henry}</p>
- * <p>{@code date: 2025/2/23 10:24}</p>
- * <p>{@code description: 文件描述}</p>
+ * @Class: LogManager
+ * @Author: Henry
+ * @Date: 2025/2/23 10:24
+ * @Description: 日志管理器，统一管理日志输出代理
  */
+
 object LogManager {
     private var logProxy: LogProxy? = null
 

@@ -4,6 +4,13 @@ import androidx.lifecycle.ViewModel
 import com.sky.mvvm.SkyMVVMLib
 import com.sky.mvvm.callback.livedata.event.EventLiveData
 
+/**
+ * @Class: BaseViewModel
+ * @Author: Henry
+ * @Date: 2026/07/13 10:22
+ * @Description: ViewModel基类，提供Loading弹窗显示隐藏的状态通知能力
+ */
+
 open class BaseViewModel : ViewModel() {
     private val TAG = "BaseViewModel"
     init {

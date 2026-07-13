@@ -9,11 +9,12 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.OnLifecycleEvent
 
 /**
- * <p>{@code className: }</p>
- * <p>{@code author: Henry}</p>
- * <p>{@code date: 2025/2/23 08:59}</p>
- * <p>{@code description: 文件描述}</p>
+ * @Class: KtxHandler
+ * @Author: Henry
+ * @Date: 2025/2/23 08:59
+ * @Description: 生命周期感知的Handler，随Lifecycle自动清理消息防止内存泄漏
  */
+
 @Suppress("DEPRECATION")
 class KtxHandler(lifecycleOwner: LifecycleOwner, callback: Callback) : Handler(callback),
     LifecycleObserver {

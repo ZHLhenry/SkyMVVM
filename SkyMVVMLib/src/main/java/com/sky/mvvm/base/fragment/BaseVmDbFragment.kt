@@ -8,6 +8,12 @@ import androidx.databinding.ViewDataBinding
 import com.sky.mvvm.base.viewmodel.BaseViewModel
 import com.sky.mvvm.ext.inflateBindingWithGeneric
 
+/**
+ * @Class: BaseVmDbFragment
+ * @Author: Henry
+ * @Date: 2026/07/13 10:22
+ * @Description: 支持DataBinding的Fragment基类，自动通过泛型inflate布局并绑定ViewModel
+ */
 
 abstract class BaseVmDbFragment<VM : BaseViewModel, DB : ViewDataBinding> : BaseVmFragment<VM>() {
 

@@ -7,12 +7,14 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.Interceptor
 import javax.inject.Singleton
+
 /**
- * <p>{@code className: }</p>
- * <p>{@code author: Henry}</p>
- * <p>{@code date: 2025/2/23 10:22}</p>
- * <p>{@code description: 文件描述}</p>
+ * @Class: AndroidLoggingInterceptor
+ * @Author: Henry
+ * @Date: 2025/2/23 10:22
+ * @Description: OkHttp日志拦截器的Hilt依赖注入Module
  */
+
 @InstallIn(SingletonComponent::class)
 @Module
 object AndroidLoggingInterceptor {

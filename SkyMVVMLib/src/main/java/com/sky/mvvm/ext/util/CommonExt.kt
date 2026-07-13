@@ -7,11 +7,12 @@ import android.view.View
 import com.sky.mvvm.ext.view.clickNoRepeat
 
 /**
- * <p>{@code className: }</p>
- * <p>{@code author: Henry}</p>
- * <p>{@code date: 2025/2/23 09:03}</p>
- * <p>{@code description: 文件描述}</p>
+ * @Class: CommonExt
+ * @Author: Henry
+ * @Date: 2025/2/23 09:03
+ * @Description: 通用扩展函数，提供常用的Kotlin扩展方法
  */
+
 /**
  * 获取屏幕宽度
  */

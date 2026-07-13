@@ -20,11 +20,12 @@ import java.util.concurrent.ConcurrentHashMap
 import kotlin.coroutines.CoroutineContext
 
 /**
- * <p>{@code className: SkyFlow}</p>
- * <p>{@code author: Henry}</p>
- * <p>{@code date: 2025/3/5 11:01}</p>
- * <p>{@code description: 基于 SharedFlow 的事件总线实现，支持普通事件和粘性事件}</p>
+ * @Class: SkyFlow
+ * @Author: Henry
+ * @Date: 2025/3/5 11:01
+ * @Description: 基于SharedFlow的事件总线，支持普通事件流和粘性事件流
  */
+
 object SkyFlow {
     private const val TAG = "SkyFlow"
     private val flowMap = ConcurrentHashMap<String, SkyFlowEvent<*>>()

@@ -1,11 +1,12 @@
 package com.sky.mvvm.flow
 
 /**
- * <p>{@code className: }</p>
- * <p>{@code author: Henry}</p>
- * <p>{@code date: 2025/3/5 11:11}</p>
- * <p>{@code description: 文件描述}</p>
+ * @Class: SkyFlowEventData
+ * @Author: Henry
+ * @Date: 2025/3/5 11:11
+ * @Description: SkyFlow事件数据模型，包含事件Key和Value
  */
+
 data class SkyFlowEventData(
     var eventKey: String,
     var eventValue: String

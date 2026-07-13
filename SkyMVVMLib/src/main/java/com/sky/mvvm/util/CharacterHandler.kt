@@ -16,6 +16,13 @@ import javax.xml.transform.TransformerFactory
 import javax.xml.transform.stream.StreamResult
 import javax.xml.transform.stream.StreamSource
 
+/**
+ * @Class: CharacterHandler
+ * @Author: Henry
+ * @Date: 2026/07/13 10:22
+ * @Description: 字符处理工具类，提供Emoji过滤、JSON格式化、XML格式化功能
+ */
+
 class CharacterHandler private constructor() {
     private val TAG = "CharacterHandler"
     companion object {

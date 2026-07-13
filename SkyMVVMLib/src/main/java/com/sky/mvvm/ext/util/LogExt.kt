@@ -8,6 +8,13 @@ const val TAG = "SkyMVVM"
 
 var enableSkyMVVMLog = true
 
+/**
+ * @Class: LogExt
+ * @Author: Henry
+ * @Date: 2026/07/13 10:22
+ * @Description: 日志扩展函数，支持XLog和Android Log双模式输出
+ */
+
 private enum class LEVEL {
     V, D, I, W, E
 }

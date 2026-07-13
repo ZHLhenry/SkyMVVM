@@ -13,12 +13,14 @@ import javax.net.ssl.SSLSession
 import javax.net.ssl.TrustManager
 import javax.net.ssl.TrustManagerFactory
 import javax.net.ssl.X509TrustManager
+
 /**
- * <p>{@code className: }</p>
- * <p>{@code author: Henry}</p>
- * <p>{@code date: 2025/2/23 09:59}</p>
- * <p>{@code description: 支持Https连接的Okhttp客户端}</p>
+ * @Class: HttpsCerUtils
+ * @Author: Henry
+ * @Date: 2025/2/23 09:59
+ * @Description: HTTPS证书工具类，支持信任所有证书或指定证书配置
  */
+
 @SuppressLint("TrustAllX509TrustManager")
 object HttpsCerUtils {
     private const val TAG = "HttpsCerUtils"

@@ -6,11 +6,12 @@ import com.sky.mvvm.base.viewmodel.BaseViewModel
 import com.sky.mvvm.ext.inflateBindingWithGeneric
 
 /**
- * <p>{@code className: }</p>
- * <p>{@code author: Henry}</p>
- * <p>{@code date: 2025/2/23 09:49}</p>
- * <p>{@code description: 文件描述}</p>
+ * @Class: BaseVmDbActivity
+ * @Author: Henry
+ * @Date: 2025/2/23 09:49
+ * @Description: 支持DataBinding的Activity基类，自动通过泛型inflate布局并绑定ViewModel
  */
+
 abstract class BaseVmDbActivity<VM : BaseViewModel, DB : ViewDataBinding> : BaseVmActivity<VM>() {
 
     private val TAG = "BaseVmDbActivity"

@@ -1,11 +1,12 @@
 package com.sky.mvvm.ext.download
 
 /**
- * <p>{@code className: }</p>
- * <p>{@code author: Henry}</p>
- * <p>{@code date: 2025/2/23 10:37}</p>
- * <p>{@code description: 文件描述}</p>
+ * @Class: DownloadResultState
+ * @Author: Henry
+ * @Date: 2025/2/23 10:37
+ * @Description: 下载状态密封类，封装等待、进度、成功、暂停、错误状态
  */
+
 sealed class DownloadResultState {
     companion object {
 

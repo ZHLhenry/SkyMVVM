@@ -19,6 +19,13 @@ import com.sky.mvvm.network.manager.NetState
 import com.sky.mvvm.network.manager.NetworkStateManager
 import java.lang.reflect.ParameterizedType
 
+/**
+ * @Class: BaseVmFragment
+ * @Author: Henry
+ * @Date: 2026/07/13 10:22
+ * @Description: MVVM架构Fragment基类，封装ViewModel绑定、懒加载、网络状态监听
+ */
+
 abstract class BaseVmFragment<VM : BaseViewModel> : Fragment() {
     private val TAG = "BaseVmFragment"
 
@@ -64,7 +71,6 @@ abstract class BaseVmFragment<VM : BaseViewModel> : Fragment() {
      * 网络变化监听 子类重写
      */
     open fun onNetworkStateChanged(netState: NetState) {}
-
 
     /**
      * 获取[ViewModel]

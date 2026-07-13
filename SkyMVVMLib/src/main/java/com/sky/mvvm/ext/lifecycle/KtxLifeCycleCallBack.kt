@@ -5,11 +5,12 @@ import android.os.Bundle
 import com.sky.mvvm.ext.util.logI
 
 /**
- * <p>{@code className: }</p>
- * <p>{@code author: Henry}</p>
- * <p>{@code date: 2025/2/23 08:59}</p>
- * <p>{@code description: 文件描述}</p>
+ * @Class: KtxLifeCycleCallBack
+ * @Author: Henry
+ * @Date: 2025/2/23 08:59
+ * @Description: Activity生命周期回调，记录日志并管理Activity栈
  */
+
 class KtxLifeCycleCallBack : Application.ActivityLifecycleCallbacks {
 
     private val TAG = javaClass.simpleName
@@ -31,7 +32,6 @@ class KtxLifeCycleCallBack : Application.ActivityLifecycleCallbacks {
         "onActivityPaused : ${activity.localClassName}".logI(TAG)
     }
 
-
     override fun onActivityDestroyed(activity: Activity) {
         "onActivityDestroyed : ${activity.localClassName}".logI(TAG)
         KtxActivityManger.popActivity(activity)
@@ -44,6 +44,5 @@ class KtxLifeCycleCallBack : Application.ActivityLifecycleCallbacks {
     override fun onActivityStopped(activity: Activity) {
         "onActivityStopped : ${activity.localClassName}".logI(TAG)
     }
-
 
 }

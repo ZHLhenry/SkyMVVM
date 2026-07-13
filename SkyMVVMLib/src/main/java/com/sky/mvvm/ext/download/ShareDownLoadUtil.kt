@@ -7,16 +7,16 @@ import com.sky.mvvm.base.BaseApplication.Companion.app
 import androidx.core.content.edit
 
 /**
- * <p>{@code className: }</p>
- * <p>{@code author: Henry}</p>
- * <p>{@code date: 2025/2/23 10:39}</p>
- * <p>{@code description: 文件描述}</p>
+ * @Class: ShareDownLoadUtil
+ * @Author: Henry
+ * @Date: 2025/2/23 10:39
+ * @Description: SharedPreferences下载进度持久化工具，记录已下载字节数实现断点续传
  */
+
 object ShareDownLoadUtil {
 
     private var path = Build.BRAND + "_" + Build.MODEL + "_" + "SkyMVVM_Download_SP"
     private val sp: SharedPreferences = app.getSharedPreferences(path, Context.MODE_PRIVATE)
-
 
     fun setPath(path: String) {
         ShareDownLoadUtil.path = path
@@ -61,6 +61,5 @@ object ShareDownLoadUtil {
     fun clear() {
         sp.edit { clear() }
     }
-
 
 }

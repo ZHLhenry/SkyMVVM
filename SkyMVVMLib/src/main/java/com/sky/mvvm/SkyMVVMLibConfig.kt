@@ -6,11 +6,12 @@ import com.elvishew.xlog.printer.Printer
 import okhttp3.Interceptor
 
 /**
- * <p>{@code className: SkyMVVMLibConfig}</p>
- * <p>{@code author: Henry}</p>
- * <p>{@code date: 2025/6/30}</p>
- * <p>{@code description: SkyMVVM库配置类}</p>
+ * @Class: SkyMVVMLibConfig
+ * @Author: Henry
+ * @Date: 2025/6/30
+ * @Description: SkyMVVM库配置类，支持XLog日志、SkyFlow事件流、OkHttp日志等模块配置
  */
+
 class SkyMVVMLibConfig private constructor(
     var context: Context,
     var xLogLibEnabled: Boolean,

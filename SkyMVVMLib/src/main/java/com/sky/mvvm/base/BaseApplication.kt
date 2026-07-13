@@ -8,12 +8,14 @@ import androidx.lifecycle.ProcessLifecycleOwner
 import com.sky.mvvm.ext.lifecycle.KtxAppLifeObserver
 import com.sky.mvvm.ext.lifecycle.KtxLifeCycleCallBack
 import com.sky.mvvm.network.manager.NetworkStateReceive
+
 /**
- * <p>{@code className: }</p>
- * <p>{@code author: Henry}</p>
- * <p>{@code date: 2025/2/22 22:00}</p>
- * <p>{@code description: 文件描述}</p>
+ * @Class: BaseApplication
+ * @Author: Henry
+ * @Date: 2025/2/22 22:00
+ * @Description: Application基类，初始化网络监听、Activity生命周期管理及App前后台监听
  */
+
 open class BaseApplication : Application() {
     private val TAG = "BaseApplication"
     override fun onCreate() {

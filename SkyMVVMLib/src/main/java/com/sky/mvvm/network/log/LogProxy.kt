@@ -1,11 +1,12 @@
 package com.sky.mvvm.network.log
 
 /**
- * <p>{@code className: }</p>
- * <p>{@code author: Henry}</p>
- * <p>{@code date: 2025/2/23 10:24}</p>
- * <p>{@code description: 文件描述}</p>
+ * @Class: LogProxy
+ * @Author: Henry
+ * @Date: 2025/2/23 10:24
+ * @Description: 日志代理接口，定义e/w/i/d日志输出方法
  */
+
 interface LogProxy {
     fun e(tag: String, msg: String)
 

@@ -33,6 +33,14 @@ import java.util.Map;
  * <p>
  * Create by KunMinX at 19/9/23
  */
+
+/**
+ * @Class: ProtectedUnPeekLiveData
+ * @Author: Henry
+ * @Date: 2026/07/13 10:22
+ * @Description: 防倒灌LiveData保护层，限制Activity/Fragment篡改数据层数据
+ */
+
 public class ProtectedUnPeekLiveData<T> extends LiveData<T> {
 
     protected boolean isAllowNullValue;

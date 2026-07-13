@@ -15,11 +15,12 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 /**
- * <p>{@code className: }</p>
- * <p>{@code author: Henry}</p>
- * <p>{@code date: 2025/2/23 10:35}</p>
- * <p>{@code description: 下载管理类}</p>
+ * @Class: DownLoadManager
+ * @Author: Henry
+ * @Date: 2025/2/23 10:35
+ * @Description: 文件下载管理器，支持断点续传、暂停、取消下载
  */
+
 @Singleton
 class DownLoadManager @Inject constructor() {
     /** 忽略https模式 */
@@ -32,7 +33,6 @@ class DownLoadManager @Inject constructor() {
                 .writeTimeout(5, TimeUnit.SECONDS).build()
         ).build()
 
-
     /** 正常http模式 */
     private val retrofitBuilder = Retrofit.Builder()
         .baseUrl("https://www.baidu.com")
@@ -42,7 +42,6 @@ class DownLoadManager @Inject constructor() {
                 .readTimeout(5, TimeUnit.SECONDS)
                 .writeTimeout(5, TimeUnit.SECONDS).build()
         ).build()
-
 
     /**
      *开始下载

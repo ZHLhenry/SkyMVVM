@@ -11,6 +11,13 @@ import androidx.viewbinding.ViewBinding
 import java.lang.reflect.InvocationTargetException
 import java.lang.reflect.ParameterizedType
 
+/**
+ * @Class: ViewBindUtil
+ * @Author: Henry
+ * @Date: 2026/07/13 10:23
+ * @Description: ViewBinding/DataBinding工具类，通过泛型自动inflate绑定布局
+ */
+
 @JvmName("inflateWithGeneric")
 fun <VB : ViewBinding> AppCompatActivity.inflateBindingWithGeneric(layoutInflater: LayoutInflater): VB =
     withGenericBindingClass<VB>(this) { clazz ->

@@ -8,11 +8,12 @@ import androidx.lifecycle.OnLifecycleEvent
 import com.sky.mvvm.callback.livedata.BooleanLiveData
 
 /**
- * <p>{@code className: }</p>
- * <p>{@code author: Henry}</p>
- * <p>{@code date: 2025/2/23 08:58}</p>
- * <p>{@code description: 文件描述}</p>
+ * @Class: KtxAppLifeObserver
+ * @Author: Henry
+ * @Date: 2025/2/23 08:58
+ * @Description: 应用前后台生命周期观察者，监听App进入前台和进入后台
  */
+
 object KtxAppLifeObserver : LifecycleObserver {
 
     var isForeground = BooleanLiveData()

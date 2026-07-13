@@ -7,12 +7,14 @@ import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
 import java.io.IOException
+
 /**
- * <p>{@code className: }</p>
- * <p>{@code author: Henry}</p>
- * <p>{@code date: 2025/2/23 10:25}</p>
- * <p>{@code description: 文件描述}</p>
+ * @Class: Logger
+ * @Author: Henry
+ * @Date: 2025/2/23 10:25
+ * @Description: OkHttp日志格式化器，支持JSON和文件请求响应的格式化打印
  */
+
 class Logger {
 
     companion object {

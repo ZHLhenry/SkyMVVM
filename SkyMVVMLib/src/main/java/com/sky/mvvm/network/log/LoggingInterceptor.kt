@@ -6,12 +6,14 @@ import okhttp3.Response
 import java.io.IOException
 import java.nio.charset.Charset
 import java.util.concurrent.TimeUnit
+
 /**
- * <p>{@code className: }</p>
- * <p>{@code author: Henry}</p>
- * <p>{@code date: 2025/2/23 10:25}</p>
- * <p>{@code description: 文件描述}</p>
+ * @Class: LoggingInterceptor
+ * @Author: Henry
+ * @Date: 2025/2/23 10:25
+ * @Description: OkHttp日志拦截器，拦截并格式化打印HTTP请求和响应日志
  */
+
 internal class LoggingInterceptor private constructor(private val builder: Builder) : Interceptor {
 
     private val enableLog: Boolean

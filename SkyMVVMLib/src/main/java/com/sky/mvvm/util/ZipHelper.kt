@@ -4,6 +4,13 @@ import java.nio.charset.Charset
 import java.util.*
 import java.util.zip.*
 
+/**
+ * @Class: ZipHelper
+ * @Author: Henry
+ * @Date: 2026/07/13 10:22
+ * @Description: 数据压缩解压工具类，支持Zlib和Gzip格式的压缩与解压
+ */
+
 class ZipHelper private constructor() {
     private val TAG = "ZipHelper"
     companion object {

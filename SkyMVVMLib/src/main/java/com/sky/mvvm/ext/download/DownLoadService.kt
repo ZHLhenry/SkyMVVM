@@ -8,11 +8,12 @@ import retrofit2.http.Streaming
 import retrofit2.http.Url
 
 /**
- * <p>{@code className: }</p>
- * <p>{@code author: Henry}</p>
- * <p>{@code date: 2025/2/23 10:37}</p>
- * <p>{@code description: 文件描述}</p>
+ * @Class: DownLoadService
+ * @Author: Henry
+ * @Date: 2025/2/23 10:37
+ * @Description: Retrofit下载服务接口，支持Range断点下载
  */
+
 interface DownLoadService {
     @Streaming
     @GET

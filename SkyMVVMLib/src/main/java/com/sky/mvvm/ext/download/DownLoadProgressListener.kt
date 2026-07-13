@@ -1,11 +1,12 @@
 package com.sky.mvvm.ext.download
 
 /**
- * <p>{@code className: }</p>
- * <p>{@code author: Henry}</p>
- * <p>{@code date: 2025/2/23 10:36}</p>
- * <p>{@code description: 文件描述}</p>
+ * @Class: DownLoadProgressListener
+ * @Author: Henry
+ * @Date: 2025/2/23 10:36
+ * @Description: 下载进度与状态回调接口定义
  */
+
 interface DownLoadProgressListener {
 
     /**
@@ -18,7 +19,6 @@ interface DownLoadProgressListener {
      */
     fun onUpdate(key: String, progress: Int, read: Long, count: Long, done: Boolean)
 }
-
 
 interface OnDownLoadListener : DownLoadProgressListener {
 

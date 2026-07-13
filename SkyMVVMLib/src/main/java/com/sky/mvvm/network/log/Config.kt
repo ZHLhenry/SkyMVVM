@@ -2,12 +2,14 @@ package com.sky.mvvm.network.log
 import android.util.Log
 import com.elvishew.xlog.XLog
 import com.sky.mvvm.SkyMVVMLib
+
 /**
- * <p>{@code className: }</p>
- * <p>{@code author: Henry}</p>
- * <p>{@code date: 2025/2/23 10:23}</p>
- * <p>{@code description: 在使用日志拦截器之前,必须要先实现 LogProxy ，否则无法打印网络请求的 request 、response,所以，先调用这个方法}</p>
+ * @Class: Config
+ * @Author: Henry
+ * @Date: 2025/2/23 10:23
+ * @Description: 日志配置初始化，根据XLog启用状态选择日志输出方式
  */
+
 fun init() {
     val useXLog = SkyMVVMLib.getConfig()?.xLogLibEnabled == true
     LogManager.logProxy(object : LogProxy {

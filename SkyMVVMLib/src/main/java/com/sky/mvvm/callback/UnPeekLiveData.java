@@ -27,6 +27,14 @@ import androidx.lifecycle.Observer;
  * <p>
  * Create by KunMinX at 2020/7/21
  */
+
+/**
+ * @Class: UnPeekLiveData
+ * @Author: Henry
+ * @Date: 2026/07/13 10:22
+ * @Description: 防倒灌LiveData，解决页面重回时数据倒灌问题，基于KunMinX方案
+ */
+
 public class UnPeekLiveData<T> extends ProtectedUnPeekLiveData<T> {
 
     @Override

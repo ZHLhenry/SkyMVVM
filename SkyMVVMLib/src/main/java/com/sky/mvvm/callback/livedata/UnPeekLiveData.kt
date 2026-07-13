@@ -6,11 +6,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 
 /**
- * <p>{@code className: }</p>
- * <p>{@code author: Henry}</p>
- * <p>{@code date: 2025/2/23 10:15}</p>
- * <p>{@code description: 仅分发 owner observe后才新拿到的数据,可避免共享作用域 VM 下 liveData 被 observe 时旧数据倒灌的情况}</p>
+ * @Class: UnPeekLiveData
+ * @Author: Henry
+ * @Date: 2025/2/23 10:15
+ * @Description: 防倒灌LiveData，解决页面重回时数据倒灌问题，基于KunMinX方案
  */
+
 class UnPeekLiveData<T> : MutableLiveData<T>() {
     override fun observe(
         owner: LifecycleOwner,

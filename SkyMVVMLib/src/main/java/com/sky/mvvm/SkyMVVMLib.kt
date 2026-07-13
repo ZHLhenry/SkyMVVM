@@ -10,11 +10,12 @@ import com.elvishew.xlog.printer.Printer
 import com.sky.mvvm.network.log.LoggingInterceptor
 
 /**
- * <p>{@code className: SkyMVVMLib}</p>
- * <p>{@code author: Henry}</p>
- * <p>{@code date: 2025/6/30}</p>
- * <p>{@code description: SkyMVVM库初始化入口}</p>
+ * @Class: SkyMVVMLib
+ * @Author: Henry
+ * @Date: 2025/6/30
+ * @Description: SkyMVVM库入口，负责初始化日志、网络拦截器等核心配置
  */
+
 object SkyMVVMLib {
     private const val TAG = "SkyMVVMLib"
     @SuppressLint("StaticFieldLeak")

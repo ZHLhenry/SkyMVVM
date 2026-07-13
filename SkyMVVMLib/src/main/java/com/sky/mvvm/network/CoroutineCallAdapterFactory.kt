@@ -4,12 +4,14 @@ import kotlinx.coroutines.Deferred
 import retrofit2.*
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
+
 /**
- * <p>{@code className: }</p>
- * <p>{@code author: Henry}</p>
- * <p>{@code date: 2025/2/23 10:32}</p>
- * <p>{@code description: 文件描述}</p>
+ * @Class: CoroutineCallAdapterFactory
+ * @Author: Henry
+ * @Date: 2025/2/23 10:32
+ * @Description: Retrofit协程调用适配器，支持Deferred返回类型
  */
+
 class CoroutineCallAdapterFactory private constructor() : CallAdapter.Factory() {
     companion object {
         @JvmStatic

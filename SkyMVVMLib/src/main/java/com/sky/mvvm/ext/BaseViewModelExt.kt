@@ -17,6 +17,13 @@ import com.sky.mvvm.network.state.paresResult
 import kotlinx.coroutines.*
 
 /**
+ * @Class: BaseViewModelExt
+ * @Author: Henry
+ * @Date: 2026/07/13 10:23
+ * @Description: BaseViewModel扩展函数，封装网络请求、状态解析、协程启动等通用逻辑
+ */
+
+/**
  * 显示页面状态，这里有个技巧，成功回调在第一个，其后两个带默认值的回调可省
  * @param resultState 接口返回值
  * @param onLoading 加载中
@@ -82,7 +89,6 @@ fun <T> BaseVmFragment<*>.parseState(
         }
     }
 }
-
 
 /**
  * net request 不校验请求结果数据是否是成功

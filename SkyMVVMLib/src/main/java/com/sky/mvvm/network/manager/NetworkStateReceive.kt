@@ -7,11 +7,12 @@ import android.net.ConnectivityManager
 import com.sky.mvvm.util.NetworkUtil
 
 /**
- * <p>{@code className: }</p>
- * <p>{@code author: Henry}</p>
- * <p>{@code date: 2025/2/23 10:28}</p>
- * <p>{@code description: 文件描述}</p>
+ * @Class: NetworkStateReceive
+ * @Author: Henry
+ * @Date: 2025/2/23 10:28
+ * @Description: 网络状态广播接收器，监听网络连接变化并通知上层
  */
+
 @Suppress("DEPRECATION")
 class NetworkStateReceive : BroadcastReceiver() {
     var isInit = true

@@ -7,12 +7,14 @@ import java.io.File
 import java.io.RandomAccessFile
 import java.nio.channels.FileChannel
 import java.text.DecimalFormat
+
 /**
- * <p>{@code className: }</p>
- * <p>{@code author: Henry}</p>
- * <p>{@code date: 2025/2/23 10:38}</p>
- * <p>{@code description: 文件描述}</p>
+ * @Class: FileTool
+ * @Author: Henry
+ * @Date: 2025/2/23 10:38
+ * @Description: 文件下载工具类，处理文件写入、目录创建、字节格式化等
  */
+
 object FileTool {
 
     //定义GB的计算常量
@@ -135,7 +137,6 @@ object FileTool {
     ) =
         if (currentLength == 0L) responseBody.contentLength() else currentLength + responseBody.contentLength()
 
-
     /**
      * 获取下载地址
      * @param savePath String
@@ -150,7 +151,6 @@ object FileTool {
 
     }
 
-
     /**
      * 创建文件夹
      * @param downLoadPath String
@@ -163,7 +163,6 @@ object FileTool {
         }
         return true
     }
-
 
     /**
      * 格式化小数

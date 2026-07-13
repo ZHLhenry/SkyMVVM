@@ -4,11 +4,12 @@ import android.app.Activity
 import java.util.LinkedList
 
 /**
- * <p>{@code className: }</p>
- * <p>{@code author: Henry}</p>
- * <p>{@code date: 2025/2/23 08:58}</p>
- * <p>{@code description: 文件描述}</p>
+ * @Class: KtxActivityManger
+ * @Author: Henry
+ * @Date: 2025/2/23 08:58
+ * @Description: Activity栈管理器，管理Activity入栈出栈和批量关闭
  */
+
 object KtxActivityManger {
     //activity集合
     private val mActivityList = LinkedList<Activity>()

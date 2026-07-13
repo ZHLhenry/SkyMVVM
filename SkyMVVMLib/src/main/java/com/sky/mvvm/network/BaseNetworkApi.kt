@@ -3,12 +3,14 @@ import com.sky.mvvm.SkyMVVMLib
 import com.sky.mvvm.util.HttpsCerUtils
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
+
 /**
- * <p>{@code className: }</p>
- * <p>{@code author: Henry}</p>
- * <p>{@code date: 2025/2/23 10:30}</p>
- * <p>{@code description: 网络请求构建器基类}</p>
+ * @Class: BaseNetworkApi
+ * @Author: Henry
+ * @Date: 2025/2/23 10:30
+ * @Description: 网络API基类，封装Retrofit和OkHttpClient创建，支持HTTPS忽略证书模式
  */
+
 abstract class BaseNetworkApi {
 
     fun <T> getApi(serviceClass: Class<T>, baseUrl: String, type: Boolean): T {
@@ -42,7 +44,6 @@ abstract class BaseNetworkApi {
             builder = setHttpClientBuilder(builder)
             return builder.build()
         }
-
 
     /**
      * 配置https,忽略证书模式

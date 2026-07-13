@@ -5,11 +5,12 @@ import androidx.lifecycle.MutableLiveData
 import com.sky.mvvm.R
 
 /**
- * <p>{@code className: }</p>
- * <p>{@code author: Henry}</p>
- * <p>{@code date: 2025/2/23 10:38}</p>
- * <p>{@code description: 文件描述}</p>
+ * @Class: FileDownloaderExt
+ * @Author: Henry
+ * @Date: 2025/2/23 10:38
+ * @Description: 下载扩展函数，将下载回调转换为DownloadResultState LiveData
  */
+
 fun downLoadExt(content: Context, downloadResultState: MutableLiveData<DownloadResultState>): OnDownLoadListener {
     return object : OnDownLoadListener {
         override fun onDownLoadPrepare(key: String) {

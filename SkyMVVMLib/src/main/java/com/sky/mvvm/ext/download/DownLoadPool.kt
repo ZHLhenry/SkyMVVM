@@ -4,12 +4,14 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.isActive
 import java.util.concurrent.ConcurrentHashMap
+
 /**
- * <p>{@code className: }</p>
- * <p>{@code author: Henry}</p>
- * <p>{@code date: 2025/2/23 10:36}</p>
- * <p>{@code description: 文件描述}</p>
+ * @Class: DownLoadPool
+ * @Author: Henry
+ * @Date: 2025/2/23 10:36
+ * @Description: 下载任务池，管理下载协程、路径、监听器的映射关系
  */
+
 object DownLoadPool {
 
     private val scopeMap: ConcurrentHashMap<String, CoroutineScope> = ConcurrentHashMap()
@@ -34,7 +36,6 @@ object DownLoadPool {
         pathMap[key] = path
     }
 
-
     fun remove(key: String) {
         pause(key)
         scopeMap.remove(key)
@@ -42,7 +43,6 @@ object DownLoadPool {
         pathMap.remove(key)
         ShareDownLoadUtil.remove(key)
     }
-
 
     fun pause(key: String) {
         val scope = scopeMap[key]
@@ -54,7 +54,6 @@ object DownLoadPool {
     fun removeExitSp(key: String) {
         scopeMap.remove(key)
     }
-
 
     fun getScopeFromKey(key: String): CoroutineScope? {
         return scopeMap[key]

@@ -1,5 +1,12 @@
 package com.sky.mvvm.util
 
+/**
+ * @Class: UrlEncoderUtils
+ * @Author: Henry
+ * @Date: 2026/07/13 10:22
+ * @Description: URL编码工具类，判断字符串是否已被URLEncode编码
+ */
+
 class UrlEncoderUtils private constructor() {
     private val TAG = "UrlEncoderUtils"
     companion object {

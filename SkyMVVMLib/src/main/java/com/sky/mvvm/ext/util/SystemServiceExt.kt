@@ -21,12 +21,14 @@ import android.view.WindowManager
 import android.view.accessibility.AccessibilityManager
 import android.view.inputmethod.InputMethodManager
 import androidx.core.content.ContextCompat
+
 /**
- * <p>{@code className: }</p>
- * <p>{@code author: Henry}</p>
- * <p>{@code date: 2025/2/23 09:05}</p>
- * <p>{@code description: 文件描述}</p>
+ * @Class: SystemServiceExt
+ * @Author: Henry
+ * @Date: 2025/2/23 09:05
+ * @Description: 系统服务扩展函数，简化获取系统服务的调用
  */
+
 inline fun <reified T> Context.getSystemService(): T? =
     ContextCompat.getSystemService(this, T::class.java)
 

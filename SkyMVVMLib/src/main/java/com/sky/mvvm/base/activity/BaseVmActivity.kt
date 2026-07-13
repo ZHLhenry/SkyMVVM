@@ -12,12 +12,14 @@ import com.sky.mvvm.ext.util.notNull
 import com.sky.mvvm.network.manager.NetState
 import com.sky.mvvm.network.manager.NetworkStateManager
 import java.lang.reflect.ParameterizedType
+
 /**
- * <p>{@code className: }</p>
- * <p>{@code author: Henry}</p>
- * <p>{@code date: 2025/2/23 09:48}</p>
- * <p>{@code description: 文件描述}</p>
+ * @Class: BaseVmActivity
+ * @Author: Henry
+ * @Date: 2025/2/23 09:48
+ * @Description: MVVM架构Activity基类，封装ViewModel绑定、Loading弹窗、网络状态监听
  */
+
 abstract class BaseVmActivity<VM : BaseViewModel> : AppCompatActivity() {
     private val TAG = "BaseVmActivity"
 
@@ -57,7 +59,6 @@ abstract class BaseVmActivity<VM : BaseViewModel> : AppCompatActivity() {
      */
     open fun onNetworkStateChanged(netState: NetState) {}
 
-
     /**
      * 获取[ViewModel]
      */
@@ -68,7 +69,6 @@ abstract class BaseVmActivity<VM : BaseViewModel> : AppCompatActivity() {
             defaultViewModelCreationExtras
         )[vmClass]
     }
-
 
     /**
      * 获取泛型VM对应的类

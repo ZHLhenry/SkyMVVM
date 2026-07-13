@@ -10,12 +10,14 @@ import org.apache.http.conn.ConnectTimeoutException
 import org.json.JSONException
 import retrofit2.HttpException
 import java.net.ConnectException
+
 /**
- * <p>{@code className: }</p>
- * <p>{@code author: Henry}</p>
- * <p>{@code date: 2025/2/23 10:33}</p>
- * <p>{@code description: 根据异常返回相关的错误信息工具类}</p>
+ * @Class: ExceptionHandle
+ * @Author: Henry
+ * @Date: 2025/2/23 10:33
+ * @Description: 异常处理工具，将各类网络异常转换为统一的AppException
  */
+
 object ExceptionHandle {
 
     fun handleException(context: Context, e: Throwable?): AppException {

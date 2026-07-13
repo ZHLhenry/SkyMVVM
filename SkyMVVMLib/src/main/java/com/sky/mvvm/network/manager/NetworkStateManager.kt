@@ -3,11 +3,12 @@ package com.sky.mvvm.network.manager
 import com.sky.mvvm.callback.livedata.event.EventLiveData
 
 /**
- * <p>{@code className: }</p>
- * <p>{@code author: Henry}</p>
- * <p>{@code date: 2025/2/23 10:27}</p>
- * <p>{@code description: 文件描述}</p>
+ * @Class: NetworkStateManager
+ * @Author: Henry
+ * @Date: 2025/2/23 10:27
+ * @Description: 网络状态管理器，单例模式管理网络状态变化的EventLiveData
  */
+
 class NetworkStateManager private constructor() {
     val mNetworkStateCallback = EventLiveData<NetState>()
 

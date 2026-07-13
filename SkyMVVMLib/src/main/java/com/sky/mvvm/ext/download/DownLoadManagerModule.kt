@@ -7,11 +7,12 @@ import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 /**
- * <p>{@code className: }</p>
- * <p>{@code author: Henry}</p>
- * <p>{@code date: 2025/2/23 10:36}</p>
- * <p>{@code description: 注入下载}</p>
+ * @Class: DownLoadManagerModule
+ * @Author: Henry
+ * @Date: 2025/2/23 10:36
+ * @Description: DownLoadManager的Hilt依赖注入Module
  */
+
 @Module
 @InstallIn(SingletonComponent::class)
 object DownLoadManagerModule {

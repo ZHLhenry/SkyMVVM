@@ -9,12 +9,18 @@ import android.widget.ImageView
 import androidx.core.graphics.createBitmap
 
 /**
+ * @Class: ViewExt
+ * @Author: Henry
+ * @Date: 2026/07/13 10:23
+ * @Description: View扩展函数，提供显隐控制、防重复点击、View转Bitmap等能力
+ */
+
+/**
  * 设置view显示
  */
 fun View.visible() {
     visibility = View.VISIBLE
 }
-
 
 /**
  * 设置view占位隐藏
@@ -94,7 +100,6 @@ fun createBitmapSafely(width: Int, height: Int, config: Bitmap.Config, retryCoun
     }
 }
 
-
 /**
  * 防止重复点击事件 默认0.5秒内不可重复点击
  * @param interval 时间间隔 默认0.5秒
@@ -111,7 +116,6 @@ fun View.clickNoRepeat(interval: Long = 500, action: (view: View) -> Unit) {
         action(it)
     }
 }
-
 
 fun Any?.notNull(notNullAction: (value: Any) -> Unit, nullAction1: () -> Unit) {
     if (this != null) {

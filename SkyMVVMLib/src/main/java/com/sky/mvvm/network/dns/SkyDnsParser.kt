@@ -11,12 +11,12 @@ import java.net.UnknownHostException
 import java.nio.ByteBuffer
 
 /**
- * <p>{@code className: SkyDnsParser}</p>
- * <p>{@code author: Henry}</p>
- * <p>{@code date: 2026/6/30}</p>
- * <p>{@code description: VPN 环境下 DNS 解析失败的回退方案。
- * 优先使用系统 DNS，失败后通过 UDP 直连公共 DNS 服务器解析。</p>
+ * @Class: SkyDnsParser
+ * @Author: Henry
+ * @Date: 2026/6/30
+ * @Description: 自定义DNS解析器，系统DNS失败后自动切换备用DNS服务器
  */
+
 class SkyDnsParser(
     private val fallbackServers: List<InetAddress> = listOf(
         InetAddress.getByName("8.8.8.8"),       // Google DNS

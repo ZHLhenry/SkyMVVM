@@ -10,6 +10,13 @@ import java.net.NetworkInterface
 import java.net.SocketException
 import java.net.URL
 
+/**
+ * @Class: NetworkUtil
+ * @Author: Henry
+ * @Date: 2026/07/13 10:22
+ * @Description: 网络工具类，提供网络状态检测、IP获取、WiFi/3G判断等功能
+ */
+
 object NetworkUtil {
     private const val TAG = "NetworkUtil"
     private var url = "http://www.baidu.com"

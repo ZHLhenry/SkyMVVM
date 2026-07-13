@@ -26,6 +26,14 @@ import kotlin.reflect.KProperty
 /**
  * @github https://github.com/wuyr/ActivityMessenger
  */
+
+/**
+ * @Class: ActivityMessenger
+ * @Author: Henry
+ * @Date: 2026/07/13 10:22
+ * @Description: Activity跳转工具类，简化startActivity和startActivityForResult调用
+ */
+
 object ActivityMessenger {
     private val TAG = "ActivityMessenger"
     var sRequestCode = 0
@@ -542,12 +550,10 @@ fun <T> extraFrag(extraName: String): FragmentExtras<T?> = FragmentExtras(extraN
 fun <T> extraFrag(extraName: String, defaultValue: T): FragmentExtras<T> =
     FragmentExtras(extraName, defaultValue)
 
-
 fun <T> extraAct(extraName: String): ActivityExtras<T?> = ActivityExtras(extraName, null)
 
 fun <T> extraAct(extraName: String, defaultValue: T): ActivityExtras<T> =
     ActivityExtras(extraName, defaultValue)
-
 
 /**
  * 以下方法只是把ActivityMessenger里面的方法变成了扩展方法

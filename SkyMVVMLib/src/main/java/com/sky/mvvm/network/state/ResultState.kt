@@ -4,12 +4,14 @@ import androidx.lifecycle.MutableLiveData
 import com.sky.mvvm.network.AppException
 import com.sky.mvvm.network.BaseResponse
 import com.sky.mvvm.network.ExceptionHandle
+
 /**
- * <p>{@code className: }</p>
- * <p>{@code author: Henry}</p>
- * <p>{@code date: 2025/2/23 10:28}</p>
- * <p>{@code description: 自定义结果集封装类}</p>
+ * @Class: ResultState
+ * @Author: Henry
+ * @Date: 2025/2/23 10:28
+ * @Description: 网络请求结果密封类，封装Loading、Success、Error三种状态
  */
+
 sealed class ResultState<out T> {
     companion object {
         fun <T> onAppSuccess(data: T): ResultState<T> = Success(data)
