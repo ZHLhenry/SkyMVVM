@@ -54,6 +54,7 @@ dependencies {
     api(libs.skymvvm)
 //    api(project(":SkyMVVMLib"))
     api(libs.skymultistatelayout)
+    api(libs.skywidget)
 
     implementation(projects.core.model)
 }

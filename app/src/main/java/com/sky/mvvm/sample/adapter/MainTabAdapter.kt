@@ -29,9 +29,7 @@ class MainTabAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(
     override fun createFragment(position: Int): Fragment {
         try {
             return fragments!![position].newInstance() as Fragment
-        } catch (e: IllegalAccessException) {
-            e.printStackTrace()
-        } catch (e: InstantiationException) {
+        } catch (e: Exception) {
             e.printStackTrace()
         }
         return null!!
