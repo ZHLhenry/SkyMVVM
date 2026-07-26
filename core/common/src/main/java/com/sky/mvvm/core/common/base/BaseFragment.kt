@@ -91,6 +91,7 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding> : BaseVmDb
         super.onViewCreated(view, savedInstanceState)
         immersionBar {
             transparentStatusBar()
+            transparentNavigationBar()
             init()
         }
     }

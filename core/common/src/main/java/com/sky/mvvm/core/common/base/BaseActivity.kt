@@ -12,7 +12,7 @@ import com.sky.mvvm.core.common.ext.showLoadingExt
 /**
  * <p>{@code className: }</p>
  * <p>{@code author: Henry}</p>
- * <p>{@code date: 2025/2/23 15:31}</p>
+ * <p>{@code date: 2025/2/23 15:31</p>
  * <p>{@code description: 文件描述}</p>
  */
 abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding> : BaseVmDbActivity<VM, DB>() {
@@ -20,6 +20,7 @@ abstract class BaseActivity<VM : BaseViewModel, DB : ViewDataBinding> : BaseVmDb
         super.onCreate(savedInstanceState, persistentState)
         immersionBar{
             transparentStatusBar()
+            transparentNavigationBar()
             init()
         }
     }

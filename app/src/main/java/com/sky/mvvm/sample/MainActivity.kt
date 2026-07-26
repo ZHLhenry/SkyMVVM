@@ -27,19 +27,6 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
         mDatabind.mainVp.adapter = fragmentAdapter
         mDatabind.mainBnv.setupWithViewPager2(mDatabind.mainVp)
         mDatabind.mainVp.isUserInputEnabled = false
-//        mDatabind.mainBnv.setMenuDoubleClickListener(object : IMenuDoubleClickListener {
-//            override fun onDoubleClick(position: Int, menu: MenuItem) {
-//                when (menu.itemId) {
-//                    R.id.menu_home -> {
-//                        mDatabind.mainVp.setCurrentItem(0, false)
-//                    }
-//
-//                    R.id.menu_mine -> {
-//                        mDatabind.mainVp.setCurrentItem(1, false)
-//                    }
-//                }
-//            }
-//        })
         val bd: BadgeDrawable = mDatabind.mainBnv.realView.getOrCreateBadge(R.id.menu_home)
         bd.number = 9899
         bd.horizontalOffset = 12
