@@ -28,9 +28,9 @@ class DownLoadManager @Inject constructor() {
         .baseUrl("https://www.baidu.com")
         .client(
             HttpsCerUtils.trustAllCertificateClient.newBuilder()
-                .connectTimeout(10, TimeUnit.SECONDS)
-                .readTimeout(5, TimeUnit.SECONDS)
-                .writeTimeout(5, TimeUnit.SECONDS).build()
+                .connectTimeout(30, TimeUnit.SECONDS)
+                .readTimeout(60, TimeUnit.SECONDS)
+                .writeTimeout(30, TimeUnit.SECONDS).build()
         ).build()
 
     /** 正常http模式 */
@@ -38,9 +38,9 @@ class DownLoadManager @Inject constructor() {
         .baseUrl("https://www.baidu.com")
         .client(
             OkHttpClient.Builder()
-                .connectTimeout(10, TimeUnit.SECONDS)
-                .readTimeout(5, TimeUnit.SECONDS)
-                .writeTimeout(5, TimeUnit.SECONDS).build()
+                .connectTimeout(30, TimeUnit.SECONDS)
+                .readTimeout(60, TimeUnit.SECONDS)
+                .writeTimeout(30, TimeUnit.SECONDS).build()
         ).build()
 
     /**

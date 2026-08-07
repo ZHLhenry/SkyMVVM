@@ -65,23 +65,18 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 rootProject.name = "SkyMVVM"
 
-// 读取 local.properties 中的本地模块开关
 val localProps = Properties().apply {
     val file = File(rootDir, "local.properties")
     if (file.exists()) load(FileInputStream(file))
 }
-val useLocalSkyMVVM = localProps.getProperty("useLocalSkyMVVM", "false").toBoolean()
-val useLocalSkyWidget = localProps.getProperty("useLocalSkyWidget", "false").toBoolean()
+val useLocalSkyWidget = localProps.getProperty("useLocalSkyWidget")?.toBooleanStrictOrNull() ?: false
 
-// 将 SkyWidget 项目的 SkyWidgetLib 模块作为本地子项目引入（仅当 useLocalSkyWidget=true 时）
 if (useLocalSkyWidget) {
     include(":SkyWidgetLib")
     project(":SkyWidgetLib").projectDir = file("../SkyWidget/SkyWidgetLib")
 }
 
 include(":app")
-if (useLocalSkyMVVM) {
-    include(":SkyMVVMLib")
-}
 include(":core:common")
 include(":core:model")
+include(":SkyMVVMLib")

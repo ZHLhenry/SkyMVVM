@@ -6,13 +6,12 @@ plugins {
     alias(libs.plugins.sky.android.hilt)
 }
 
-// 读取 local.properties 中的本地模块开关
-val localProperties = Properties().apply {
-    val file = rootProject.file("local.properties")
+val localProps = Properties().apply {
+    val file = File(rootDir, "local.properties")
     if (file.exists()) load(FileInputStream(file))
 }
-val useLocalSkyMVVM = localProperties.getProperty("useLocalSkyMVVM", "false").toBoolean()
-val useLocalSkyWidget = localProperties.getProperty("useLocalSkyWidget", "false").toBoolean()
+val useLocalSkyMVVM = localProps.getProperty("useLocalSkyMVVM")?.toBooleanStrictOrNull() ?: false
+val useLocalSkyWidget = localProps.getProperty("useLocalSkyWidget")?.toBooleanStrictOrNull() ?: false
 
 android {
     namespace = "com.sky.mvvm.core.common"
@@ -60,6 +59,8 @@ dependencies {
     api(libs.moshi)
     ksp(libs.moshi.codegen)
     api(libs.moshi.converter)
+
+    api(libs.appupdate)
 
     api(libs.skymultistatelayout)
     // SkyMVVM: 根据 useLocalSkyMVVM 开关切换本地/远程依赖

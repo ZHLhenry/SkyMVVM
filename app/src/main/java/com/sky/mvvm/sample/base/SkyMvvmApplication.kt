@@ -23,6 +23,7 @@ import com.sky.mvvm.sample.BuildConfig
 import com.sky.mvvm.sample.feature.other.ui.LoginActivity
 import com.sky.mvvm.util.ActivityMessenger
 import com.sky.widget.iconfont.SkyIconFontsLib
+import com.sky.widget.tools.qrcode.SkyQRCode
 import dagger.hilt.android.HiltAndroidApp
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -89,6 +90,7 @@ class SkyMvvmApplication : BaseApplication() {
         // JSON 文件为 iconfont.cn 导出的标准格式（含 css_prefix_text 和 glyphs 字段）
 //        SkyIconFontsLib.initRegister(this, "fonts/testSky_iconfont.ttf")
         SkyIconFontsLib.initRegister(this)
+        SkyQRCode.init(this)
 
         // 监听应用生命周期，进入后台时清理资源
         KtxAppLifeObserver.isForeground.observe(ProcessLifecycleOwner.get()) { isForeground ->

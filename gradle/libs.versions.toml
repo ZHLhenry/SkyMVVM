@@ -8,20 +8,21 @@ material = "1.13.0"
 activity = "1.13.0"
 constraintlayout = "2.2.1"
 hilt = "2.60.1"
-lifecycleRuntimeKtx = "2.10.0"
+lifecycleRuntimeKtx = "2.11.0"
 persistentcookiejar = "v1.0.1"
 retrofitVersion = "3.0.0"
 databindingRuntime = "9.3.1"
-skywidget = "1.1.2"
+skywidget = "1.1.4"
 skymvvm = "1.2.0"
 skymultistatelayout = "1.0.1"
-skyBuildLogic = "1.2.1"
+skyBuildLogic = "1.2.3"
 chucker = "4.3.1"
 moshi = "1.15.2"
 gsonfactory = "10.5"
 gson = "2.14.0"
 xlog = "1.11.1"
 iconics = "5.5.0"
+appupdate = "4.3.6"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -57,6 +58,7 @@ gsonfactory = { module = "com.github.getActivity:GsonFactory", version.ref = "gs
 gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
 xlog = { module = "com.elvishew:xlog", version.ref = "xlog" }
 iconics-core = { group = "com.mikepenz", name = "iconics-core", version.ref = "iconics" }
+appupdate = { group = "io.github.azhon", name = "appupdate", version.ref = "appupdate" }
 
 skywidget = { module = "com.sky.lib:SkyWidget", version.ref = "skywidget" }
 skymvvm = { module = "com.sky.lib:SkyMVVM", version.ref = "skymvvm" }
