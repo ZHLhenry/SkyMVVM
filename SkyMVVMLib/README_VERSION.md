@@ -1,3 +1,10 @@
+## [v1.2.1] - 2026-09-12
+- 升级构建工具版本：
+  - compileSdk: `36` → `37`
+  - Gradle: `9.6.1` → `9.7.1`
+- 升级相关依赖库版本
+- 修复 `BaseFragment` 隐藏软键盘时使用已废弃 `InputMethodManager.HIDE_NOT_ALWAYS` 常量的警告
+
 ## [v1.2.0] - 2026-07-09
 - 修正资源标识符拼写错误：`sky_mmvmlib` → `sky_mvvmlib`
 - 完善 README.md 文档，新增版本要求、依赖版本信息、模块结构等说明

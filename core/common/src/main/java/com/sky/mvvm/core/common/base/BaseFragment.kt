@@ -80,7 +80,7 @@ abstract class BaseFragment<VM : BaseViewModel, DB : ViewDataBinding> : BaseVmDb
                     act.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
                 inputMethodManager.hideSoftInputFromWindow(
                     view.windowToken,
-                    InputMethodManager.HIDE_NOT_ALWAYS
+                    0
                 )
             }
         }

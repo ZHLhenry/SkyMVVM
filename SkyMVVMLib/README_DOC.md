@@ -50,14 +50,14 @@
 | 项目 | 最低版本 |
 |------|----------|
 | **minSdk** | 24（Android 7.0） |
-| **compileSdk** | 36 |
+| **compileSdk** | 37 |
 | **targetSdk** | 35 |
 | **Kotlin** | 2.2.10 |
 | **AGP（Android Gradle Plugin）** | 9.2.1 |
-| **Gradle** | 9.6.1 |
+| **Gradle** | 9.7.1 |
 | **JDK** | 17+ |
 
-> **注意**：宿主 App 的 `compileSdk` 必须 **≥ 36**，否则 AAR 依赖会出现元数据版本冲突。
+> **注意**：宿主 App 的 `compileSdk` 必须 **≥ 37**，否则 AAR 依赖会出现元数据版本冲突。
 
 ---
 
