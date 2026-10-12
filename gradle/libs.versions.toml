@@ -1,24 +1,24 @@
 [versions]
-coreKtx = "1.19.0"
+coreKtx = "1.19.1"
 junit = "4.13.2"
 junitVersion = "1.3.0"
 espressoCore = "3.7.0"
-appcompat = "1.7.1"
+appcompat = "1.8.0"
 material = "1.13.0"
 activity = "1.13.0"
-constraintlayout = "2.2.1"
+constraintlayout = "2.2.2"
 hilt = "2.60.1"
 lifecycleRuntimeKtx = "2.11.0"
 persistentcookiejar = "v1.0.1"
 retrofitVersion = "3.0.0"
-databindingRuntime = "9.4.0"
+databindingRuntime = "9.4.1"
 skywidget = "1.1.5"
-skymvvm = "1.2.1"
+skymvvm = "1.2.2"
 skymultistatelayout = "1.0.1"
-skyBuildLogic = "1.2.4"
+skyBuildLogic = "1.2.8"
 chucker = "4.3.1"
 moshi = "1.15.2"
-gsonfactory = "10.5"
+gsonfactory = "10.8"
 gson = "2.14.0"
 xlog = "1.11.1"
 iconics = "5.6.0"
@@ -57,7 +57,6 @@ moshi-converter = { module = "com.squareup.retrofit2:converter-moshi", version.r
 gsonfactory = { module = "com.github.getActivity:GsonFactory", version.ref = "gsonfactory" }
 gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
 xlog = { module = "com.elvishew:xlog", version.ref = "xlog" }
-iconics-core = { group = "com.mikepenz", name = "iconics-core", version.ref = "iconics" }
 appupdate = { group = "io.github.azhon", name = "appupdate", version.ref = "appupdate" }
 
 skywidget = { module = "com.sky.lib:SkyWidget", version.ref = "skywidget" }
