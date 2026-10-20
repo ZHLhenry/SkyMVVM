@@ -48,9 +48,8 @@ public class ProtectedUnPeekLiveData<T> extends LiveData<T> {
     private final HashMap<Integer, Boolean> observers = new HashMap<>();
 
     public void observeInActivity(@NonNull AppCompatActivity activity, @NonNull Observer<? super T> observer) {
-        LifecycleOwner owner = activity;
         Integer storeId = System.identityHashCode(activity.getViewModelStore());
-        observe(storeId, owner, observer);
+        observe(storeId, activity, observer);
     }
 
     public void observeInFragment(@NonNull Fragment fragment, @NonNull Observer<? super T> observer) {
@@ -63,12 +62,10 @@ public class ProtectedUnPeekLiveData<T> extends LiveData<T> {
                          @NonNull LifecycleOwner owner,
                          @NonNull Observer<? super T> observer) {
 
-        if (observers.get(storeId) == null) {
-            observers.put(storeId, true);
-        }
+        observers.putIfAbsent(storeId, true);
 
         super.observe(owner, t -> {
-            if (!observers.get(storeId)) {
+            if (Boolean.FALSE.equals(observers.get(storeId))) {
                 observers.put(storeId, true);
                 if (t != null || isAllowNullValue) {
                     observer.onChanged(t);

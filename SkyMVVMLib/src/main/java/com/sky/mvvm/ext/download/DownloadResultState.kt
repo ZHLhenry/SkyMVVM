@@ -4,7 +4,7 @@ package com.sky.mvvm.ext.download
  * @Class: DownloadResultState
  * @Author: Henry
  * @Date: 2025/2/23 10:37
- * @Description: 下载状态密封类，封装等待、进度、成功、暂停、错误状态
+ * @Description: 下载状态密封类，封装等待、进度、成功、暂停、取消、失败状态
  */
 
 sealed class DownloadResultState {
@@ -20,7 +20,9 @@ sealed class DownloadResultState {
 
         fun onPause(): DownloadResultState = Pause
 
-        fun onError(errorMsg: String): DownloadResultState = Error(errorMsg)
+        fun onCancel(): DownloadResultState = Cancel
+
+        fun onFailure(errorMsg: String): DownloadResultState = Failure(errorMsg)
     }
 
     object Pending : DownloadResultState()
@@ -29,5 +31,6 @@ sealed class DownloadResultState {
 
     data class Success(val filePath: String, val totalBytes: Long) : DownloadResultState()
     object Pause : DownloadResultState()
-    data class Error(val errorMsg: String) : DownloadResultState()
+    object Cancel : DownloadResultState()
+    data class Failure(val errorMsg: String) : DownloadResultState()
 }

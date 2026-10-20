@@ -71,7 +71,12 @@ class MineFragment : BaseFragment<MineViewModel, FragmentMineBinding>() {
                     mDatabind.tvDownloadStatus.text = "下载已暂停"
                     mDatabind.btnDownload.text = "继续下载"
                 }
-                is DownloadResultState.Error -> {
+                is DownloadResultState.Cancel -> {
+                    mDatabind.progressBar.visibility = View.GONE
+                    mDatabind.tvDownloadStatus.text = "下载已取消"
+                    mDatabind.btnDownload.text = "重新下载"
+                }
+                is DownloadResultState.Failure -> {
                     mDatabind.progressBar.visibility = View.GONE
                     mDatabind.tvDownloadStatus.text = "下载失败: ${state.errorMsg}"
                     mDatabind.btnDownload.text = "重新下载"
@@ -85,6 +90,11 @@ class MineFragment : BaseFragment<MineViewModel, FragmentMineBinding>() {
                 url = "https://cdn.jsdelivr.net/gh/bitbar/test-samples@master/apps/android/bitbar-sample-app.apk",
                 saveName = "bitbar-sample-app.apk"
             )
+        }
+
+        // 点击取消按钮，验证下载取消状态回调
+        mDatabind.btnCancelDownload.setOnClickListener {
+            mViewModel.cancelDownload()
         }
     }
 

@@ -26,11 +26,14 @@ interface OnDownLoadListener : DownLoadProgressListener {
     fun onDownLoadPrepare(key: String)
 
     //下载失败
-    fun onDownLoadError(key: String, throwable: Throwable)
+    fun onDownLoadFailure(key: String, throwable: Throwable)
 
     //下载成功
     fun onDownLoadSuccess(key: String, path: String, size: Long)
 
-    //下载暂停
+    //下载暂停（保留断点，可续传）
     fun onDownLoadPause(key: String)
+
+    //下载取消（删除已下载文件，不可续传）
+    fun onDownLoadCancel(key: String) {}
 }

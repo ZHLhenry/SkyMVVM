@@ -3,8 +3,10 @@ package com.sky.mvvm.ext.download
 import android.os.Looper
 import com.sky.mvvm.ext.util.logI
 import com.sky.mvvm.util.HttpsCerUtils
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.NonCancellable
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
@@ -72,12 +74,25 @@ class DownLoadManager @Inject constructor() {
      * @param key String 取消的标识
      */
     fun cancel(key: String) {
+        if (DownLoadPool.isFinished(key)) {
+            //任务已成功或失败结束，不再回调取消
+            DownLoadPool.remove(key)
+            return
+        }
         val path = DownLoadPool.getPathFromKey(key)
         if (path != null) {
             val file = File(path)
             if (file.exists()) {
                 file.delete()
             }
+        }
+        val scope = DownLoadPool.getScopeFromKey(key)
+        if (scope != null && scope.isActive) {
+            //下载进行中：标记取消，由下载协程的取消出口统一回调onDownLoadCancel
+            DownLoadPool.markCancelled(key)
+        } else {
+            //没有活跃任务时直接回调取消状态
+            DownLoadPool.getListenerFromKey(key)?.onDownLoadCancel(key)
         }
         DownLoadPool.remove(key)
     }
@@ -140,17 +155,19 @@ class DownLoadManager @Inject constructor() {
             "key $tag 已经在队列中 但是已经不再活跃 remove".logI()
             DownLoadPool.removeExitSp(tag)
         }
+        //清理上一次任务遗留的取消/结束标记
+        DownLoadPool.resetState(tag)
 
         if (saveName.isEmpty()) {
             withContext(Dispatchers.Main) {
-                loadListener.onDownLoadError(tag, Throwable("save name is Empty"))
+                loadListener.onDownLoadFailure(tag, Throwable("save name is Empty"))
             }
             return
         }
 
         if (Looper.getMainLooper().thread == Thread.currentThread()) {
             withContext(Dispatchers.Main) {
-                loadListener.onDownLoadError(tag, Throwable("current thread is in main thread"))
+                loadListener.onDownLoadFailure(tag, Throwable("current thread is in main thread"))
             }
             return
         }
@@ -184,13 +201,11 @@ class DownLoadManager @Inject constructor() {
                 retrofitBuilder.create(DownLoadService::class.java)
                     .downloadFile("bytes=$currentLength-", url)
             }
-//            val response = retrofitBuilder.create(DownLoadService::class.java)
-//                .downloadFile("bytes=$currentLength-", url)
             val responseBody = response.body()
             if (responseBody == null) {
                 "responseBody is null".logI()
                 withContext(Dispatchers.Main) {
-                    loadListener.onDownLoadError(
+                    loadListener.onDownLoadFailure(
                         key = tag,
                         throwable = Throwable("responseBody is null please check download url")
                     )
@@ -198,17 +213,50 @@ class DownLoadManager @Inject constructor() {
                 DownLoadPool.remove(tag)
                 return
             }
+            //按响应码校准断点位置：只有206才表示服务器支持Range续传
+            val startLength = when (response.code()) {
+                206 -> currentLength
+                200 -> {
+                    if (currentLength > 0L) {
+                        //服务器忽略Range返回全量，删除旧文件后从头下载，避免文件损坏
+                        File("$savePath/$saveName").delete()
+                        ShareDownLoadUtil.remove(tag)
+                    }
+                    0L
+                }
+                else -> {
+                    responseBody.close()
+                    withContext(Dispatchers.Main) {
+                        loadListener.onDownLoadFailure(
+                            key = tag,
+                            throwable = Throwable("download failed, http code ${response.code()}")
+                        )
+                    }
+                    DownLoadPool.remove(tag)
+                    return
+                }
+            }
             FileTool.downToFile(
                 tag,
                 savePath,
                 saveName,
-                currentLength,
+                startLength,
                 responseBody,
                 loadListener
             )
         } catch (throwable: Throwable) {
+            if (throwable is CancellationException) {
+                if (!DownLoadPool.isFinished(tag) && DownLoadPool.consumeCancelled(tag)) {
+                    //主动取消触发的协程取消，在不可取消的主线程上下文中回调
+                    withContext(NonCancellable + Dispatchers.Main) {
+                        loadListener.onDownLoadCancel(tag)
+                    }
+                }
+                //暂停或取消导致的协程异常，不作为下载失败回调
+                throw throwable
+            }
             withContext(Dispatchers.Main) {
-                loadListener.onDownLoadError(key = tag, throwable = throwable)
+                loadListener.onDownLoadFailure(key = tag, throwable = throwable)
             }
             DownLoadPool.remove(tag)
         }

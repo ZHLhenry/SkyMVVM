@@ -47,7 +47,7 @@ class SkyDownloadManager : BaseHttpDownloadManager() {
                             trySend(DownloadStatus.Start)
                         }
 
-                        override fun onDownLoadError(key: String, throwable: Throwable) {
+                        override fun onDownLoadFailure(key: String, throwable: Throwable) {
                             trySend(DownloadStatus.Error(throwable))
                         }
 
@@ -56,6 +56,10 @@ class SkyDownloadManager : BaseHttpDownloadManager() {
                         }
 
                         override fun onDownLoadPause(key: String) {
+                            trySend(DownloadStatus.Cancel)
+                        }
+
+                        override fun onDownLoadCancel(key: String) {
                             trySend(DownloadStatus.Cancel)
                         }
 

@@ -22,6 +22,12 @@ object DownLoadPool {
     //监听
     private val listenerHashMap: ConcurrentHashMap<String, OnDownLoadListener> = ConcurrentHashMap()
 
+    //主动取消的下载标识，用于在协程取消出口回调onDownLoadCancel
+    private val cancelledKeys: MutableSet<String> = ConcurrentHashMap.newKeySet()
+
+    //已成功/失败结束的下载标识，避免结束后再回调取消
+    private val finishedKeys: MutableSet<String> = ConcurrentHashMap.newKeySet()
+
     fun add(key: String, job: CoroutineScope) {
         scopeMap[key] = job
     }
@@ -53,6 +59,32 @@ object DownLoadPool {
 
     fun removeExitSp(key: String) {
         scopeMap.remove(key)
+    }
+
+    //标记下载被主动取消
+    fun markCancelled(key: String) {
+        cancelledKeys.add(key)
+    }
+
+    //消费取消标记
+    fun consumeCancelled(key: String): Boolean {
+        return cancelledKeys.remove(key)
+    }
+
+    //标记下载已结束（成功或失败）
+    fun markFinished(key: String) {
+        finishedKeys.add(key)
+    }
+
+    //是否已结束（成功或失败）
+    fun isFinished(key: String): Boolean {
+        return finishedKeys.contains(key)
+    }
+
+    //清理上一次任务遗留的取消/结束标记
+    fun resetState(key: String) {
+        cancelledKeys.remove(key)
+        finishedKeys.remove(key)
     }
 
     fun getScopeFromKey(key: String): CoroutineScope? {

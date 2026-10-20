@@ -18,11 +18,11 @@ fun downLoadExt(content: Context, downloadResultState: MutableLiveData<DownloadR
             downloadResultState.postValue(DownloadResultState.onPending())
         }
 
-        override fun onDownLoadError(key: String, throwable: Throwable) {
-            //下载错误
+        override fun onDownLoadFailure(key: String, throwable: Throwable) {
+            //下载失败
             downloadResultState.postValue(
-                DownloadResultState.onError(
-                    throwable.message ?: content.getString(R.string.sky_mvvmlib_download_error)
+                DownloadResultState.onFailure(
+                    throwable.message ?: content.getString(R.string.sky_mvvmlib_download_failure)
                 )
             )
         }
@@ -35,6 +35,11 @@ fun downLoadExt(content: Context, downloadResultState: MutableLiveData<DownloadR
         override fun onDownLoadPause(key: String) {
             //下载暂停
             downloadResultState.postValue(DownloadResultState.onPause())
+        }
+
+        override fun onDownLoadCancel(key: String) {
+            //下载取消
+            downloadResultState.postValue(DownloadResultState.onCancel())
         }
 
         override fun onUpdate(key: String, progress: Int, read: Long, count: Long, done: Boolean) {

@@ -820,8 +820,9 @@ downloadState.observe(this) { state ->
             // state.filePath 文件路径
             // state.totalBytes 文件大小
         }
-        is DownloadResultState.Pause -> { /* 下载暂停 */ }
-        is DownloadResultState.Error -> {
+        is DownloadResultState.Pause -> { /* 下载暂停（保留断点） */ }
+        is DownloadResultState.Cancel -> { /* 下载取消（文件已删除） */ }
+        is DownloadResultState.Failure -> {
             // state.errorMsg 错误信息
         }
     }
@@ -831,20 +832,24 @@ downloadState.observe(this) { state ->
 ### 暂停/取消下载
 
 ```kotlin
-downloadManager.pause("apk_update")      // 暂停
-downloadManager.cancel("apk_update")     // 取消（删除已下载文件）
+downloadManager.pause("apk_update")      // 暂停（保留断点，可续传，回调 onDownLoadPause）
+downloadManager.cancel("apk_update")     // 取消（删除已下载文件，不可续传，回调 onDownLoadCancel）
 downloadManager.doDownLoadCancelAll()    // 取消所有下载
 downloadManager.doDownLoadPauseAll()     // 暂停所有下载
 ```
+
+> **说明**：暂停会保留断点记录，可续传；取消会删除已下载文件并清空断点，不可续传。暂停与取消均不会触发失败回调；已结束的任务再次取消也不会触发回调。
+> 续传时服务端返回 `206` 才继续断点写入，若返回 `200` 则删除旧文件从头下载；响应头缺少有效 `Content-Length`（如 chunked）或下载字节数不完整时，按失败处理。
 
 ### 自定义下载监听
 
 ```kotlin
 val listener = object : OnDownLoadListener {
     override fun onDownLoadPrepare(key: String) { /* 准备开始 */ }
-    override fun onDownLoadError(key: String, throwable: Throwable) { /* 失败 */ }
+    override fun onDownLoadFailure(key: String, throwable: Throwable) { /* 失败 */ }
     override fun onDownLoadSuccess(key: String, path: String, size: Long) { /* 成功 */ }
-    override fun onDownLoadPause(key: String) { /* 暂停 */ }
+    override fun onDownLoadPause(key: String) { /* 暂停（保留断点） */ }
+    override fun onDownLoadCancel(key: String) { /* 取消（删除已下载文件） */ }
     override fun onUpdate(key: String, progress: Int, read: Long, count: Long, done: Boolean) {
         // 进度更新
     }
@@ -1133,7 +1138,7 @@ val age: Int? = intent.get("age")
     <string name="sky_mvvmlib_exception_timeout_error">网络连接超时，请稍后重试</string>
 
     <!-- 下载提示 -->
-    <string name="sky_mvvmlib_download_error">下载错误</string>
+    <string name="sky_mvvmlib_download_failure">下载失败</string>
 
     <!-- 加载提示 -->
     <string name="sky_mvvmlib_loading_message">请求网络中</string>

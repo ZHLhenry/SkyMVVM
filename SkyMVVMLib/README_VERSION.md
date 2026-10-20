@@ -1,3 +1,13 @@
+## [v1.2.3] - 2026-10-20
+- 下载状态重构：
+  - `DownloadResultState.Error` → `DownloadResultState.Failure`，新增 `DownloadResultState.Cancel`
+  - `OnDownLoadListener.onDownLoadError` → `onDownLoadFailure`，新增 `onDownLoadCancel`（默认为空实现）
+- 完善取消/结束标记管理：仅进行中的任务回调 `onDownLoadCancel`，已结束任务不再误触发；暂停/取消不再误报失败
+- 断点续传增强：按响应码 `206`/`200` 校准续传起点，断点记录节流写盘（500ms），异常退出保留断点；无效 `Content-Length` 或下载不完整时回调失败
+- `FileTool` 优化：`bytes2kb` 固定 `Locale.US` 格式化、`getBasePath` 简化、流资源统一关闭
+- `ProtectedUnPeekLiveData` 判空与状态判断优化；`ViewExt.toBitmap` 改用 `withSave`
+- 字符串资源 `sky_mvvmlib_download_error` 重命名为 `sky_mvvmlib_download_failure`
+
 ## [v1.2.2] - 2026-10-12
 - 升级构建工具版本：
   - Gradle: `9.7.1` → `9.8.1`

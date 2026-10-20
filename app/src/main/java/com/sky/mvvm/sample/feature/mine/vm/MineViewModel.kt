@@ -52,9 +52,9 @@ class MineViewModel @Inject constructor(
                         _downloadResultState.postValue(DownloadResultState.onPending())
                     }
 
-                    override fun onDownLoadError(key: String, throwable: Throwable) {
+                    override fun onDownLoadFailure(key: String, throwable: Throwable) {
                         _downloadResultState.postValue(
-                            DownloadResultState.onError(throwable.message ?: "下载失败")
+                            DownloadResultState.onFailure(throwable.message ?: "下载失败")
                         )
                     }
 
@@ -64,6 +64,10 @@ class MineViewModel @Inject constructor(
 
                     override fun onDownLoadPause(key: String) {
                         _downloadResultState.postValue(DownloadResultState.onPause())
+                    }
+
+                    override fun onDownLoadCancel(key: String) {
+                        _downloadResultState.postValue(DownloadResultState.onCancel())
                     }
 
                     override fun onUpdate(key: String, progress: Int, read: Long, count: Long, done: Boolean) {
