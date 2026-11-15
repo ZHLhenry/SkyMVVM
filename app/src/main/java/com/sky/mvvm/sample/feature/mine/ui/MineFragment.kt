@@ -13,7 +13,9 @@ import com.sky.mvvm.ext.download.FileTool
 import com.sky.mvvm.sample.R
 import com.sky.mvvm.sample.databinding.FragmentMineBinding
 import com.sky.mvvm.sample.feature.mine.vm.MineViewModel
+import com.sky.mvvm.sample.feature.nav.NavContainerActivity
 import com.sky.mvvm.sample.feature.other.ui.LoginActivity
+import com.sky.mvvm.sample.feature.tab.TabContainerActivity
 import com.sky.widget.iconfont.SkyIconFontsLib
 import com.azhon.appupdate.manager.DownloadManager
 import com.sky.mvvm.sample.download.SkyDownloadManager
@@ -33,6 +35,14 @@ class MineFragment : BaseFragment<MineViewModel, FragmentMineBinding>() {
         mDatabind.statelayout.showContent()
         mDatabind.btnLogin.setOnClickListener {
             startActivity(Intent(requireContext(), LoginActivity::class.java))
+        }
+        // 跳转到单 Activity + 多 Fragment（Navigation）示例
+        mDatabind.btnNavigationDemo.setOnClickListener {
+            startActivity(Intent(requireContext(), NavContainerActivity::class.java))
+        }
+        // 跳转到 Tab 多返回栈（show/hide）示例
+        mDatabind.btnTabDemo.setOnClickListener {
+            startActivity(Intent(requireContext(), TabContainerActivity::class.java))
         }
         // 通过 SkyIconFontsLib.style() 解析 {prefix_name} 格式的图标标记
         mDatabind.tvIcon.text = SkyIconFontsLib.style(

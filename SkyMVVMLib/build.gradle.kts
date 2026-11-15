@@ -21,6 +21,10 @@ dependencies {
     // liveData
     api(libs.androidx.lifecycle.lifecycle.livedata.ktx)
 
+    // navigation
+    api(libs.androidx.navigation.fragment.ktx)
+    api(libs.androidx.navigation.ui.ktx)
+
     //retrofit
     api(libs.retrofit2.retrofit)
     api(libs.persistentcookiejar)

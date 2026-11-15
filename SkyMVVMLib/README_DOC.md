@@ -16,6 +16,12 @@
   - [Activity 基类](#2-activity-基类)
   - [Fragment 基类](#3-fragment-基类)
   - [BaseViewModel](#4-baseviewmodel)
+- [单 Activity 导航](#单-activity-导航)
+  - [单 NavHost 容器](#1-basecontaineractivity--单-navhost-容器)
+  - [多 Tab 容器](#2-basetabcontaineractivity--多-tab-容器)
+  - [导航跳转与返回栈 API](#3-导航跳转与返回栈-api)
+  - [图作用域 ViewModel](#4-图作用域-viewmodel)
+  - [Fragment 结果回传](#5-fragment-结果回传)
 - [网络请求模块](#网络请求模块)
   - [BaseNetworkApi](#1-basenetworkapi--retrofit-构建器)
   - [BaseResponse 脱壳](#2-baseresponse-响应脱壳)
@@ -70,9 +76,10 @@
 | 异步框架 | Kotlin Coroutines + Flow | — |
 | 网络请求 | Retrofit2 + OkHttp | 3.0.0 |
 | 数据解析 | Gson + GsonFactory | 2.14.0 / 10.5 |
-| 生命周期 | Lifecycle + LiveData | 2.10.0 |
+| 生命周期 | Lifecycle + LiveData | 2.11.0 |
 | 视图绑定 | ViewBinding / DataBinding | — |
 | 事件总线 | SharedFlow（自封装 SkyFlow） | — |
+| 导航 | Navigation（Fragment） | 2.10.2 |
 | 日志框架 | XLog（可选，compileOnly） | 1.11.1 |
 
 ---
@@ -91,6 +98,11 @@ com.sky.mvvm
 │   │   ├── BaseVmFragment       # 普通 MVVM Fragment（支持懒加载）
 │   │   ├── BaseVmDbFragment     # DataBinding Fragment
 │   │   └── BaseVmVbFragment     # ViewBinding Fragment
+│   ├── container/               # 单 Activity 容器基类（基于 Navigation）
+│   │   ├── BaseContainerActivity   # 单 NavHost 容器（页面流）
+│   │   └── BaseTabContainerActivity # 多 NavHost 容器（show/hide 多返回栈）
+│   ├── nav/                     # Navigation 导航扩展
+│   │   └── FragmentNavExt       # 跳转/返回栈/图作用域 VM/结果回传
 │   └── viewmodel/
 │       └── BaseViewModel        # ViewModel 基类，内置 Loading 状态通知
 │
@@ -444,6 +456,127 @@ class MainViewModel @Inject constructor() : BaseViewModel() {
 - `loadingChange.showDialog`：`EventLiveData<String>`，通知 UI 显示加载框，值为提示消息
 - `loadingChange.dismissDialog`：`EventLiveData<Boolean>`，通知 UI 隐藏加载框
 - 初始化时自动检查 `SkyMVVMLib` 是否已初始化
+
+---
+
+## 单 Activity 导航
+
+SkyMVVMLib 内置基于官方 `androidx.navigation` 的「单 Activity + 多 Fragment」导航能力，提供两种容器基类与一套导航扩展函数。
+
+> **前提**：库已通过 `api` 导出 Navigation 依赖，宿主 App 无需额外添加依赖。
+
+### 1. BaseContainerActivity — 单 NavHost 容器
+
+适合「页面流」场景（如 登录 → 首页 → 详情），所有页面共享一个导航图。
+
+```kotlin
+@AndroidEntryPoint
+class MainActivity : BaseContainerActivity<MainViewModel>() {
+    override fun navGraphId() = R.navigation.nav_graph
+
+    override fun onContainerReady(savedInstanceState: Bundle?) {
+        // 容器就绪后做额外初始化（可选）
+    }
+}
+```
+
+**特性**：
+
+- 内置 `FragmentContainerView(NavHostFragment)`，子类只需实现 `navGraphId()`
+- 暴露 `navController` 供子类做导航操作
+- 自动处理 Toolbar 返回箭头（`onSupportNavigateUp`）
+- 系统返回键由 NavHostFragment 自动分发，无需额外处理
+
+### 2. BaseTabContainerActivity — 多 Tab 容器
+
+适合「底部导航」场景，每个 Tab 拥有独立导航图与返回栈，通过 show/hide 切换、视图不销毁（适用于 WebView、地图、视频等需保留视图状态的场景）。
+
+```kotlin
+@AndroidEntryPoint
+class MainActivity : BaseTabContainerActivity<MainViewModel>() {
+    override fun layoutId() = R.layout.activity_main          // FragmentContainerView + BottomNavigationView
+    override fun containerId() = R.id.nav_host_container
+
+    override fun tabItems() = listOf(
+        TabItem("home", R.navigation.nav_home),
+        TabItem("mine", R.navigation.nav_mine)
+    )
+
+    override fun initView(savedInstanceState: Bundle?) {
+        super.initView(savedInstanceState)   // 默认展示第一个 Tab
+        findViewById<BottomNavigationView>(R.id.bottom_nav).setOnItemSelectedListener { item ->
+            showTab(tagOf(item.itemId))      // show/hide 切换
+            true
+        }
+    }
+}
+```
+
+| 成员 | 说明 |
+|------|------|
+| `tabItems()` | Tab 列表，顺序即展示顺序，首个为默认 Tab |
+| `containerId()` | 承载所有 NavHostFragment 的容器 View id |
+| `showTab(tag)` | 切换 Tab（show/hide，不销毁视图） |
+| `navControllerOf(tag)` | 获取指定 Tab 的导航控制器 |
+
+### 3. 导航跳转与返回栈 API
+
+对 Fragment 提供以下扩展函数（`com.sky.mvvm.base.nav`）：
+
+| 函数 | 作用 |
+|------|------|
+| `navigateTo(destId, vararg params)` | 前进跳转（携带参数） |
+| `popBack()` | 返回上一页 |
+| `popTo(destId, inclusive)` | 返回到指定 destination |
+| `popToRoot()` | 返回到导航图根节点 |
+
+```kotlin
+// 前进（带参数）
+navigateTo(R.id.secondFragment, "user_name" to "Henry", "age" to 25)
+
+// 返回上一页
+popBack()
+
+// 返回到指定页面（inclusive=true 时目标页也弹出）
+popTo(R.id.firstFragment)
+popTo(R.id.firstFragment, true)
+
+// 返回到根节点
+popToRoot()
+```
+
+### 4. 图作用域 ViewModel
+
+同一导航图内的所有 destination 共享同一 ViewModel 实例：
+
+```kotlin
+private val sharedViewModel by lazy {
+    obtainNavGraphViewModel(NavSharedViewModel::class.java, R.id.nav_graph)
+}
+```
+
+### 5. Fragment 结果回传
+
+替代 `startActivityForResult`，基于 Navigation 的 `SavedStateHandle`，接收方一次性消费。
+
+| 函数 | 场景 |
+|------|------|
+| `setNavResult(key, value)` | 返回紧邻上一页并携带结果 |
+| `setNavResultTo(destId, key, value, inclusive)` | 跨层返回指定页并携带结果（跳过中间层） |
+| `observeNavResult(key)` | 接收结果（一次性消费，自动清理） |
+
+```kotlin
+// 发送方：返回上一页带结果
+setNavResult("result_key", "返回的数据")
+
+// 发送方：跨层返回 A 带结果（A → B → C，从 C 直接回 A，跳过 B）
+setNavResultTo(R.id.fragmentA, "result_key", "带回 A 的数据")
+
+// 接收方：两种场景用法完全一致
+observeNavResult<String>("result_key") { value ->
+    value?.let { /* 处理返回结果 */ }
+}
+```
 
 ---
 

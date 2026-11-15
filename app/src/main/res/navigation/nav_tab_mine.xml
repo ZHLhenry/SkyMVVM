@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_tab_mine"
+    app:startDestination="@id/mineTabFragment">
+
+    <fragment
+        android:id="@+id/mineTabFragment"
+        android:name="com.sky.mvvm.sample.feature.tab.ui.MineTabFragment"
+        android:label="MineTab">
+        <action
+            android:id="@+id/action_mine_to_detail"
+            app:destination="@id/mineTabDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/mineTabDetailFragment"
+        android:name="com.sky.mvvm.sample.feature.tab.ui.TabDetailFragment"
+        android:label="MineTabDetail" />
+
+</navigation>

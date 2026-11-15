@@ -24,6 +24,24 @@
                 android:text="跳转登录"
                 android:textSize="20sp" />
 
+            <Button
+                android:id="@+id/btn_navigation_demo"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="跳转 Navigation 示例"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/btn_tab_demo"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="跳转 Tab 多返回栈示例"
+                android:textSize="20sp" />
+
             <TextView
                 android:id="@+id/tv_icon"
                 android:layout_width="wrap_content"

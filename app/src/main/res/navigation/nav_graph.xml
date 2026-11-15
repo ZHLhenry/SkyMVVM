@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/firstFragment">
+
+    <fragment
+        android:id="@+id/firstFragment"
+        android:name="com.sky.mvvm.sample.feature.nav.ui.FirstFragment"
+        android:label="FirstFragment">
+        <action
+            android:id="@+id/action_first_to_second"
+            app:destination="@id/secondFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/secondFragment"
+        android:name="com.sky.mvvm.sample.feature.nav.ui.SecondFragment"
+        android:label="SecondFragment">
+        <action
+            android:id="@+id/action_second_to_third"
+            app:destination="@id/thirdFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/thirdFragment"
+        android:name="com.sky.mvvm.sample.feature.nav.ui.ThirdFragment"
+        android:label="ThirdFragment" />
+
+</navigation>

@@ -1,8 +1,8 @@
 // skyBuild 配置
 extra["skyBuild.appName"] = "SkyMVVM"
 extra["skyBuild.applicationId"] = "com.sky.mvvm.sample"
-extra["skyBuild.versionCode"] = 123
-extra["skyBuild.versionName"] = "1.2.3"
+extra["skyBuild.versionCode"] = 124
+extra["skyBuild.versionName"] = "1.2.4"
 extra["skyBuild.compileSdk"] = 37
 extra["skyBuild.minSdk"] = 24
 extra["skyBuild.targetSdk"] = 35

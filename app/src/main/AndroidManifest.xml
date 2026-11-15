@@ -39,6 +39,16 @@
             android:name=".feature.other.ui.LoginActivity"
             android:screenOrientation="portrait"
             tools:ignore="DiscouragedApi,LockedOrientationActivity" />
+
+        <activity
+            android:name=".feature.nav.NavContainerActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="DiscouragedApi,LockedOrientationActivity" />
+
+        <activity
+            android:name=".feature.tab.TabContainerActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="DiscouragedApi,LockedOrientationActivity" />
     </application>
 
 </manifest>

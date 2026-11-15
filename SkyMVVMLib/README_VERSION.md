@@ -1,3 +1,12 @@
+## [v1.2.4] - 2026-11-15
+- 新增单 Activity + 多 Fragment 导航能力（基于官方 `androidx.navigation` 2.10.2，api 导出）：
+  - 新增 `BaseContainerActivity` 单 NavHost 容器基类（页面流场景）
+  - 新增 `BaseTabContainerActivity` 多 Tab 容器基类（show/hide 多返回栈，视图不销毁）
+  - 新增导航扩展 `FragmentNavExt`：`navigateTo` / `popBack` / `popTo` / `popToRoot`
+  - 新增图作用域 ViewModel 获取 `obtainNavGraphViewModel`
+  - 新增 Fragment 结果回传 `setNavResult` / `setNavResultTo`（跨层）/ `observeNavResult`
+- 完善 `README_DOC.md`，新增「单 Activity 导航」章节
+
 ## [v1.2.3] - 2026-10-20
 - 下载状态重构：
   - `DownloadResultState.Error` → `DownloadResultState.Failure`，新增 `DownloadResultState.Cancel`
